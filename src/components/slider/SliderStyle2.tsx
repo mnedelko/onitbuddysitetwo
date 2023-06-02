@@ -1111,7 +1111,7 @@ const SliderItem2 = (props: any) => {
                                                                 <span>Presale Discount if whitelisted</span>
                                                                 { props.isWLOnly ?
                                                                 (<h6><div> {(((props.whitelistPrice)*100))+'%'}</div></h6>):
-                                                                (<h6><div> {(((props.whitelistPrice/props.price)*100))+'%'}</div></h6>)
+                                                                (<h6> <div> {(((props.whitelistPrice /props.price)*100).toFixed(0))+'%'}</div></h6>)
                                                                 }
                                                             </div>
                                                         </div>) 
