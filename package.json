@@ -70,12 +70,10 @@
   },
   "scripts": {
     "start": "craco start",
-    "lint": "prettier -c 'src/**/*.{ts,tsx}' && npm run lint:eslint",
-    "lint:eslint": "eslint 'src/**/*.{ts,tsx}'",
-    "lint:fix": "prettier --write 'src/**/*.{ts,tsx}' && eslint --fix 'src/**/*.{ts,tsx}'",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "react-scripts eject",
+    "postinstall": "patch-package"
   },
   "eslintConfig": {
     "extends": [
