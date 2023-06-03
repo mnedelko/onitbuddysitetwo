@@ -791,7 +791,7 @@ const SliderStyle2 = (props: SliderProps) => {
         (async () => {
                 if (anchorWallet) {
                     console.log(anchorWallet)
-                    const balance = await props.connection.getBalance(userWallet!.publicKey);
+                    const balance = await props.connection.getBalance(anchorWallet!.publicKey);
                     setBalance(balance / LAMPORTS_PER_SOL);
                 }
             })();
