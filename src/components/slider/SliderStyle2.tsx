@@ -450,6 +450,7 @@ const SliderStyle2 = (props: SliderProps) => {
                     //whitelist mint?
 
                     if (cndy?.state.whitelistMintSettings){
+                        setWhitelistEnabled(true);
                         // is it a presale mint?
                         if(
                             cndy.state.whitelistMintSettings.presale &&
@@ -785,6 +786,16 @@ const SliderStyle2 = (props: SliderProps) => {
     
         setIsActive((candyMachine!.state.isActive = active));
       };
+
+      useEffect(() => {
+        (async () => {
+                if (anchorWallet) {
+                    console.log(anchorWallet)
+                    const balance = await props.connection.getBalance(userWallet!.publicKey);
+                    setBalance(balance / LAMPORTS_PER_SOL);
+                }
+            })();
+        }, [anchorWallet, props.connection]);
     
       useEffect(() => {
         refreshCandyMachineState();
@@ -794,7 +805,8 @@ const SliderStyle2 = (props: SliderProps) => {
         props.connection,
         refreshCandyMachineState,
       ]);
-    
+
+      
       useEffect(() => {
         (function loop() {
           setTimeout(() => {
@@ -1016,6 +1028,8 @@ const SliderItem2 = (props: any) => {
     const isPresale = props.isPresale;
     const isWhitelistUser = props.isWhitelistUser;
     const isValidBalance = props.isValidBalance;
+    const whitelistEnabled = props.whitelistEnabled;
+    const balance = props.balance;
     //console.log('This is the console log');
     //console.log(wallet);
     //console.log(props.isActive);
@@ -1033,7 +1047,7 @@ const SliderItem2 = (props: any) => {
                                         <WalletContainer>
                                             <Wallet>
                                                 {publicKey?
-                                                    <WalletAmount>Your wallet balance: {(props.balance || 0).toLocaleString()} SOL</WalletAmount> :
+                                                    <WalletAmount>Your wallet balance: {(balance || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
                                         </WalletContainer>
@@ -1045,7 +1059,7 @@ const SliderItem2 = (props: any) => {
                                                     {//The below used to say wallet && props.isActive && props.whitelistTokenBalance > 0 ? <- We removed props.isActive due to whitelist use case
                                                     }
                                                     <div><Price
-                                                        label={props.whitelistEnabled && (props.whitelistTokenBalance > 0) ? (props.whitelistPrice + " " + props.priceLabel) : (props.price + " " + props.priceLabel)}/>
+                                                        label={whitelistEnabled && (props.whitelistTokenBalance > 0) ? (props.whitelistPrice + " " + props.priceLabel) : (props.price + " " + props.priceLabel)}/>
                                                         <div className="content-left">
                                                             <div className="media">
                                                                 <img src={imgdetail1} alt="Axies" />
@@ -1093,7 +1107,7 @@ const SliderItem2 = (props: any) => {
                                                             ) : 
                                                             (!props.isWLOnly || props.whitelistTokenBalance > 0) ? 
                                                                 props.isGatekeeper &&
-                                                                    wallet.publicKey &&
+                                                                    publicKey &&
                                                                     wallet.signTransaction ? (
                                                                     <GatewayProvider
                                                                         wallet={{
