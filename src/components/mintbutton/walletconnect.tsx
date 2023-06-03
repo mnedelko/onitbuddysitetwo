@@ -10,17 +10,13 @@ import {
 import * as anchor from "@project-serum/anchor";
 import { clusterApiUrl } from "@solana/web3.js";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { SlopeWalletAdapter } from "@solana/wallet-adapter-slope";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";  
 import {
-    getPhantomWallet,
-    getSlopeWallet,
-    getSolflareWallet,
-    getSolflareWebWallet,
-    getSolletWallet,
-    getSolletExtensionWallet,
-    getSolongWallet,
-    getLedgerWallet,
-    getSafePalWallet,
-} from "@solana/wallet-adapter-wallets";
+    SolletWalletAdapter,
+    SolletExtensionWalletAdapter,
+  } from "@solana/wallet-adapter-sollet";
 
 import {
     WalletModalProvider
@@ -74,9 +70,13 @@ const candyMachineId = new anchor.web3.PublicKey(
 
     const wallets = useMemo(
         () => [
-            getPhantomWallet(),
+          new PhantomWalletAdapter(),
+          new SolflareWalletAdapter({ network }),
+          new SlopeWalletAdapter(),
+          new SolletWalletAdapter({ network }),
+          new SolletExtensionWalletAdapter({ network }),
         ],
-        [network]
+        []
     );
 
 
