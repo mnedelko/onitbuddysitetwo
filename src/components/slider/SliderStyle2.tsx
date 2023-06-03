@@ -1048,7 +1048,7 @@ const SliderItem2 = (props: any) => {
                                         <WalletContainer>
                                             <Wallet>
                                                 {publicKey?
-                                
+                            
                                                     <WalletAmount>Your wallet balance: {(balance || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
@@ -1256,7 +1256,7 @@ const SliderItem2 = (props: any) => {
                                                     <span className="heading style-2">Your Wallet balance</span>
                                                     <div className="price-box">
                                                               {wallet ?
-                                                    <h5>{(props.balance || 0).toLocaleString()} SOL</h5> :
+                                                    <h5>{(balance || 0).toLocaleString()} SOL</h5> :
                                                     <span>Balance Not Available</span>}
                                                         </div>
                                                     {/* <Countdown date={Date.now() + 500000000}>
