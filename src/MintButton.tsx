@@ -50,9 +50,7 @@ export const MintButton = ({
     const [waitForActiveToken, setWaitForActiveToken] = useState(false);
 
     const getMintButtonContent = () => {
-        if (!candyMachine) {
-            "CONNECTING..."
-        } else if (candyMachine?.state.isSoldOut) {
+        if (candyMachine?.state.isSoldOut) {
           return "SOLD OUT";
         } else if (isMinting) {
           return <CircularProgress />;
