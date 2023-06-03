@@ -1,0 +1,1 @@
+{"version":3,"file":"WalletDialogProvider.d.ts","sourceRoot":"","sources":["../../src/WalletDialogProvider.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,EAAE,EAAE,SAAS,EAAE,MAAM,OAAO,CAAC;AAG3C,OAAO,KAAK,EAAE,iBAAiB,EAAE,MAAM,mBAAmB,CAAC;AAG3D,MAAM,WAAW,yBAA0B,SAAQ,iBAAiB;IAChE,QAAQ,EAAE,SAAS,CAAC;CACvB;AAED,eAAO,MAAM,oBAAoB,EAAE,EAAE,CAAC,yBAAyB,CAc9D,CAAC"}

@@ -1,7 +1,25 @@
 import React, { useMemo } from 'react';
 import HeaderStyle2 from '../components/header/HeaderStyle2';
 import * as anchor from "@project-serum/anchor";
+
+import { DEFAULT_TIMEOUT } from "../connection";
 import { clusterApiUrl } from "@solana/web3.js";
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import {
+    ConnectionProvider,
+    WalletProvider,
+  } from "@solana/wallet-adapter-react";
+
+  import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
+
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
+import { SlopeWalletAdapter } from "@solana/wallet-adapter-slope";
+import { SolflareWalletAdapter } from "@solana/wallet-adapter-solflare";  
+import {
+    SolletWalletAdapter,
+    SolletExtensionWalletAdapter,
+  } from "@solana/wallet-adapter-sollet";
+
 import Footer from '../components/footer/Footer';
 import SliderStyle2 from '../components/slider/SliderStyle2';
 import MeetTheTeam from '../components/layouts/home-5/MeetTheTeam';
@@ -14,53 +32,33 @@ import Workflow from '../components/layouts/home-5/Workflow'
 
 //import { createTheme} from "@material-ui/core";
 
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-
-import {
-    getPhantomWallet,
-    // getSlopeWallet,
-    // getSolflareWallet,
-    // getSolflareWebWallet,
-    // getSolletWallet,
-    // getSolletExtensionWallet,
-    // getSolongWallet,
-    // getLedgerWallet,
-    // getSafePalWallet,
-} from "@solana/wallet-adapter-wallets";
-
 import {
     WalletModalProvider,
     // WalletDisconnectButton,
     // WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
 
-import { DEFAULT_TIMEOUT } from '../connection';
-
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
     try {
-        const candyMachineId = new anchor.web3.PublicKey(
-            process.env.REACT_APP_CANDY_MACHINE_ID!,
-        );
-
-        return candyMachineId;
+      return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID!);
     } catch (e) {
-        console.log('Failed to construct CandyMachineId', e);
-        return undefined;
+      console.log("Failed to construct CandyMachineId", e);
+      return undefined;
     }
-};
+  };
+
+let error: string | undefined = undefined;
 
 const candyMachineId = getCandyMachineId();
   
-const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
-
-const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
-const connection = new anchor.web3.Connection(
-    rpcHost ? rpcHost : anchor.web3.clusterApiUrl('mainnet-beta'),
-);
+const network = (process.env.REACT_APP_SOLANA_NETWORK ??
+    "devnet") as WalletAdapterNetwork;
+const rpcHost =
+    process.env.REACT_APP_SOLANA_RPC_HOST ?? anchor.web3.clusterApiUrl("devnet");
+const connection = new anchor.web3.Connection(rpcHost);
 
 // const theme = createTheme({
 //       palette: {
@@ -99,7 +97,11 @@ const Home05 = () => {
 
     const wallets = useMemo(
         () => [
-            getPhantomWallet(),
+          new PhantomWalletAdapter(),
+          new SolflareWalletAdapter({ network }),
+          new SlopeWalletAdapter(),
+          new SolletWalletAdapter({ network }),
+          new SolletExtensionWalletAdapter({ network }),
         ],
         []
     );

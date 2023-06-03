@@ -1,0 +1,1 @@
+{"version":3,"file":"useWalletDialog.d.ts","sourceRoot":"","sources":["../../src/useWalletDialog.ts"],"names":[],"mappings":";AAEA,MAAM,WAAW,wBAAwB;IACrC,IAAI,EAAE,OAAO,CAAC;IACd,OAAO,EAAE,CAAC,IAAI,EAAE,OAAO,KAAK,IAAI,CAAC;CACpC;AAED,eAAO,MAAM,mBAAmB,mDAA0E,CAAC;AAE3G,wBAAgB,eAAe,IAAI,wBAAwB,CAE1D"}
