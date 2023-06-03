@@ -1032,7 +1032,7 @@ const SliderItem2 = (props: any) => {
                                     <MainContainer>
                                         <WalletContainer>
                                             <Wallet>
-                                                {wallet.privateKey ?
+                                                {publicKey?
                                                     <WalletAmount>Your wallet balance: {(props.balance || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
