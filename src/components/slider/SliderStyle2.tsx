@@ -1255,7 +1255,7 @@ const SliderItem2 = (props: any) => {
                                                 <div className="item count-down">
                                                     <span className="heading style-2">Your Wallet balance</span>
                                                     <div className="price-box">
-                                                              {wallet ?
+                                                              {anchorWallet ?
                                                     <h5>{(balance || 0).toLocaleString()} SOL</h5> :
                                                     <span>Balance Not Available</span>}
                                                         </div>
