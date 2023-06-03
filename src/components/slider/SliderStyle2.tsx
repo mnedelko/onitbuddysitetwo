@@ -1030,6 +1030,7 @@ const SliderItem2 = (props: any) => {
     const isValidBalance = props.isValidBalance;
     const whitelistEnabled = props.whitelistEnabled;
     const balance = props.balance;
+    console.log("This is the balance", balance);
     //console.log('This is the console log');
     //console.log(wallet);
     //console.log(props.isActive);
@@ -1047,6 +1048,7 @@ const SliderItem2 = (props: any) => {
                                         <WalletContainer>
                                             <Wallet>
                                                 {publicKey?
+                                
                                                     <WalletAmount>Your wallet balance: {(balance || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
