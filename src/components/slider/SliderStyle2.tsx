@@ -314,6 +314,9 @@ export interface SliderProps {
 
 const SliderStyle2 = (props: SliderProps) => {
     //State Definitions
+    const [isUserMinting, setIsUSerMinting] = useState(false);
+    const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
+    
     const [balance, setBalance] = useState<number>();
     const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
     const [isActive, setIsActive] = useState(false); // true when countdown completes or whitelisted
@@ -345,7 +348,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
     //This defines the wallet
     const wallet = useWallet();
-    const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
+    
     
     const rpcUrl = props.rpcHost;
     const solFeesEstimation = 0.012; // approx of account creation fees
