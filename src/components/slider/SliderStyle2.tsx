@@ -1063,7 +1063,7 @@ const SliderItem2 = (props: any) => {
                                                     {//The below used to say wallet && props.isActive && props.whitelistTokenBalance > 0 ? <- We removed props.isActive due to whitelist use case
                                                     }
                                                     <div><Price
-                                                        label={whitelistEnabled && (props.whitelistTokenBalance > 0) ? (props.whitelistPrice + " " + props.priceLabel) : (userPrice+ " " + props.priceLabel)}/>
+                                                        label={whitelistEnabled && (isWhitelistUser) ? (props.whitelistPrice + " " + props.priceLabel) : (userPrice+ " " + props.priceLabel)}/>
                                                         <div className="content-left">
                                                             <div className="media">
                                                                 <img src={imgdetail1} alt="Axies" />
@@ -1071,9 +1071,9 @@ const SliderItem2 = (props: any) => {
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    {wallet && props.isActive && props.whitelistEnabled && (props.whitelistTokenBalance > 0) && props.isBurnToken &&
-                                                        <h3>You own {props.whitelistTokenBalance} WL mint {props.whitelistTokenBalance > 1 ? "tokens" : "token"}.</h3>}
-                                                    {wallet && props.isActive && props.whitelistEnabled && (props.whitelistTokenBalance > 0) && !props.isBurnToken &&
+                                                    {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) && props.isBurnToken &&
+                                                        <h3>You own {props.whitelistTokenBalance} WL mint {isWhitelistUser ? "tokens" : "token"}.</h3>}
+                                                    {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) && !props.isBurnToken &&
                                                         <h3>You are whitelisted and allowed to mint.</h3>}
 
                                                     {wallet && props.isActive && props.endDate && Date.now() < props.endDate.getTime() &&
@@ -1097,7 +1097,7 @@ const SliderItem2 = (props: any) => {
                                                         {console.log(!props.isEnded)}
                                                         {console.log("statis of goLiveDate")}
                                                         {console.log(JSON.stringify(props.goLiveDate))} */}
-                                                        {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || props.whitelistTokenBalance > 0) ? (
+                                                        {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
                                                             <Countdown
                                                                 date={toDate(props.goLiveDate)}
                                                                 onMount={({ completed }) => completed && props.setIsActive(!props.isEnded)}
@@ -1109,7 +1109,7 @@ const SliderItem2 = (props: any) => {
                                                             !wallet ? ( "this is another placeholder"
                                                                 // <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
-                                                            (!props.isWLOnly || props.whitelistTokenBalance > 0) ? 
+                                                            (!props.isWLOnly || isWhitelistUser) ? 
                                                                 props.isGatekeeper &&
                                                                     publicKey &&
                                                                     wallet.signTransaction ? (
@@ -1187,7 +1187,7 @@ const SliderItem2 = (props: any) => {
                                                     {console.log("props.whitelistTokenBalance")}
                                                     {console.log(props.whitelistTokenBalance)} */}
                                                     { //The below used to say wallet && props.isActive && props.whitelistTokenBalance > 0 ? <- We removed props.isActive due to whitelist use case
-                                                    wallet && props.whitelistTokenBalance > 0 ?
+                                                    anchorWallet && isWhitelistUser ?
                                                         (<div className="author">
                                                             <div className="avatar">
                                                                 <img src={tick} alt="Axies" />
@@ -1250,7 +1250,7 @@ const SliderItem2 = (props: any) => {
                                                             {
                                                             //The below used to say props.isActive && props.whitelistEnabled && (props.whitelistTokenBalance > 0) <- We removed props.isActive due to whitelist use case
                                                             }
-                                                            <h5>{props.whitelistEnabled && (props.whitelistTokenBalance > 0) ? (props.whitelistPrice + " " + props.priceLabel) : (userPrice + " " + props.priceLabel)}</h5>
+                                                            <h5>{props.whitelistEnabled && (isWhitelistUser) ? (props.whitelistPrice + " " + props.priceLabel) : (userPrice + " " + props.priceLabel)}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1269,7 +1269,7 @@ const SliderItem2 = (props: any) => {
                                             {
                                              //This used to say wallet && props.isActive && props.whitelistEnabled && (props.whitelistTokenBalance > 0) ? <-We removed the props.isActive due to the whitelist use case
                                             }
-                                            {wallet && props.whitelistEnabled && (props.whitelistTokenBalance > 0) ?
+                                            {wallet && props.whitelistEnabled && (isWhitelistUser) ?
                                                 (<div></div> )
                                                 : <a target="_blank" rel="noreferrer" href='https://discord.gg/RWs3DP2' className="sc-button loadmore style bag fl-button pri-3"><span>Get Whitelisted</span></a>}
                                         </div>
