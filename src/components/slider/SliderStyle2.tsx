@@ -464,8 +464,8 @@ const SliderStyle2 = (props: SliderProps) => {
                         // is there a discount?
                         if (cndy.state.whitelistMintSettings.discountPrice) {
                             setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice.toNumber()/LAMPORTS_PER_SOL);
-                            userPrice = cndy.state.whitelistMintSettings.discountPrice;
-                            //setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
+                            //userPrice = cndy.state.whitelistMintSettings.discountPrice;
+                            setUserPrice(cndy.state.price.toNumber() / LAMPORTS_PER_SOL);
                         } else {
                             setDiscountPrice(undefined);
                             // when presale=false and discountPrice=null, mint is restricted
@@ -502,7 +502,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         }
                     }
                     userPrice = isWLUser ? userPrice : cndy.state.price;
-                    setUserPrice(userPrice.toNumber()/ LAMPORTS_PER_SOL);
+                    setUserPrice(cndy.state.price.toNumber()/ LAMPORTS_PER_SOL);
 
                     // detect if using spl-token to mint
                     if (cndy?.state.tokenMint) {
