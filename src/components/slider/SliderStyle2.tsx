@@ -465,7 +465,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         if (cndy.state.whitelistMintSettings.discountPrice) {
                             setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice.toNumber()/LAMPORTS_PER_SOL);
                             userPrice = cndy.state.whitelistMintSettings.discountPrice;
-                            setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
+                            //setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
                         } else {
                             setDiscountPrice(undefined);
                             // when presale=false and discountPrice=null, mint is restricted
