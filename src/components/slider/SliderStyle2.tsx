@@ -356,7 +356,7 @@ const SliderStyle2 = (props: SliderProps) => {
     
     const [isWLOnly, setIsWLOnly] = useState(false);
     const [priceDiscount, setPriceDiscount] = useState(0);
-    const [userPrice, setUserPrice] = useState<anchor.BN>(0);
+    const [userPrice, setUserPrice] = useState<anchor.BN>();
 
     const solFeesEstimation = 0.012; // approx of account creation fees
 
