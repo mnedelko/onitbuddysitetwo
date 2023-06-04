@@ -973,6 +973,8 @@ const SliderStyle2 = (props: SliderProps) => {
                                         setIsWhitelistUser = {setIsWhitelistUser}
                                         userPrice = {userPrice}
                                         setUserPrice = {setUserPrice}
+                                        discountPrice = {discountPrice}
+                                        setDiscountPrice = {setDiscountPrice}
                                     />
                                 </SwiperSlide>
                             ))
@@ -1033,6 +1035,7 @@ const SliderItem2 = (props: any) => {
     const whitelistEnabled = props.whitelistEnabled;
     const balance = props.balance;
     const userPrice = props.userPrice;
+    const discountPrice = props.discountPrice;
     //console.log('This is the console log');
     //console.log(wallet);
     //console.log(props.isActive);
@@ -1063,7 +1066,7 @@ const SliderItem2 = (props: any) => {
                                                     {//The below used to say wallet && props.isActive && props.whitelistTokenBalance > 0 ? <- We removed props.isActive due to whitelist use case
                                                     }
                                                     <div><Price
-                                                        label={whitelistEnabled && (isWhitelistUser) ? (props.whitelistPrice + " " + props.priceLabel) : (userPrice+ " " + props.priceLabel)}/>
+                                                        label={whitelistEnabled && (isWhitelistUser) ? (discountPrice+ " " + props.priceLabel) : (userPrice+ " " + props.priceLabel)}/>
                                                         <div className="content-left">
                                                             <div className="media">
                                                                 <img src={imgdetail1} alt="Axies" />
@@ -1213,7 +1216,7 @@ const SliderItem2 = (props: any) => {
                                                     }
                                                 </div>
                                                 <div className="meta-info">
-                                                    {wallet && props.isActive && props.whitelistEnabled ?
+                                                    {anchorWallet && props.isActive && props.whitelistEnabled ?
                                                         (<div className="author">
                                                             <div className="avatar">
                                                                 <img src={discount} alt="Axies" />
@@ -1221,8 +1224,8 @@ const SliderItem2 = (props: any) => {
                                                             <div className="info">
                                                                 <span>Presale Discount if whitelisted</span>
                                                                 { props.isWLOnly ? 
-                                                                (<h6> <div> {((props.whitelistPrice)*100)+'%'}</div> </h6>):
-                                                                (<h6> <div> {(((props.whitelistPrice /userPrice)*100).toFixed(0))+'%'}</div></h6>)
+                                                                (<h6> <div> {((discountPrice)*100)+'%'}</div> </h6>):
+                                                                (<h6> <div> {(((discountPrice/userPrice)*100).toFixed(0))+'%'}</div></h6>)
                                                                 }
                                                             </div>
                                                         </div>) :
@@ -1233,8 +1236,8 @@ const SliderItem2 = (props: any) => {
                                                             <div className="info">
                                                                 <span>Presale Discount if whitelisted</span>
                                                                 { props.isWLOnly ?
-                                                                (<h6><div> {(((props.whitelistPrice)*100))+'%'}</div></h6>):
-                                                                (<h6> <div> {(((props.whitelistPrice /userPrice)*100).toFixed(0))+'%'}</div></h6>)
+                                                                (<h6><div> {(((discountPrice)*100))+'%'}</div></h6>):
+                                                                (<h6> <div> {(((discountPrice /userPrice)*100).toFixed(0))+'%'}</div></h6>)
                                                                 }
                                                             </div>
                                                         </div>) 
@@ -1250,7 +1253,7 @@ const SliderItem2 = (props: any) => {
                                                             {
                                                             //The below used to say props.isActive && props.whitelistEnabled && (props.whitelistTokenBalance > 0) <- We removed props.isActive due to whitelist use case
                                                             }
-                                                            <h5>{props.whitelistEnabled && (isWhitelistUser) ? (props.whitelistPrice + " " + props.priceLabel) : (userPrice + " " + props.priceLabel)}</h5>
+                                                            <h5>{props.whitelistEnabled && (isWhitelistUser) ? (discountPrice + " " + props.priceLabel) : (userPrice + " " + props.priceLabel)}</h5>
                                                         </div>
                                                     </div>
                                                 </div>
