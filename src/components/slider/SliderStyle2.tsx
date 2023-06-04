@@ -1109,8 +1109,8 @@ const SliderItem2 = (props: any) => {
                                                                 }}
                                                                 renderer={props.renderGoLiveDateCounter}
                                                             />) : (
-                                                            !wallet ? ( "this is another placeholder"
-                                                                // <ConnectButton>Connect Wallet</ConnectButton>
+                                                            !discountPrice ? ( 
+                                                                <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
                                                             (!props.isWLOnly || isWhitelistUser) ? 
                                                                 props.isGatekeeper &&
@@ -1160,7 +1160,7 @@ const SliderItem2 = (props: any) => {
                                                         )}
                                                     </MintButtonContainer>
                                                     <br/>
-                                                    {wallet && props.isActive && props.solanaExplorerLink &&
+                                                    {anchorWallet && props.isActive && props.solanaExplorerLink &&
                                                         <SolExplorerLink href={props.solanaExplorerLink} target="_blank">View on Solscan</SolExplorerLink>}
                                                 </NFT>
                                             </div>
@@ -1224,7 +1224,7 @@ const SliderItem2 = (props: any) => {
                                                             <div className="info">
                                                                 <span>Presale Discount if whitelisted</span>
                                                                 { props.isWLOnly ? 
-                                                                (<h6> <div> {((discountPrice)*100)+'%'}</div> </h6>):
+                                                                (<h6> <div> {(((discountPrice)*100).toFixed(0))+'%'}</div> </h6>):
                                                                 (<h6> <div> {(((discountPrice/userPrice)*100).toFixed(0))+'%'}</div></h6>)
                                                                 }
                                                             </div>
@@ -1236,7 +1236,7 @@ const SliderItem2 = (props: any) => {
                                                             <div className="info">
                                                                 <span>Presale Discount if whitelisted</span>
                                                                 { props.isWLOnly ?
-                                                                (<h6><div> {(((discountPrice)*100))+'%'}</div></h6>):
+                                                                (<h6><div> {((((discountPrice)*100)).toFixed(0))+'%'}</div></h6>):
                                                                 (<h6> <div> {(((discountPrice /userPrice)*100).toFixed(0))+'%'}</div></h6>)
                                                                 }
                                                             </div>
@@ -1272,7 +1272,7 @@ const SliderItem2 = (props: any) => {
                                             {
                                              //This used to say wallet && props.isActive && props.whitelistEnabled && (props.whitelistTokenBalance > 0) ? <-We removed the props.isActive due to the whitelist use case
                                             }
-                                            {wallet && props.whitelistEnabled && (isWhitelistUser) ?
+                                            {anchorWallet&& props.whitelistEnabled && (isWhitelistUser) ?
                                                 (<div></div> )
                                                 : <a target="_blank" rel="noreferrer" href='https://discord.gg/RWs3DP2' className="sc-button loadmore style bag fl-button pri-3"><span>Get Whitelisted</span></a>}
                                         </div>
