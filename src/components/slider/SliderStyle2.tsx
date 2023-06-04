@@ -357,7 +357,7 @@ const SliderStyle2 = (props: SliderProps) => {
     const [isWLOnly, setIsWLOnly] = useState(false);
     const [priceDiscount, setPriceDiscount] = useState(0);
     const [userPrice, setUserPrice] = useState<Number>();
-
+    const [solBalance, setSolBalance] = useState<Number>();
     const solFeesEstimation = 0.012; // approx of account creation fees
 
     //Logging:
@@ -795,8 +795,8 @@ const SliderStyle2 = (props: SliderProps) => {
         (async () => {
                 if (anchorWallet) {
                     console.log(anchorWallet)
-                    const balance = await props.connection.getBalance(anchorWallet!.publicKey);
-                    setBalance(balance / LAMPORTS_PER_SOL);
+                    const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
+                    setSolBalance(solBalance / LAMPORTS_PER_SOL);
                 }
             })();
         }, [anchorWallet, props.connection]);
@@ -975,6 +975,8 @@ const SliderStyle2 = (props: SliderProps) => {
                                         setUserPrice = {setUserPrice}
                                         discountPrice = {discountPrice}
                                         setDiscountPrice = {setDiscountPrice}
+                                        setSolBalance = {setSolBalance}
+                                        solBalance = {solBalance}
                                     />
                                 </SwiperSlide>
                             ))
@@ -1036,6 +1038,7 @@ const SliderItem2 = (props: any) => {
     const balance = props.balance;
     const userPrice = props.userPrice;
     const discountPrice = props.discountPrice;
+    const solBalance = props.solBalance;
     //console.log('This is the console log');
     //console.log(wallet);
     //console.log(props.isActive);
@@ -1052,8 +1055,7 @@ const SliderItem2 = (props: any) => {
                                     <MainContainer>
                                         <WalletContainer>
                                             <Wallet>
-                                                {publicKey?
-                            
+                                                {anchorWallet.publicKey?
                                                     <WalletAmount>Your wallet balance: {(balance || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
@@ -1109,13 +1111,13 @@ const SliderItem2 = (props: any) => {
                                                                 }}
                                                                 renderer={props.renderGoLiveDateCounter}
                                                             />) : (
-                                                            !discountPrice ? ( 
+                                                            !anchorWallet ? ( 
                                                                 <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
                                                             (!props.isWLOnly || isWhitelistUser) ? 
                                                                 props.isGatekeeper &&
                                                                     publicKey &&
-                                                                    wallet.signTransaction ? (
+                                                                    anchorWallet.signTransaction ? (
                                                                     <GatewayProvider
                                                                         wallet={{
                                                                             publicKey:
