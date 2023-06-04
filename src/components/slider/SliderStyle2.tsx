@@ -327,7 +327,7 @@ const SliderStyle2 = (props: SliderProps) => {
     const [isWhitelistUser, setIsWhitelistUser] = useState(false);
     const [isPresale, setIsPresale] = useState(false);
     const [isValidBalance, setIsValidBalance] = useState(false);
-    const [discountPrice, setDiscountPrice] = useState<anchor.BN>();
+    const [discountPrice, setDiscountPrice] = useState<Number>();
     const [needTxnSplit, setNeedTxnSplit] = useState(true);
     const [setupTxn, setSetupTxn] = useState<SetupState>();
 
@@ -463,7 +463,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         }
                         // is there a discount?
                         if (cndy.state.whitelistMintSettings.discountPrice) {
-                            setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice);
+                            setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice.toNumber()/LAMPORTS_PER_SOL);
                             userPrice = cndy.state.whitelistMintSettings.discountPrice;
                             setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
                         } else {
