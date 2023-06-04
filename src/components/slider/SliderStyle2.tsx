@@ -356,7 +356,7 @@ const SliderStyle2 = (props: SliderProps) => {
     
     const [isWLOnly, setIsWLOnly] = useState(false);
     const [priceDiscount, setPriceDiscount] = useState(0);
-    const [userPrice, setUserPrice] = useState<anchor.BN>();
+    const [userPrice, setUserPrice] = useState<Number>();
 
     const solFeesEstimation = 0.012; // approx of account creation fees
 
@@ -433,7 +433,7 @@ const SliderStyle2 = (props: SliderProps) => {
                     // duplication of state to make sure we have the right values!
                     let isWLUser = false;
                     let userPrice = cndy.state.price;
-                    setUserPrice(userPrice);
+                    setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
 
                     //This is where we are setting the candymachine attributes
                     setCandyMachine(cndy);
@@ -465,7 +465,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         if (cndy.state.whitelistMintSettings.discountPrice) {
                             setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice);
                             userPrice = cndy.state.whitelistMintSettings.discountPrice;
-                            setUserPrice(userPrice);
+                            setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
                         } else {
                             setDiscountPrice(undefined);
                             // when presale=false and discountPrice=null, mint is restricted
@@ -502,7 +502,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         }
                     }
                     userPrice = isWLUser ? userPrice : cndy.state.price;
-                    setUserPrice(userPrice);
+                    setUserPrice(userPrice.toNumber()/ LAMPORTS_PER_SOL);
 
                     // detect if using spl-token to mint
                     if (cndy?.state.tokenMint) {
