@@ -323,7 +323,7 @@ const SliderStyle2 = (props: SliderProps) => {
     });
     const [isActive, setIsActive] = useState(false); // true when countdown completes or whitelisted
     const [endDate, setEndDate] = useState<Date>();
-    const [itemsRemaining, setItemsRemaining] = useState(0);
+    const [itemsRemaining, setItemsRemaining] = useState<number>();
     const [isWhitelistUser, setIsWhitelistUser] = useState(false);
     const [isPresale, setIsPresale] = useState(false);
     const [isValidBalance, setIsValidBalance] = useState(false);
@@ -340,8 +340,8 @@ const SliderStyle2 = (props: SliderProps) => {
     const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
     
     const [solanaExplorerLink, setSolanaExplorerLink] = useState<string>("");
-    const [itemsAvailable, setItemsAvailable] = useState(0);
-    const [itemsRedeemed, setItemsRedeemed] = useState(0);
+    const [itemsAvailable, setItemsAvailable] = useState<number>();
+    const [itemsRedeemed, setItemsRedeemed] = useState<number>();
     
     const [isSoldOut, setIsSoldOut] = useState(false);
     const [payWithSplToken, setPayWithSplToken] = useState(false);
@@ -545,6 +545,8 @@ const SliderStyle2 = (props: SliderProps) => {
                     }
                     //amount to stop the mint?
                     if (cndy?.state.endSettings?.endSettingType.amount){
+                        console.log("endSettings.number",cndy.state.endSettings.number.toNumber());
+                        console.log("itemsAvailable",cndy.state.itemsAvailable)
                         const limit = Math.min(
                             cndy.state.endSettings.number.toNumber(),
                             cndy.state.itemsAvailable
