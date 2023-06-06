@@ -544,9 +544,10 @@ const SliderStyle2 = (props: SliderProps) => {
                         }
                     }
                     //amount to stop the mint?
+                    console.log("cndy?.state.endSettings?.endSettingType.amount",cndy?.state.endSettings?.endSettingType.amount)
                     if (cndy?.state.endSettings?.endSettingType.amount){
                         console.log("endSettings.number",cndy.state.endSettings.number.toNumber());
-                        console.log("itemsAvailable",cndy.state.itemsAvailable)
+                        console.log("itemsAvailable",cndy.state.itemsAvailable);
                         const limit = Math.min(
                             cndy.state.endSettings.number.toNumber(),
                             cndy.state.itemsAvailable
