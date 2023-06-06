@@ -1096,12 +1096,12 @@ const SliderItem2 = (props: any) => {
                                                         value={100 - (props.itemsRemaining * 100 / props.itemsAvailable)} />}
                                                     <br />
                                                     <MintButtonContainer>
-                                                        {/* {console.log("statis of !isActive")}
-                                                        {console.log(!props.isActive)}
-                                                        {console.log("statis of !isEnded")}
-                                                        {console.log(!props.isEnded)}
-                                                        {console.log("statis of goLiveDate")}
-                                                        {console.log(JSON.stringify(props.goLiveDate))} */}
+                                                        {console.log("statis of !isWLOnly", !props.isWLOnly)}
+                                                        {console.log("isWhitelistUser", isWhitelistUser)}
+                                                        {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
+                                                        {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
+                                                        {console.log("publicKey", publicKey)}
+                                                        {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
                                                             <Countdown
                                                                 date={toDate(props.goLiveDate)}
@@ -1115,7 +1115,8 @@ const SliderItem2 = (props: any) => {
                                                                 <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
                                                             (!props.isWLOnly || isWhitelistUser) ? 
-                                                                props.isGatekeeper &&
+                                                                candyMachine?.state.isActive &&
+                                                                candyMachine?.state.gatekeeper &&
                                                                     publicKey &&
                                                                     anchorWallet.signTransaction ? (
                                                                     <GatewayProvider
