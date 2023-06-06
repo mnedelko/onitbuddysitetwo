@@ -794,17 +794,24 @@ const SliderStyle2 = (props: SliderProps) => {
         setIsActive((candyMachine!.state.isActive = active));
       };
 
-      useEffect(() => {
-        (async () => {
-                if (anchorWallet) {
-                    console.log(anchorWallet)
-                    const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
-                    setSolBalance(solBalance / LAMPORTS_PER_SOL);
-                }
-            })();
-        }, [anchorWallet, props.connection]);
+    //   useEffect(() => {
+    //     (async () => {
+    //             if (anchorWallet) {
+    //                 console.log(anchorWallet)
+    //                 const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
+    //                 setSolBalance(solBalance / LAMPORTS_PER_SOL);
+    //             }
+    //         })();
+    //     }, [anchorWallet, props.connection]);
     
       useEffect(() => {
+        async () => {
+            if (anchorWallet) {
+                console.log(anchorWallet)
+                const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
+                setSolBalance(solBalance / LAMPORTS_PER_SOL);
+            }
+        };
         refreshCandyMachineState();
       }, [
         anchorWallet,
