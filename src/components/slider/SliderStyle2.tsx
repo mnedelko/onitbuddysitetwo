@@ -1099,6 +1099,7 @@ const SliderItem2 = (props: any) => {
                                                         {console.log("statis of !isWLOnly", !props.isWLOnly)}
                                                         {console.log("isWhitelistUser", isWhitelistUser)}
                                                         {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
+                                                        {console.log("!props.isActive", !props.isActive )}
                                                         {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
                                                         {console.log("publicKey", publicKey)}
                                                         {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
