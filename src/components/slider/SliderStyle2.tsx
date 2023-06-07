@@ -804,20 +804,25 @@ const SliderStyle2 = (props: SliderProps) => {
     //         })();
     //     }, [anchorWallet, props.connection]);
     
+
+    const refreshWallet = async () => {
+        if (anchorWallet) {
+            console.log(anchorWallet)
+            const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
+            setSolBalance(solBalance / LAMPORTS_PER_SOL);
+        }
+    };
+
       useEffect(() => {
-        async () => {
-            if (anchorWallet) {
-                console.log(anchorWallet)
-                const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
-                setSolBalance(solBalance / LAMPORTS_PER_SOL);
-            }
-        };
+        refreshWallet();
         refreshCandyMachineState();
       }, [
         anchorWallet,
         props.candyMachineId,
         props.connection,
         refreshCandyMachineState,
+        refreshWallet,
+        setSolBalance
       ]);
 
       
@@ -1086,7 +1091,7 @@ const SliderItem2 = (props: any) => {
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) && props.isBurnToken &&
+                                                    {anchorWallet && isActive && whitelistEnabled && (isWhitelistUser) && props.isBurnToken &&
                                                         <h3>You own {props.whitelistTokenBalance} WL mint {isWhitelistUser ? "tokens" : "token"}.</h3>}
                                                     {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) && !props.isBurnToken &&
                                                         <h3>You are whitelisted and allowed to mint.</h3>}
