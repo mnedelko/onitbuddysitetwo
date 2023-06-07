@@ -348,7 +348,7 @@ const SliderStyle2 = (props: SliderProps) => {
     const [priceLabel, setPriceLabel] = useState<string>("SOL");
     const [whitelistPrice, setWhitelistPrice] = useState(0);
     const [whitelistEnabled, setWhitelistEnabled] = useState(false);
-    const [isBurnToken, setIsBurnToken] = useState(false);
+    //const [isBurnToken, setIsBurnToken] = useState(false);
     const [whitelistTokenBalance, setWhitelistTokenBalance] = useState(0);
     const [isEnded, setIsEnded] = useState(false);
     
@@ -803,6 +803,13 @@ const SliderStyle2 = (props: SliderProps) => {
     //     }, [anchorWallet, props.connection]);
     
       useEffect(() => {
+        (async () => {
+            if (anchorWallet) {
+                console.log(anchorWallet)
+                const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
+                setSolBalance(solBalance / LAMPORTS_PER_SOL);
+            }
+        })();
         refreshCandyMachineState();
       }, [
         anchorWallet,
@@ -849,7 +856,12 @@ const SliderStyle2 = (props: SliderProps) => {
         let remaining = itemsRemaining - qty;
         setItemsRemaining(remaining);
         setIsSoldOut(remaining === 0);
-        if (isBurnToken && whitelistTokenBalance && whitelistTokenBalance > 0) {
+        // if (isBurnToken && whitelistTokenBalance && whitelistTokenBalance > 0) {
+        //     let balance = whitelistTokenBalance - qty;
+        //     setWhitelistTokenBalance(balance);
+        //     setIsActive(isPresale && !isEnded && balance > 0);
+        // }
+        if ( whitelistTokenBalance && whitelistTokenBalance > 0) {
             let balance = whitelistTokenBalance - qty;
             setWhitelistTokenBalance(balance);
             setIsActive(isPresale && !isEnded && balance > 0);
@@ -947,8 +959,8 @@ const SliderStyle2 = (props: SliderProps) => {
                                         setWhitelistPrice = {setWhitelistPrice}
                                         whitelistEnabled = {whitelistEnabled}
                                         setWhitelistEnabled = {setWhitelistEnabled}
-                                        isBurnToken = {isBurnToken}
-                                        setIsBurnToken = {setIsBurnToken}
+                                        //isBurnToken = {isBurnToken}
+                                        //setIsBurnToken = {setIsBurnToken}
                                         whitelistTokenBalance = {whitelistTokenBalance}
                                         setWhitelistTokenBalance = {setWhitelistTokenBalance}
                                         isEnded = {isEnded}
@@ -1077,9 +1089,9 @@ const SliderItem2 = (props: any) => {
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    {anchorWallet && isActive && whitelistEnabled && (isWhitelistUser) && props.isBurnToken &&
+                                                    {anchorWallet && isActive && whitelistEnabled && (isWhitelistUser) &&
                                                         <h3>You own {props.whitelistTokenBalance} WL mint {isWhitelistUser ? "tokens" : "token"}.</h3>}
-                                                    {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) && !props.isBurnToken &&
+                                                    {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) &&
                                                         <h3>You are whitelisted and allowed to mint.</h3>}
 
                                                     {wallet && props.isActive && props.endDate && Date.now() < props.endDate.getTime() &&
