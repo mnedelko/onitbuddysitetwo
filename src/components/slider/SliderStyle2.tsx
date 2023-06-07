@@ -105,7 +105,7 @@ const Wallet = styled.ul`
   padding: 0;
 `;
 
-const ConnectButton:any = styled(WalletDialogButton)`
+const ConnectButton:any = styled(WalletModalProvider)`
   border-radius: 5px !important;
   padding: 6px 16px;
   background-color: #4E44CE;

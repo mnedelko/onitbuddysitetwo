@@ -30,6 +30,7 @@ const scrollToTop = () => {
     txTimeout: number;
     rpcHost: string;
     network: WalletAdapterNetwork;
+    error?: string;
 }
 
 const HeaderStyle2 = (props: HomeProps) => {

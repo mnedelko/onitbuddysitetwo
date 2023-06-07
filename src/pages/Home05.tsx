@@ -9,7 +9,6 @@ import {
     ConnectionProvider,
     WalletProvider,
   } from "@solana/wallet-adapter-react";
-import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 import { SlopeWalletAdapter } from "@solana/wallet-adapter-slope";
@@ -31,11 +30,11 @@ import Workflow from '../components/layouts/home-5/Workflow'
 
 //import { createTheme} from "@material-ui/core";
 
-// import {
-//     WalletModalProvider,
-//     // WalletDisconnectButton,
-//     // WalletMultiButton
-// } from '@solana/wallet-adapter-react-ui';
+import {
+    WalletModalProvider,
+    // WalletDisconnectButton,
+    // WalletMultiButton
+} from '@solana/wallet-adapter-react-ui';
 
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -111,13 +110,14 @@ const Home05 = () => {
         <div className='home-5'>
             <ConnectionProvider endpoint={endpoint}>
                 <WalletProvider wallets={wallets} autoConnect>
-                    <WalletDialogProvider>
+                    <WalletModalProvider>
                         <HeaderStyle2
                                 candyMachineId={candyMachineId}
                                 connection={connection}
                                 txTimeout={DEFAULT_TIMEOUT}
                                 rpcHost={rpcHost}
                                 network={network}
+                                error={error}
                             />
                         <SliderStyle2 
                             //@ts-ignore
@@ -127,13 +127,14 @@ const Home05 = () => {
                             txTimeout={DEFAULT_TIMEOUT}
                             rpcHost={rpcHost}
                             network={network}
+                            error={error}
                         />
                         <RarityGridPageWrapper data={todayPickData} />
                         <Slider data={heroSliderData} />
                         <Workflow />
                         <Experiences/>
                         <MeetTheTeam />
-                    </WalletDialogProvider>
+                    </WalletModalProvider>
                 </WalletProvider>
             </ConnectionProvider>
             <Footer />
