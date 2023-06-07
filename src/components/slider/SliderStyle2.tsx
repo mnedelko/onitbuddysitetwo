@@ -60,6 +60,7 @@ import Card from '../elements/Card'
 
 //@ts-ignore
 import lightpaperpdfslider from '../../assets/docs/OnitBuddy-LightPaper.pdf';
+import { WalletDialogButton } from '@solana/wallet-adapter-material-ui';
 
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
 const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString() : "TOKEN";
@@ -104,7 +105,7 @@ const Wallet = styled.ul`
   padding: 0;
 `;
 
-const ConnectButton:any = styled(WalletMultiButton)`
+const ConnectButton:any = styled(WalletDialogButton)`
   border-radius: 5px !important;
   padding: 6px 16px;
   background-color: #4E44CE;
@@ -437,8 +438,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
                     //This is where we are setting the candymachine attributes
                     setCandyMachine(cndy);
-                    //console.log("this is the candymachine payload");
-                    //console.log(cndy);
+                    console.log("this is the candymachine payload", cndy);
                     setItemsAvailable(cndy.state.itemsAvailable);
                     setItemsRemaining(cndy.state.itemsRemaining);
                     setItemsRedeemed(cndy.state.itemsRedeemed);
@@ -791,7 +791,7 @@ const SliderStyle2 = (props: SliderProps) => {
           setIsPresale((candyMachine!.state.isPresale = false));
         }
     
-        setIsActive((candyMachine!.state.isActive == active));
+        setIsActive((candyMachine!.state.isActive = active));
       };
 
     //   useEffect(() => {
