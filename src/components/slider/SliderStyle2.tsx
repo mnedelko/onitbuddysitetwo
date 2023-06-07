@@ -927,7 +927,7 @@ const SliderStyle2 = (props: SliderProps) => {
                                 <SwiperSlide key={index} >
                                     <SliderItem2 
                                         goLiveDate= {candyMachine?.state.goLiveDate}
-                                        isGatekeeper = {candyMachine?.state.gatekeeper}
+                                        isGatekeeper = {candyMachine.state.gatekeeper}
                                         //consoleThis ={consoleThis}
                                         anchorWallet = {anchorWallet}
                                         balance = {balance}
@@ -1052,6 +1052,7 @@ const SliderItem2 = (props: any) => {
     const userPrice = props.userPrice;
     const discountPrice = props.discountPrice;
     const solBalance = props.solBalance;
+    const whitelistTokenBalance = props.whitelistTokenBalance; 
     //console.log('This is the console log');
     //console.log(wallet);
     //console.log(props.isActive);
@@ -1090,8 +1091,8 @@ const SliderItem2 = (props: any) => {
                                                     </div>
                                                     <br />
                                                     {anchorWallet && isActive && whitelistEnabled && (isWhitelistUser) &&
-                                                        <h3>You own {props.whitelistTokenBalance} WL mint {isWhitelistUser ? "tokens" : "token"}.</h3>}
-                                                    {wallet && props.isActive && props.whitelistEnabled && (isWhitelistUser) &&
+                                                        <h3>You own {whitelistTokenBalance} WL mint {isWhitelistUser ? "tokens" : "token"}.</h3>}
+                                                    {wallet && isActive && whitelistEnabled && (isWhitelistUser) &&
                                                         <h3>You are whitelisted and allowed to mint.</h3>}
 
                                                     {wallet && props.isActive && props.endDate && Date.now() < props.endDate.getTime() &&
@@ -1111,9 +1112,9 @@ const SliderItem2 = (props: any) => {
                                                     <MintButtonContainer>
                                                         {console.log("statis of !isWLOnly", !props.isWLOnly)}
                                                         {console.log("isWhitelistUser", isWhitelistUser)}
-                                                        {console.log("candyMachine?.state.isActive ", candyMachine.state.isActive )}
+                                                        {console.log("candyMachine.state.isActive ", candyMachine.state.isActive )}
                                                         {console.log("!props.isActive", !props.isActive )}
-                                                        {console.log("candyMachine?.state.gatekeeper", candyMachine.state.gatekeeper)}
+                                                        {console.log("candyMachine.state.gatekeeper", candyMachine.state.gatekeeper)}
                                                         {console.log("publicKey", publicKey)}
                                                         {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
@@ -1129,8 +1130,8 @@ const SliderItem2 = (props: any) => {
                                                                 <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
                                                             (!props.isWLOnly || isWhitelistUser) ? 
-                                                                candyMachine?.state.isActive &&
-                                                                candyMachine?.state.gatekeeper &&
+                                                                candyMachine.state.isActive &&
+                                                                candyMachine.state.gatekeeper &&
                                                                     publicKey &&
                                                                     anchorWallet.signTransaction ? (
                                                                     <GatewayProvider
@@ -1143,7 +1144,7 @@ const SliderItem2 = (props: any) => {
                                                                         // // Replace with following when added
                                                                         // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
                                                                         gatekeeperNetwork={
-                                                                            candyMachine?.state?.gatekeeper?.gatekeeperNetwork
+                                                                            candyMachine.state.gatekeeper.gatekeeperNetwork
                                                                         } // This is the ignite (captcha) network
                                                                         /// Don't need this for mainnet
                                                                         clusterUrl={rpcUrl}
