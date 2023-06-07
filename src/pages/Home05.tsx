@@ -9,8 +9,7 @@ import {
     ConnectionProvider,
     WalletProvider,
   } from "@solana/wallet-adapter-react";
-
-  import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
+import { WalletDialogProvider } from "@solana/wallet-adapter-material-ui";
 
 import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 import { SlopeWalletAdapter } from "@solana/wallet-adapter-slope";
@@ -32,11 +31,11 @@ import Workflow from '../components/layouts/home-5/Workflow'
 
 //import { createTheme} from "@material-ui/core";
 
-import {
-    WalletModalProvider,
-    // WalletDisconnectButton,
-    // WalletMultiButton
-} from '@solana/wallet-adapter-react-ui';
+// import {
+//     WalletModalProvider,
+//     // WalletDisconnectButton,
+//     // WalletMultiButton
+// } from '@solana/wallet-adapter-react-ui';
 
 // Default styles that can be overridden by your app
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -49,16 +48,23 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
       return undefined;
     }
   };
-
-let error: string | undefined = undefined;
-
-const candyMachineId = getCandyMachineId();
   
-const network = (process.env.REACT_APP_SOLANA_NETWORK ??
-    "devnet") as WalletAdapterNetwork;
-const rpcHost =
+  let error: string | undefined = undefined;
+  
+  if (process.env.REACT_APP_SOLANA_NETWORK === undefined) {
+    error =
+      "Your REACT_APP_SOLANA_NETWORK value in the .env file doesn't look right! The options are devnet and mainnet-beta!";
+  } else if (process.env.REACT_APP_SOLANA_RPC_HOST === undefined) {
+    error =
+      "Your REACT_APP_SOLANA_RPC_HOST value in the .env file doesn't look right! Make sure you enter it in as a plain-text url (i.e., https://metaplex.devnet.rpcpool.com/)";
+  }
+  
+  const candyMachineId = getCandyMachineId();
+  const network = (process.env.REACT_APP_SOLANA_NETWORK ??
+    "mainnet-beta") as WalletAdapterNetwork;
+  const rpcHost =
     process.env.REACT_APP_SOLANA_RPC_HOST ?? anchor.web3.clusterApiUrl("devnet");
-const connection = new anchor.web3.Connection(rpcHost);
+  const connection = new anchor.web3.Connection(rpcHost);
 
 // const theme = createTheme({
 //       palette: {
@@ -88,29 +94,24 @@ const connection = new anchor.web3.Connection(rpcHost);
 
 const Home05 = () => {
 
-    // Custom RPC endpoint.
-    const endpoint = useMemo(() => clusterApiUrl(network), []);
+  const endpoint = useMemo(() => clusterApiUrl(network), []);
 
-    // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking and lazy loading --
-    // Only the wallets you configure here will be compiled into your application, and only the dependencies
-    // of wallets that your users connect to will be loaded.
-
-    const wallets = useMemo(
-        () => [
-          new PhantomWalletAdapter(),
-          new SolflareWalletAdapter({ network }),
-          new SlopeWalletAdapter(),
-          new SolletWalletAdapter({ network }),
-          new SolletExtensionWalletAdapter({ network }),
-        ],
-        []
-    );
+  const wallets = useMemo(
+    () => [
+      new PhantomWalletAdapter(),
+      new SolflareWalletAdapter({ network }),
+      new SlopeWalletAdapter(),
+      new SolletWalletAdapter({ network }),
+      new SolletExtensionWalletAdapter({ network }),
+    ],
+    []
+  );
 
     return (
         <div className='home-5'>
             <ConnectionProvider endpoint={endpoint}>
                 <WalletProvider wallets={wallets} autoConnect>
-                    <WalletModalProvider>
+                    <WalletDialogProvider>
                         <HeaderStyle2
                                 candyMachineId={candyMachineId}
                                 connection={connection}
@@ -132,7 +133,7 @@ const Home05 = () => {
                         <Workflow />
                         <Experiences/>
                         <MeetTheTeam />
-                    </WalletModalProvider>
+                    </WalletDialogProvider>
                 </WalletProvider>
             </ConnectionProvider>
             <Footer />
