@@ -1103,17 +1103,17 @@ const SliderItem2 = (props: any) => {
                                                             }}
                                                             renderer={props.renderEndDateCounter}
                                                         />}
-                                                    {wallet && props.isActive &&
+                                                    {wallet && isActive &&
                                                         <h3>TOTAL MINTED : {props.itemsRedeemed} / {props.itemsAvailable}</h3>}
-                                                    {wallet && props.isActive && <BorderLinearProgress variant="determinate"
+                                                    {wallet && isActive && <BorderLinearProgress variant="determinate"
                                                         value={100 - (props.itemsRemaining * 100 / props.itemsAvailable)} />}
                                                     <br />
                                                     <MintButtonContainer>
                                                         {console.log("statis of !isWLOnly", !props.isWLOnly)}
                                                         {console.log("isWhitelistUser", isWhitelistUser)}
-                                                        {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
+                                                        {console.log("candyMachine?.state.isActive ", candyMachine.state.isActive )}
                                                         {console.log("!props.isActive", !props.isActive )}
-                                                        {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
+                                                        {console.log("candyMachine?.state.gatekeeper", candyMachine.state.gatekeeper)}
                                                         {console.log("publicKey", publicKey)}
                                                         {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
