@@ -34,10 +34,9 @@ import {
 import {WalletAdapterNetwork} from '@solana/wallet-adapter-base';
 
 import {useAnchorWallet, useWallet} from "@solana/wallet-adapter-react";
-import {WalletMultiButton} from "@solana/wallet-adapter-react-ui";
+import {WalletModalProvider, WalletMultiButton} from "@solana/wallet-adapter-react-ui";
 import {GatewayProvider} from '@civic/solana-gateway-react';
 import Countdown from "react-countdown";
-
 
 import {AlertState, getAtaForMint, toDate} from '../../utility/utils';
 import {MintButton} from '../../MintButton';
@@ -60,7 +59,6 @@ import Card from '../elements/Card'
 
 //@ts-ignore
 import lightpaperpdfslider from '../../assets/docs/OnitBuddy-LightPaper.pdf';
-import { WalletDialogButton } from '@solana/wallet-adapter-material-ui';
 
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
 const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString() : "TOKEN";
