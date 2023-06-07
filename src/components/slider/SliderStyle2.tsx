@@ -791,7 +791,7 @@ const SliderStyle2 = (props: SliderProps) => {
           setIsPresale((candyMachine!.state.isPresale = false));
         }
     
-        setIsActive((candyMachine!.state.isActive = active));
+        setIsActive((candyMachine!.state.isActive === active));
       };
 
     //   useEffect(() => {
