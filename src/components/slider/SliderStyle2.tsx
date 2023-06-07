@@ -804,25 +804,13 @@ const SliderStyle2 = (props: SliderProps) => {
     //         })();
     //     }, [anchorWallet, props.connection]);
     
-
-    const refreshWallet = async () => {
-        if (anchorWallet) {
-            console.log(anchorWallet)
-            const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
-            setSolBalance(solBalance / LAMPORTS_PER_SOL);
-        }
-    };
-
       useEffect(() => {
-        refreshWallet();
         refreshCandyMachineState();
       }, [
         anchorWallet,
         props.candyMachineId,
         props.connection,
         refreshCandyMachineState,
-        refreshWallet,
-        setSolBalance
       ]);
 
       
