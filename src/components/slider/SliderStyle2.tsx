@@ -436,7 +436,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
                     //This is where we are setting the candymachine attributes
                     setCandyMachine(cndy);
-                    console.log("this is the candymachine payload", candyMachine);
+                    console.log("this is the candymachine payload", cndy);
                     setItemsAvailable(cndy.state.itemsAvailable);
                     setItemsRemaining(cndy.state.itemsRemaining);
                     setItemsRedeemed(cndy.state.itemsRedeemed);
@@ -626,7 +626,7 @@ const SliderStyle2 = (props: SliderProps) => {
                       });
                     }
             },
-            [anchorWallet, props.candyMachineId, props.rpcHost, props.connection]
+            [anchorWallet, candyMachine, props.candyMachineId, props.rpcHost, props.connection]
     );
 
     const onMint = async (
