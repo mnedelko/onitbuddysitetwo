@@ -436,7 +436,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
                     //This is where we are setting the candymachine attributes
                     setCandyMachine(cndy);
-                    console.log("this is the candymachine payload", cndy);
+                    console.log("this is the candymachine payload", candyMachine);
                     setItemsAvailable(cndy.state.itemsAvailable);
                     setItemsRemaining(cndy.state.itemsRemaining);
                     setItemsRedeemed(cndy.state.itemsRedeemed);
@@ -1114,9 +1114,9 @@ const SliderItem2 = (props: any) => {
                                                     <MintButtonContainer>
                                                         {console.log("statis of !isWLOnly", !props.isWLOnly)}
                                                         {console.log("isWhitelistUser", isWhitelistUser)}
-                                                        {console.log("candyMachine?.state.isActive ", props.candyMachine?.state.isActive )}
+                                                        {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
                                                         {console.log("!props.isActive", !props.isActive )}
-                                                        {console.log("candyMachine?.state.gatekeeper", props.candyMachine?.state.gatekeeper)}
+                                                        {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
                                                         {console.log("publicKey", publicKey)}
                                                         {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
