@@ -479,9 +479,10 @@ const SliderStyle2 = (props: SliderProps) => {
                         const token = (await getAtaForMint(mint, publicKey))[0];
 
                         try{
-                            const balance = await connection.getTokenAccountBalance(token);
-                            console.log("This is the whitelist token balance", balance);
-                            isWLUser = parseInt(balance.value.amount) > 0;
+                            const whitelistTokBalance = await connection.getTokenAccountBalance(token);
+                            setWhitelistTokenBalance(whitelistTokBalance.value.uiAmount);
+                            console.log("This is the whitelist token balance", whitelistTokenBalance);
+                            isWLUser = whitelistTokenBalance > 0;
                             // only whitelist the user if the balance > 0
                             setIsWhitelistUser(isWLUser);
 
@@ -863,8 +864,8 @@ const SliderStyle2 = (props: SliderProps) => {
         //     setIsActive(isPresale && !isEnded && balance > 0);
         // }
         if ( whitelistTokenBalance && whitelistTokenBalance > 0) {
-            let balance = whitelistTokenBalance - qty;
-            setWhitelistTokenBalance(balance);
+            let whitelistTokBalance = whitelistTokenBalance - qty;
+            setWhitelistTokenBalance(whitelistTokBalance);
             setIsActive(isPresale && !isEnded && balance > 0);
         }
         setSetupTxn(undefined);
