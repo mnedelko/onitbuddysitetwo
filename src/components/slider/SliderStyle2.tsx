@@ -1114,9 +1114,9 @@ const SliderItem2 = (props: any) => {
                                                     <MintButtonContainer>
                                                         {console.log("statis of !isWLOnly", !props.isWLOnly)}
                                                         {console.log("isWhitelistUser", isWhitelistUser)}
-                                                        {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
+                                                        {console.log("candyMachine?.state.isActive ", props.candyMachine?.state.isActive )}
                                                         {console.log("!props.isActive", !props.isActive )}
-                                                        {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
+                                                        {console.log("candyMachine?.state.gatekeeper", props.candyMachine?.state.gatekeeper)}
                                                         {console.log("publicKey", publicKey)}
                                                         {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
@@ -1132,8 +1132,8 @@ const SliderItem2 = (props: any) => {
                                                                 <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
                                                             (!props.isWLOnly || isWhitelistUser) ? 
-                                                                candyMachine?.state.isActive &&
-                                                                candyMachine?.state.gatekeeper &&
+                                                                props.candyMachine?.state.isActive &&
+                                                                props.candyMachine?.state.gatekeeper &&
                                                                     publicKey &&
                                                                     anchorWallet.signTransaction ? (
                                                                     <GatewayProvider
