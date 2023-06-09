@@ -484,8 +484,8 @@ const SliderStyle2 = (props: SliderProps) => {
                         try{
                             const whitelistTokBalance = await connection.getTokenAccountBalance(token);
                             setWhitelistTokenBalance(whitelistTokBalance.value.uiAmount);
-                            console.log("This is the whitelist token balance", whitelistTokenBalance);
-                            isWLUser = whitelistTokenBalance > 0;
+                            console.log("This is the whitelist token balance", whitelistTokBalance);
+                            isWLUser = whitelistTokBalance.value.uiAmount > 0;
                             // only whitelist the user if the balance > 0
                             console.log("isWLUser", isWLUser);
                             setIsWhitelistUser(isWLUser);
