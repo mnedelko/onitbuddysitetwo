@@ -803,7 +803,7 @@ const SliderStyle2 = (props: SliderProps) => {
     //             }
     //         })();
     //     }, [anchorWallet, props.connection]);
-    
+      
       useEffect(() => {
         (async () => {
             if (anchorWallet) {
@@ -812,6 +812,11 @@ const SliderStyle2 = (props: SliderProps) => {
                 setSolBalance(solBalance / LAMPORTS_PER_SOL);
             }
         })();
+      }, [
+        anchorWallet, props.connection,
+      ]);
+
+      useEffect(() => {
         refreshCandyMachineState();
       }, [
         anchorWallet,
@@ -819,7 +824,6 @@ const SliderStyle2 = (props: SliderProps) => {
         props.connection,
         refreshCandyMachineState,
       ]);
-
       
     //   useEffect(() => {
     //     (function loop() {
