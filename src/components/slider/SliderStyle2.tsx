@@ -804,17 +804,17 @@ const SliderStyle2 = (props: SliderProps) => {
     //         })();
     //     }, [anchorWallet, props.connection]);
       
-      useEffect(() => {
-        (async () => {
-            if (anchorWallet) {
-                console.log(anchorWallet)
-                const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
-                setSolBalance(solBalance / LAMPORTS_PER_SOL);
-            }
-        })();
-      }, [
-        anchorWallet, props.connection,
-      ]);
+    //   useEffect(() => {
+    //     (async () => {
+    //         if (anchorWallet) {
+    //             console.log(anchorWallet)
+    //             const solBalance = await props.connection.getBalance(anchorWallet!.publicKey);
+    //             setSolBalance(solBalance / LAMPORTS_PER_SOL);
+    //         }
+    //     })();
+    //   }, [
+    //     anchorWallet, props.connection,
+    //   ]);
 
       useEffect(() => {
         refreshCandyMachineState();
@@ -1098,10 +1098,10 @@ const SliderItem2 = (props: any) => {
                                                     <br />
                                                     {anchorWallet && isActive && whitelistEnabled && (isWhitelistUser) &&
                                                         <h3>You own {whitelistTokenBalance} WL mint {isWhitelistUser ? "tokens" : "token"}.</h3>}
-                                                    {wallet && isActive && whitelistEnabled && (isWhitelistUser) &&
+                                                    {anchorWallet && isActive && whitelistEnabled && (isWhitelistUser) &&
                                                         <h3>You are whitelisted and allowed to mint.</h3>}
 
-                                                    {wallet && props.isActive && props.endDate && Date.now() < props.endDate.getTime() &&
+                                                    {anchorWallet && props.isActive && props.endDate && Date.now() < props.endDate.getTime() &&
                                                         <Countdown
                                                             date={toDate(props.candyMachine?.state?.endSettings?.number)}
                                                             onMount={({completed}) => completed && props.setIsEnded(true)}
@@ -1110,9 +1110,9 @@ const SliderItem2 = (props: any) => {
                                                             }}
                                                             renderer={props.renderEndDateCounter}
                                                         />}
-                                                    {wallet && isActive &&
+                                                    {anchorWallet && isActive &&
                                                         <h3>TOTAL MINTED : {props.itemsRedeemed} / {props.itemsAvailable}</h3>}
-                                                    {wallet && isActive && <BorderLinearProgress variant="determinate"
+                                                    {anchorWallet && isActive && <BorderLinearProgress variant="determinate"
                                                         value={100 - (props.itemsRemaining * 100 / props.itemsAvailable)} />}
                                                     <br />
                                                     <MintButtonContainer>
