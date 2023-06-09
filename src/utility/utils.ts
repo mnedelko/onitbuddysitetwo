@@ -49,7 +49,7 @@ export const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID =
   new anchor.web3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
 export const CIVIC = new anchor.web3.PublicKey(
-  "gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs",
+  "gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs"
 );
 
 export const CIVIC_GATEKEEPER_NETWORK =
@@ -68,7 +68,7 @@ export const getAtaForMint = async (
 export const getNetworkExpire = async (
   gatekeeperNetwork: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddressSync(
+  return await anchor.web3.PublicKey.findProgramAddress(
     [gatekeeperNetwork.toBuffer(), Buffer.from("expire")],
     CIVIC
   );
@@ -78,7 +78,7 @@ export const getNetworkToken = async (
   wallet: anchor.web3.PublicKey,
   gatekeeperNetwork: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddressSync(
+  return await anchor.web3.PublicKey.findProgramAddress(
     [
       wallet.toBuffer(),
       Buffer.from("gateway"),
