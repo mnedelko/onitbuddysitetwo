@@ -652,6 +652,7 @@ const SliderStyle2 = (props: SliderProps) => {
               console.log("onMint, candyMachine", candyMachine);
               console.log("onMint, publicKey", publicKey);
               setupMint = await createAccountsForMint(candyMachine, publicKey);
+              console.log("setupMint", setupMint);
               let status: any = { err: true };
               if (setupMint.transaction) {
                 status = await awaitTransactionSignatureConfirmation(
@@ -660,6 +661,7 @@ const SliderStyle2 = (props: SliderProps) => {
                   props.connection,
                   true
                 );
+                console.log("status", status);
               }
               if (status && !status.err) {
                 setSetupTxn(setupMint);
@@ -1147,7 +1149,7 @@ const SliderItem2 = (props: any) => {
                                                         {console.log("!props.isActive", !props.isActive )}
                                                         {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
                                                         {console.log("publicKey", props.publicKey)}
-                                                        {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
+                                                        {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet?.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
                                                             <Countdown
                                                                 date={toDate(props.goLiveDate)}
