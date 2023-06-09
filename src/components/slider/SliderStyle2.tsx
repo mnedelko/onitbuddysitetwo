@@ -59,6 +59,7 @@ import Card from '../elements/Card'
 
 //@ts-ignore
 import lightpaperpdfslider from '../../assets/docs/OnitBuddy-LightPaper.pdf';
+import { set } from '@project-serum/anchor/dist/cjs/utils/features';
 
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
 const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString() : "TOKEN";
@@ -969,6 +970,8 @@ const SliderStyle2 = (props: SliderProps) => {
                                         setWhitelistPrice = {setWhitelistPrice}
                                         whitelistEnabled = {whitelistEnabled}
                                         setWhitelistEnabled = {setWhitelistEnabled}
+                                        isWhitelistUser = {isWhitelistUser}
+                                        setWhitelistUser = {setIsWhitelistUser}
                                         //isBurnToken = {isBurnToken}
                                         //setIsBurnToken = {setIsBurnToken}
                                         whitelistTokenBalance = {whitelistTokenBalance}
