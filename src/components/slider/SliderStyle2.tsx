@@ -649,6 +649,8 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign account setup transaction",
                 severity: "info",
               });
+              console.log("onMint, candyMachine", candyMachine);
+              console.log("onMint, publicKey", publicKey);
               setupMint = await createAccountsForMint(candyMachine, publicKey);
               let status: any = { err: true };
               if (setupMint.transaction) {
