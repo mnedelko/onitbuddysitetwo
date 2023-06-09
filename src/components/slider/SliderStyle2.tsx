@@ -661,7 +661,7 @@ const SliderStyle2 = (props: SliderProps) => {
                   props.connection,
                   true
                 );
-                console.log("status", status);
+                console.log("This status", status);
               }
               if (status && !status.err) {
                 setSetupTxn(setupMint);
@@ -671,12 +671,14 @@ const SliderStyle2 = (props: SliderProps) => {
                     "Setup transaction succeeded! Please sign minting transaction",
                   severity: "info",
                 });
+                console.log("Conformation status confirmed")
               } else {
                 setAlertState({
                   open: true,
                   message: "Mint failed! Please try again!",
                   severity: "error",
                 });
+                console.log("Mint failed!")
                 setIsUserMinting(false);
                 return;
               }
@@ -686,6 +688,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign minting transaction",
                 severity: "info",
               });
+              console.log("Please sign minting transaction")
             }
     
             const mintResult = await mintOneToken(
