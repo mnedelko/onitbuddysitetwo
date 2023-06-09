@@ -451,6 +451,7 @@ export const mintOneToken = async (
   }
 
   if (candyMachine.state.gatekeeper) {
+    console.log("candyMachine.state.gatekeeper", candyMachine.state.gatekeeper);
     remainingAccounts.push({
       pubkey: (
         await getNetworkToken(
@@ -461,8 +462,9 @@ export const mintOneToken = async (
       isWritable: true,
       isSigner: false,
     });
-
+    console.log("We successed on ramaining Accounts");
     if (candyMachine.state.gatekeeper.expireOnUse) {
+      console.log("candyMachine.state.gatekeeper.expireOnUse", candyMachine.state.gatekeeper.expireOnUse)
       remainingAccounts.push({
         pubkey: CIVIC,
         isWritable: false,
@@ -477,13 +479,15 @@ export const mintOneToken = async (
         isWritable: false,
         isSigner: false,
       });
+      console.log("We successed on expire on use");
     }
   }
   if (candyMachine.state.whitelistMintSettings) {
+    console.log("candyMachine.state.whitelistMintSettings", candyMachine.state.whitelistMintSettings);
     const mint = new anchor.web3.PublicKey(
       candyMachine.state.whitelistMintSettings.mint
     );
-
+    console.log("Mint one token", mint);
     const whitelistToken = (await getAtaForMint(mint, payer))[0];
     remainingAccounts.push({
       pubkey: whitelistToken,
@@ -532,8 +536,7 @@ export const mintOneToken = async (
     freezePda
     );
 
-    console.log("Freeze state: ");
-    console.log(freezePdaState);
+    console.log("Freeze state: ", freezePdaState);
 
     if (freezePdaState != null) {
       remainingAccounts.push({
