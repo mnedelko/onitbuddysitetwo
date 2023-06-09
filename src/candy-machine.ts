@@ -607,13 +607,13 @@ export const mintOneToken = async (
                 (await candyMachine.program.account.collectionPda.fetch(
                     collectionPDA
                 )) as CollectionData;
-            console.log(collectionData);
+            console.log("collectionData", collectionData);
             const collectionMint = collectionData.mint;
             const collectionAuthorityRecord = await getCollectionAuthorityRecordPDA(
                 collectionMint,
                 collectionPDA
             );
-            console.log(collectionMint);
+            console.log("Collection Mint", collectionMint);
             if (collectionMint) {
                 const collectionMetadata = await getMetadata(collectionMint);
                 const collectionMasterEdition = await getMasterEdition(collectionMint);
