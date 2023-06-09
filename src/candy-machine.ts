@@ -411,8 +411,10 @@ export const mintOneToken = async (
   const instructions = [];
   const signers: anchor.web3.Keypair[] = [];
   console.log("SetupState: ", setupState);
+  console.log("candyMachineAddress: ", candyMachine.id);
   if (!setupState) {
       signers.push(mint);
+      console.log("Did we pass this?")
       instructions.push(
           ...[
               anchor.web3.SystemProgram.createAccount({
@@ -489,6 +491,7 @@ export const mintOneToken = async (
     );
     console.log("Mint one token", mint);
     const whitelistToken = (await getAtaForMint(mint, payer))[0];
+    console.log("WhitelistToken")
     remainingAccounts.push({
       pubkey: whitelistToken,
       isWritable: true,
@@ -496,6 +499,7 @@ export const mintOneToken = async (
     });
 
     if (candyMachine.state.whitelistMintSettings.mode.burnEveryTime) {
+      console.log("candyMachine.state.whitelistMintSettings.mode.burnEveryTime", candyMachine.state.whitelistMintSettings.mode.burnEveryTime);
       remainingAccounts.push({
         pubkey: mint,
         isWritable: true,
@@ -510,6 +514,7 @@ export const mintOneToken = async (
   }
 
   if (candyMachine.state.tokenMint) {
+    console.log("candyMachine.state.tokenMint", candyMachine.state.tokenMint);
     remainingAccounts.push({
       pubkey: userPayingAccountAddress,
       isWritable: true,
@@ -527,6 +532,8 @@ export const mintOneToken = async (
   const [candyMachineCreator, creatorBump] = await getCandyMachineCreator(
     candyMachineAddress
   );
+
+  console.log("candyMachineCreator", candyMachineCreator);
 
   const freezePda = (await getFreezePda(candyMachineAddress))[0];
   console.log(freezePda.toString());
