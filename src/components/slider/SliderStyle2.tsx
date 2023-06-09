@@ -477,7 +477,9 @@ const SliderStyle2 = (props: SliderProps) => {
                         const mint = new anchor.web3.PublicKey(
                             cndy.state.whitelistMintSettings.mint
                         );
+                        console.log("mint", mint)
                         const token = (await getAtaForMint(mint, publicKey))[0];
+                        console.log("token", token)
 
                         try{
                             const whitelistTokBalance = await connection.getTokenAccountBalance(token);
@@ -485,6 +487,7 @@ const SliderStyle2 = (props: SliderProps) => {
                             console.log("This is the whitelist token balance", whitelistTokenBalance);
                             isWLUser = whitelistTokenBalance > 0;
                             // only whitelist the user if the balance > 0
+                            console.log("isWLUser", isWLUser);
                             setIsWhitelistUser(isWLUser);
 
                             if(cndy.state.isWhitelistOnly) {
@@ -995,8 +998,6 @@ const SliderStyle2 = (props: SliderProps) => {
                                         setIsUserMinting = {setIsUserMinting}
                                         isValidBalance = {isValidBalance}
                                         setIsValidBalance = {setIsValidBalance}
-                                        isWhitelistUser = {isWhitelistUser}
-                                        setIsWhitelistUser = {setIsWhitelistUser}
                                         userPrice = {userPrice}
                                         setUserPrice = {setUserPrice}
                                         discountPrice = {discountPrice}
