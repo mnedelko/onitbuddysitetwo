@@ -1121,7 +1121,7 @@ const SliderItem2 = (props: any) => {
                                                         {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
                                                         {console.log("!props.isActive", !props.isActive )}
                                                         {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
-                                                        {console.log("publicKey", publicKey)}
+                                                        {console.log("publicKey", props.publicKey)}
                                                         {console.log("anchorWallet.signTransaction",JSON.stringify(anchorWallet.signTransaction))}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
                                                             <Countdown
