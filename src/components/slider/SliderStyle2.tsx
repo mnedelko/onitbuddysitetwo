@@ -1062,10 +1062,25 @@ const SliderItem2 = (props: any) => {
     const discountPrice = props.discountPrice;
     const solBalance = props.solBalance;
     const whitelistTokenBalance = props.whitelistTokenBalance; 
-    //console.log('This is the console log');
-    //console.log(wallet);
-    //console.log(props.isActive);
-    //props.consoleThis();
+    
+    console.log("1. Wallet", wallet);
+    console.log("2. publicKey", publicKey);
+    console.log("3. anchorWallet", anchorWallet);
+    console.log("4. candyMachine", candyMachine);
+    console.log("5. rpcUrl", rpcUrl);
+    console.log("6. cluster", cluster);
+    console.log("7. isUserMinting", isUserMinting);
+    console.log("8. setIsUserMinting", setIsUserMinting);
+    console.log("9. isActive", isActive);
+    console.log("10. isPresale", isPresale);
+    console.log("11. isWhitelistUser", isWhitelistUser);
+    console.log("12. isValidBalance", isValidBalance);
+    console.log("13. whitelistEnabled", whitelistEnabled);
+    console.log("14. balance", balance);
+    console.log("15. userPrice", userPrice);
+    console.log("16. discountPrice", discountPrice);
+    console.log("17. solBalance", solBalance);
+    console.log("18. whitelistTokenBalance", whitelistTokenBalance); 
     
     return (
         <div className="swiper-wrapper">
@@ -1078,7 +1093,7 @@ const SliderItem2 = (props: any) => {
                                     <MainContainer>
                                         <WalletContainer>
                                             <Wallet>
-                                                {anchorWallet.publicKey?
+                                                {publicKey?
                                                     <WalletAmount>Your wallet balance: {(balance || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
