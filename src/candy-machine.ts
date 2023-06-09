@@ -491,7 +491,7 @@ export const mintOneToken = async (
     );
     console.log("Mint one token", mint);
     const whitelistToken = (await getAtaForMint(mint, payer))[0];
-    console.log("WhitelistToken")
+    console.log("WhitelistToken", whitelistToken);
     remainingAccounts.push({
       pubkey: whitelistToken,
       isWritable: true,
@@ -536,7 +536,8 @@ export const mintOneToken = async (
   console.log("candyMachineCreator", candyMachineCreator);
 
   const freezePda = (await getFreezePda(candyMachineAddress))[0];
-  console.log(freezePda.toString());
+  console.log("FreezePda", freezePda.toString());
+  console.log("candyMachine.program", candyMachine.program);
 
   const freezePdaState = await getFreezePdaState(
     candyMachine.program,

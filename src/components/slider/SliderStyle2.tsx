@@ -690,6 +690,7 @@ const SliderStyle2 = (props: SliderProps) => {
               });
               console.log("Please sign minting transaction")
             }
+            console.log("candyMachine in onMint", candyMachine);
     
             const mintResult = await mintOneToken(
               candyMachine,
