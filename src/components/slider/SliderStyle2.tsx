@@ -435,17 +435,17 @@ const SliderStyle2 = (props: SliderProps) => {
                     setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
 
                     //This is where we are setting the candymachine attributes
-                    setCandyMachine(cndy);
+                    //setCandyMachine(cndy);
                     console.log("this is the candymachine payload", cndy);
                     setItemsAvailable(cndy.state.itemsAvailable);
                     setItemsRemaining(cndy.state.itemsRemaining);
                     setItemsRedeemed(cndy.state.itemsRedeemed);
 
                     //this is where we are implementing the decimals
-                    var divider = 1;
-                    if (decimals) {
-                        divider = +('1' + new Array(decimals).join('0').slice() + '0');
-                    }
+                    // var divider = 1;
+                    // if (decimals) {
+                    //     divider = +('1' + new Array(decimals).join('0').slice() + '0');
+                    // }
 
                     //whitelist mint?
 
