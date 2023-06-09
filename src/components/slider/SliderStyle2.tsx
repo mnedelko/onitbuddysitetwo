@@ -1157,7 +1157,7 @@ const SliderItem2 = (props: any) => {
                                                                 props.candyMachine?.state.isActive &&
                                                                 props.candyMachine?.state.gatekeeper &&
                                                                     publicKey &&
-                                                                    anchorWallet.signTransaction ? (
+                                                                    anchorWallet?.signTransaction ? (
                                                                     <GatewayProvider
                                                                         wallet={{
                                                                             publicKey:
