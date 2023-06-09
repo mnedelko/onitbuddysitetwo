@@ -934,6 +934,7 @@ const SliderStyle2 = (props: SliderProps) => {
                             data.map((item, index) => (
                                 <SwiperSlide key={index} >
                                     <SliderItem2 
+                                        wallet = {wallet}
                                         publicKey = {publicKey}
                                         goLiveDate= {candyMachine?.state.goLiveDate}
                                         isGatekeeper = {candyMachine?.state.gatekeeper}
@@ -1217,7 +1218,7 @@ const SliderItem2 = (props: any) => {
                                 <div className="col-xl-6 col-md-12">
                                     <div className="content-right">
                                         <div className="sc-item-details">
-                                            <h2 className="style2 mt-xl-4">Whitelist Presale starts Jan 23rd</h2>
+                                            <h2 className="style2 mt-xl-4">Minting in Progress</h2>
                                             <div className="meta-item">
                                                 <div className="right mt-xl-0">
                                                     <p className="mt-xl-1"></p>
