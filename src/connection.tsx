@@ -179,6 +179,9 @@ import {
       "vs handed in length",
       instructionSet.length
     );
+
+    console.log("signedTxns", signedTxns);
+    
     for (let i = 0; i < signedTxns.length; i++) {
       const signedTxnPromise = sendSignedTransaction({
         connection,
