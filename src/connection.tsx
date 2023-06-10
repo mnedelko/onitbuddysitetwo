@@ -164,12 +164,15 @@ import {
   const partiallySignedTransactions = unsignedTxns.filter((t) =>
       t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
   );
+  console.log("partiallySignedTransactions", partiallySignedTransactions);
   const fullySignedTransactions = unsignedTxns.filter(
       (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
   );
+  console.log("fullySignedTransactions", fullySignedTransactions);
   let signedTxns = await wallet.signAllTransactions(
       partiallySignedTransactions
   );
+  console.log("signedTxns", signedTxns);
   signedTxns = fullySignedTransactions.concat(signedTxns);
     const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
   
@@ -179,8 +182,6 @@ import {
       "vs handed in length",
       instructionSet.length
     );
-
-    console.log("signedTxns", signedTxns);
 
     for (let i = 0; i < signedTxns.length; i++) {
       const signedTxnPromise = sendSignedTransaction({
