@@ -509,6 +509,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
                     // detect if using spl-token to mint
                     if (cndy?.state.tokenMint) {
+                        console.log("Entering state.tokenMint");
                         // retrieves teh SPL token
                         const mint = new anchor.web3.PublicKey(cndy.state.tokenMint);
                         const token = (await getAtaForMint(mint, publicKey))[0];
@@ -528,10 +529,11 @@ const SliderStyle2 = (props: SliderProps) => {
                             console.log(e);
                         }
                     } else {
+                        console.log("No state.tokenMind");
                         const balance = new anchor.BN(
                             await connection.getBalance(publicKey)
                         );
-                        setBalance(balance.toNumber()/LAMPORTS_PER_SOL);
+                        setBalance(balance.toNumber());
                         console.log("This is the publicKey", publicKey);
                         console.log("balance", balance); 
                         const valid = balance.gte(userPrice);
