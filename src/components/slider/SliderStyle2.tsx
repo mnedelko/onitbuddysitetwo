@@ -662,6 +662,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 );
                 console.log("This status", status);
               }
+              console.log("status", status, "!status.err", !status.err);
               if (status && !status.err) {
                 setSetupTxn(setupMint);
                 setAlertState({
