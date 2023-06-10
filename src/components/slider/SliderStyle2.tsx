@@ -698,7 +698,7 @@ const SliderStyle2 = (props: SliderProps) => {
             console.log("publicKey", publicKey);
             console.log("beforeTransactions", beforeTransactions);
             console.log("afterTransactions", afterTransactions);
-            //console.log("setupMint", setupMint);
+            console.log("setupMint", setupMint);
             console.log("setupTxn", setupTxn);
     
             // const mintResult = await mintOneToken(
