@@ -116,8 +116,8 @@ export const MintButton = ({
       <CTAButton
       disabled={isMinting || !isActive}
       onClick={async () => {
+        console.log("candyMachine?.state.isActive",candyMachine?.state.isActive,"candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper);
         if (candyMachine?.state.isActive && candyMachine?.state.gatekeeper) {
-          console.log("candyMachine?.state.isActive",candyMachine?.state.isActive,"candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper);
           const network =
             candyMachine.state.gatekeeper.gatekeeperNetwork.toBase58();
           console.log("network: ", network);
