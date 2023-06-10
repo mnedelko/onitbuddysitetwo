@@ -363,7 +363,7 @@ export const createAccountsForMint = async (
       1
     ),
   ];
-
+  console.log("This is the call that is being executed");
   return {
     mint: mint,
     userTokenAccount: userTokenAccountAddress,
@@ -482,7 +482,7 @@ export const mintOneToken = async (
         isWritable: false,
         isSigner: false,
       });
-      console.log("We successed on expire on use");
+      console.log("We succeded on expire on use");
     }
   }
   if (candyMachine.state.whitelistMintSettings) {

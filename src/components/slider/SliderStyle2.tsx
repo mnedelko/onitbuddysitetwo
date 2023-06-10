@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import * as anchor from "@project-serum/anchor";
 //import { Link } from 'react-router-dom'
 
 import { Navigation, Scrollbar, A11y } from 'swiper';
@@ -23,7 +24,6 @@ import discount from '../../assets/images/icon/discount.png';
 import imgdetail1 from '../../assets/images/previewgif/mintinggifonitbuddy.gif';
 
 //solana imports
-import * as anchor from "@project-serum/anchor";
 import {
     Commitment,
     Connection,
@@ -313,7 +313,6 @@ export interface SliderProps {
 }
 
 const SliderStyle2 = (props: SliderProps) => {
-    //State Definitions
     const [isUserMinting, setIsUserMinting] = useState(false);
     const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
     const [alertState, setAlertState] = useState<AlertState>({
@@ -415,10 +414,10 @@ const SliderStyle2 = (props: SliderProps) => {
                 return;
             }
 
-            const connection = new Connection(props.rpcHost, commitment);
+    const connection = new Connection(props.rpcHost, commitment);
 
             if (props.candyMachineId){
-                try{
+                try {
                     const cndy = await getCandyMachineState(
                         anchorWallet as anchor.Wallet,
                         props.candyMachineId,
@@ -1181,7 +1180,7 @@ const SliderItem2 = (props: any) => {
                                                                             publicKey:
                                                                                 publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
                                                                             //@ts-ignore
-                                                                            signTransaction: anchorWallet.signTransaction,
+                                                                            signTransaction: wallet.signTransaction,
                                                                         }}
                                                                         // // Replace with following when added
                                                                         // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
