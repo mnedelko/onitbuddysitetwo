@@ -1201,6 +1201,7 @@ const SliderItem2 = (props: any) => {
                                                                                 isActive ||
                                                                                 (isPresale && isWhitelistUser && isValidBalance)
                                                                             }
+                                                                            anchorWallet={anchorWallet}
                                                                         />
                                                                     </GatewayProvider>
                                                                 ) : (
