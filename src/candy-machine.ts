@@ -327,7 +327,7 @@ export const createAccountsForMint = async (
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
   )[0];
-
+  console.log("1st Mint", mint);
   const signers: anchor.web3.Keypair[] = [mint];
   console.log("signers in getCollectionAuthorityRecordPDA", signers);
   const instructions = [
