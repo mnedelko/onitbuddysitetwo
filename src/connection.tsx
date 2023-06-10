@@ -184,6 +184,8 @@ import {
         connection,
         signedTransaction: signedTxns[i],
       });
+
+      console.log("signedTxnPromise", signedTxnPromise);
   
       if (sequenceType !== SequenceType.Parallel) {
         try {
