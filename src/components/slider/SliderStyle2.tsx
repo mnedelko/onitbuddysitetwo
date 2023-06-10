@@ -1180,7 +1180,7 @@ const SliderItem2 = (props: any) => {
                                                                             publicKey:
                                                                                 publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
                                                                             //@ts-ignore
-                                                                            signTransaction: wallet.signTransaction,
+                                                                            signTransaction: anchorWallet.signTransaction,
                                                                         }}
                                                                         // // Replace with following when added
                                                                         // gatekeeperNetwork={candyMachine.state.gatekeeper_network}
