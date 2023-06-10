@@ -406,9 +406,11 @@ export const mintOneToken = async (
   )[0];
   
   console.log("Is it a token mint?", candyMachine);
+  
   const userPayingAccountAddress = candyMachine.state.tokenMint
     ? (await getAtaForMint(candyMachine.state.tokenMint, payer))[0]
     : payer;
+  console.log("userPayingAccountAddress", userPayingAccountAddress);
 
   const candyMachineAddress = candyMachine.id;
   const remainingAccounts = [];
@@ -503,7 +505,7 @@ export const mintOneToken = async (
       isSigner: false,
     });
 
-    if (candyMachine.state.whitelistMintSettings.mode.burnEveryTime) {
+    if (candyMachine.state.whitelistMintSettings.mode.burnEveryTime) {   
       console.log("candyMachine.state.whitelistMintSettings.mode.burnEveryTime", candyMachine.state.whitelistMintSettings.mode.burnEveryTime);
       remainingAccounts.push({
         pubkey: mint,
@@ -572,8 +574,8 @@ export const mintOneToken = async (
       });
     }
   }
-
-  console.log(remainingAccounts.map((rm) => rm.pubkey.toBase58()));
+  console.log("Remaining Accounts", remainingAccounts);
+  console.log("RemainingAccounts", remainingAccounts.map((rm) => rm.pubkey.toBase58()));
   instructions.push(
     await candyMachine.program.instruction.mintNft(creatorBump, {
       accounts: {
