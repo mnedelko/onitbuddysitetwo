@@ -177,7 +177,7 @@ import {
   );
   console.log("signedTxns1", signedTxns);
   signedTxns = fullySignedTransactions.concat(signedTxns);
-    const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
+  const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
   console.log("signedTxns2", signedTxns);
     console.log(
       "Signed txns length",
