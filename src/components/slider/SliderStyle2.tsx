@@ -531,8 +531,8 @@ const SliderStyle2 = (props: SliderProps) => {
                         const balance = new anchor.BN(
                             await connection.getBalance(publicKey)
                         );
-                        setBalance(balance.toNumber());
-                        //console.log("This is the publicKey", publicKey);
+                        setBalance(balance.toNumber);
+                        console.log("This is the publicKey", publicKey);
                         console.log("balance", balance); 
                         const valid = balance.gte(userPrice);
                         setIsValidBalance(valid);
@@ -1113,7 +1113,7 @@ const SliderItem2 = (props: any) => {
                                         <WalletContainer>
                                             <Wallet>
                                                 {publicKey?
-                                                    <WalletAmount>Your wallet balance: {(balance || 0).toLocaleString()} SOL</WalletAmount> :
+                                                    <WalletAmount>Your wallet balance: {((balance/LAMPORTS_PER_SOL) || 0).toLocaleString()} SOL</WalletAmount> :
                                                     <ConnectButton>Connect Wallet</ConnectButton>}
                                             </Wallet>
                                         </WalletContainer>
@@ -1323,7 +1323,7 @@ const SliderItem2 = (props: any) => {
                                                     <span className="heading style-2">Your Wallet balance</span>
                                                     <div className="price-box">
                                                               {anchorWallet ?
-                                                    <h5>{(balance || 0).toLocaleString()} SOL</h5> :
+                                                    <h5>{((balance/LAMPORTS_PER_SOL) || 0).toLocaleString()} SOL</h5> :
                                                     <span>Balance Not Available</span>}
                                                         </div>
                                                     {/* <Countdown date={Date.now() + 500000000}>
