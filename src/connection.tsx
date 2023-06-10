@@ -152,6 +152,7 @@ import {
       instructions.forEach((instruction) => transaction.add(instruction));
       transaction.recentBlockhash = blockhash;
       transaction.feePayer = wallet.publicKey;
+      console.log("Instructions", instructions);
   
       if (signers.length > 0) {
         transaction.partialSign(...signers);
@@ -160,6 +161,7 @@ import {
       unsignedTxns.push(transaction);
     }
     unsignedTxns.push(...afterTransactions);
+    console.log("unsignedTxns", unsignedTxns);
 
   const partiallySignedTransactions = unsignedTxns.filter((t) =>
       t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
@@ -172,10 +174,10 @@ import {
   let signedTxns = await wallet.signAllTransactions(
       partiallySignedTransactions
   );
-  console.log("signedTxns", signedTxns);
+  console.log("signedTxns1", signedTxns);
   signedTxns = fullySignedTransactions.concat(signedTxns);
     const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
-  
+  console.log("signedTxns2", signedTxns);
     console.log(
       "Signed txns length",
       signedTxns.length,
