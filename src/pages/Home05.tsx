@@ -62,7 +62,7 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   const network = (process.env.REACT_APP_SOLANA_NETWORK ??
     "mainnet-beta") as WalletAdapterNetwork;
   const rpcHost =
-    process.env.REACT_APP_SOLANA_RPC_HOST ?? anchor.web3.clusterApiUrl("devnet");
+    process.env.REACT_APP_SOLANA_RPC_HOST ?? anchor.web3.clusterApiUrl("mainnet-beta");
   const connection = new anchor.web3.Connection(rpcHost);
 
 // const theme = createTheme({

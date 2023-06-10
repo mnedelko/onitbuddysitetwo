@@ -404,7 +404,8 @@ export const mintOneToken = async (
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
   )[0];
-
+  
+  console.log("Is it a token mint?", candyMachine);
   const userPayingAccountAddress = candyMachine.state.tokenMint
     ? (await getAtaForMint(candyMachine.state.tokenMint, payer))[0]
     : payer;
