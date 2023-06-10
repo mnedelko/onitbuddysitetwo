@@ -651,22 +651,16 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign account setup transaction",
                 severity: "info",
               });
-              console.log("onMint, candyMachine", candyMachine);
-              console.log("onMint, publicKey", publicKey);
               setupMint = await createAccountsForMint(candyMachine, publicKey);
-              console.log("setupMint", setupMint);
               let status: any = { err: true };
               if (setupMint.transaction) {
-                console.log("setupMint.transaction", setupMint.transaction);
                 status = await awaitTransactionSignatureConfirmation(
                   setupMint.transaction,
                   props.txTimeout,
                   props.connection,
                   true
                 );
-                console.log("This status", status);
               }
-              console.log("status", status, "!status.err", !status.err);
               if (status && !status.err) {
                 setSetupTxn(setupMint);
                 setAlertState({
@@ -675,14 +669,12 @@ const SliderStyle2 = (props: SliderProps) => {
                     "Setup transaction succeeded! Please sign minting transaction",
                   severity: "info",
                 });
-                console.log("Conformation status confirmed")
               } else {
                 setAlertState({
                   open: true,
                   message: "Mint failed! Please try again!",
                   severity: "error",
                 });
-                console.log("Mint failed!")
                 setIsUserMinting(false);
                 return;
               }
@@ -692,36 +684,14 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign minting transaction",
                 severity: "info",
               });
-              console.log("Please sign minting transaction")
             }
-            console.log("candyMachine in onMint", candyMachine);
-            console.log("publicKey", publicKey);
-            console.log("beforeTransactions", beforeTransactions);
-            console.log("afterTransactions", afterTransactions);
-            console.log("setupMint", setupMint);
-            console.log("setupTxn", setupTxn);
     
-            // const mintResult = await mintOneToken(
-            //   candyMachine,
-            //   publicKey,
-            //   beforeTransactions,
-            //   afterTransactions,
-            //   setupMint ?? setupTxn
-            // );
-
-            const setupState = setupMint ?? setupTxn;
-                
-            const mint = setupState?.mint ?? anchor.web3.Keypair.generate();
-
-            //THIS IS WHAT I NEED TO FIGURE OUT
-            let mintResult = await mintOneToken(
-                candyMachine,
-                publicKey,
-                mint,
-                props.connection,
-                beforeTransactions,
-                afterTransactions,
-                //setupState,
+            const mintResult = await mintOneToken(
+              candyMachine,
+              publicKey,
+              beforeTransactions,
+              afterTransactions,
+              setupMint ?? setupTxn
             );
     
             let status: any = { err: true };
