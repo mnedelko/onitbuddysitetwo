@@ -410,7 +410,7 @@ export const mintOneToken = async (
   const candyMachineAddress = candyMachine.id;
   const remainingAccounts = [];
   const instructions = [];
-  const signers: anchor.web3.Keypair[] = [];
+  const signers: anchor.web3.Keypair[] = [mint];
   //console.log("SetupState: ", setupState);
   console.log("candyMachineAddress: ", candyMachine.id);
   //signers.push(mint);
