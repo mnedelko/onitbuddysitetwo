@@ -168,6 +168,7 @@ import {
       t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
   );
   console.log("partiallySignedTransactions", partiallySignedTransactions);
+  console.log("wallet.publicKey", wallet.publicKey);
   const fullySignedTransactions = unsignedTxns.filter(
       (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
   );
@@ -177,8 +178,9 @@ import {
   );
   console.log("signedTxns1", signedTxns);
   signedTxns = fullySignedTransactions.concat(signedTxns);
-  const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
   console.log("signedTxns2", signedTxns);
+  const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
+  console.log("pendingTxns", pendingTxns);
     console.log(
       "Signed txns length",
       signedTxns.length,

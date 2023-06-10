@@ -266,7 +266,7 @@ const getMetadata = async (
 export const getCandyMachineCreator = async (
   candyMachine: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("candy_machine"), candyMachine.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -275,7 +275,7 @@ export const getCandyMachineCreator = async (
 export const getFreezePda = async (
   candyMachine: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("freeze"), candyMachine.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -284,7 +284,7 @@ export const getFreezePda = async (
 export const getCollectionPDA = async (
   candyMachineAddress: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("collection"), candyMachineAddress.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -300,7 +300,7 @@ export const getCollectionAuthorityRecordPDA = async (
   newAuthority: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddress(
+    await anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -329,6 +329,7 @@ export const createAccountsForMint = async (
   )[0];
 
   const signers: anchor.web3.Keypair[] = [mint];
+  console.log("signers in getCollectionAuthorityRecordPDA", signers);
   const instructions = [
     anchor.web3.SystemProgram.createAccount({
       fromPubkey: payer,
@@ -643,6 +644,7 @@ export const mintOneToken = async (
 
   const instructionsMatrix = [instructions];
   const signersMatrix = [signers];
+  console.log("signersMatrix", signersMatrix);
 
   try {
     const txns = (
