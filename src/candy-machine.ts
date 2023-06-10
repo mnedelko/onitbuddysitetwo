@@ -324,7 +324,6 @@ export const createAccountsForMint = async (
   payer: anchor.web3.PublicKey
 ): Promise<SetupState> => {
   const mint = anchor.web3.Keypair.generate();
-  console.log("1st mint",mint)
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
   )[0];
@@ -400,7 +399,7 @@ export const mintOneToken = async (
   setupState?: SetupState
 ): Promise<MintResult | null> => {
   //const mint = setupState?.mint ?? anchor.web3.Keypair.generate();
-  const mint = anchor.web3.Keypair.generate();
+  const mint = setupState?.mint;
   console.log("2nd mint",mint)
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
