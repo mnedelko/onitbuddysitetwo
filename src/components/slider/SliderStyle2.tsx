@@ -1069,6 +1069,7 @@ const SliderItem2 = (props: any) => {
     const discountPrice = props.discountPrice;
     const solBalance = props.solBalance;
     const whitelistTokenBalance = props.whitelistTokenBalance; 
+    const onMint = props.onMint
     
     console.log("1. Wallet", wallet);
     console.log("2. publicKey", publicKey);
@@ -1186,7 +1187,7 @@ const SliderItem2 = (props: any) => {
                                                                             candyMachine={candyMachine}
                                                                             isMinting={isUserMinting}
                                                                             setIsMinting={(val) => setIsUserMinting(val)}
-                                                                            onMint={props.onMint}
+                                                                            onMint={onMint()}
                                                                             isActive={
                                                                                 isActive ||
                                                                                 (isPresale && isWhitelistUser && isValidBalance)
