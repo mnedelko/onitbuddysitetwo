@@ -133,7 +133,7 @@ import {
     afterTransactions: Transaction[] = []
   ): Promise<{ number: number; txs: { txid: string; slot: number }[] }> => {
     if (!wallet.publicKey) throw new WalletNotConnectedError();
-  
+    console.log("signersSet",signersSet);
     const unsignedTxns: Transaction[] = beforeTransactions;
   
     if (!blockhash) {
