@@ -940,7 +940,7 @@ const SliderStyle2 = (props: SliderProps) => {
                             data.map((item, index) => (
                                 <SwiperSlide key={index} >
                                     <SliderItem2 
-                                        wallet = {wallet}
+                                        wallet = {anchorWallet}
                                         publicKey = {publicKey}
                                         goLiveDate= {candyMachine?.state.goLiveDate}
                                         isGatekeeper = {candyMachine?.state.gatekeeper}
