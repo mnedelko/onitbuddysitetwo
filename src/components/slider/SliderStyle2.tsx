@@ -700,12 +700,27 @@ const SliderStyle2 = (props: SliderProps) => {
             //console.log("setupMint", setupMint);
             console.log("setupTxn", setupTxn);
     
-            const mintResult = await mintOneToken(
-              candyMachine,
-              publicKey,
-              beforeTransactions,
-              afterTransactions,
-              setupMint ?? setupTxn
+            // const mintResult = await mintOneToken(
+            //   candyMachine,
+            //   publicKey,
+            //   beforeTransactions,
+            //   afterTransactions,
+            //   setupMint ?? setupTxn
+            // );
+
+            const setupState = setupMint ?? setupTxn;
+                
+            const mint = setupState?.mint ?? anchor.web3.Keypair.generate();
+
+            //THIS IS WHAT I NEED TO FIGURE OUT
+            let mintResult = await mintOneToken(
+                candyMachine,
+                publicKey,
+                mint,
+                props.connection,
+                beforeTransactions,
+                afterTransactions,
+                setupState,
             );
     
             let status: any = { err: true };
