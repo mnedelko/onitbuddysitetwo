@@ -1187,7 +1187,7 @@ const SliderItem2 = (props: any) => {
                                                                             candyMachine={candyMachine}
                                                                             isMinting={isUserMinting}
                                                                             setIsMinting={(val) => setIsUserMinting(val)}
-                                                                            onMint={onMint()}
+                                                                            onMint={props.onMint}
                                                                             isActive={
                                                                                 isActive ||
                                                                                 (isPresale && isWhitelistUser && isValidBalance)
