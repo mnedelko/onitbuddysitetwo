@@ -236,7 +236,7 @@ const getMasterEdition = async (
   mint: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddressSync(
+    await anchor.web3.PublicKey.findProgramAddress(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -252,7 +252,7 @@ const getMetadata = async (
   mint: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddressSync(
+    await anchor.web3.PublicKey.findProgramAddress(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -266,7 +266,7 @@ const getMetadata = async (
 export const getCandyMachineCreator = async (
   candyMachine: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddressSync(
+  return await anchor.web3.PublicKey.findProgramAddress(
     [Buffer.from("candy_machine"), candyMachine.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -275,7 +275,7 @@ export const getCandyMachineCreator = async (
 export const getFreezePda = async (
   candyMachine: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddressSync(
+  return await anchor.web3.PublicKey.findProgramAddress(
     [Buffer.from("freeze"), candyMachine.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -284,7 +284,7 @@ export const getFreezePda = async (
 export const getCollectionPDA = async (
   candyMachineAddress: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddressSync(
+  return await anchor.web3.PublicKey.findProgramAddress(
     [Buffer.from("collection"), candyMachineAddress.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -300,7 +300,7 @@ export const getCollectionAuthorityRecordPDA = async (
   newAuthority: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddressSync(
+    await anchor.web3.PublicKey.findProgramAddress(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),

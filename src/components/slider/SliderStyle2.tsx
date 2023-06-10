@@ -531,7 +531,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         const balance = new anchor.BN(
                             await connection.getBalance(publicKey)
                         );
-                        setBalance(balance.toNumber);
+                        setBalance(balance.toNumber()/LAMPORTS_PER_SOL);
                         console.log("This is the publicKey", publicKey);
                         console.log("balance", balance); 
                         const valid = balance.gte(userPrice);
