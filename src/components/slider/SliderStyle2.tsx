@@ -32,6 +32,8 @@ import {
     LAMPORTS_PER_SOL
 } from "@solana/web3.js";
 import {WalletAdapterNetwork} from '@solana/wallet-adapter-base';
+import { SolanaMobileWalletAdapterWalletName } from "@solana-mobile/wallet-adapter-mobile";
+
 
 import {useAnchorWallet, useWallet} from "@solana/wallet-adapter-react";
 import {WalletModalProvider, WalletMultiButton} from "@solana/wallet-adapter-react-ui";
@@ -396,8 +398,6 @@ const SliderStyle2 = (props: SliderProps) => {
             }
         ]
     )
-    
-
     
     const refreshCandyMachineState = useCallback(
         async (commitment: Commitment = "confirmed") => {
@@ -940,7 +940,7 @@ const SliderStyle2 = (props: SliderProps) => {
                             data.map((item, index) => (
                                 <SwiperSlide key={index} >
                                     <SliderItem2 
-                                        wallet = {anchorWallet}
+                                        wallet = {wallet}
                                         publicKey = {publicKey}
                                         goLiveDate= {candyMachine?.state.goLiveDate}
                                         isGatekeeper = {candyMachine?.state.gatekeeper}
@@ -1006,6 +1006,7 @@ const SliderStyle2 = (props: SliderProps) => {
                                         setDiscountPrice = {setDiscountPrice}
                                         setSolBalance = {setSolBalance}
                                         solBalance = {solBalance}
+                                        connect = {connect}
                                     />
                                 </SwiperSlide>
                             ))
@@ -1069,7 +1070,6 @@ const SliderItem2 = (props: any) => {
     const discountPrice = props.discountPrice;
     const solBalance = props.solBalance;
     const whitelistTokenBalance = props.whitelistTokenBalance; 
-    const onMint = props.onMint
     
     console.log("1. Wallet", wallet);
     console.log("2. publicKey", publicKey);
@@ -1103,7 +1103,14 @@ const SliderItem2 = (props: any) => {
                                             <Wallet>
                                                 {publicKey?
                                                     <WalletAmount>Your wallet balance: {((balance/LAMPORTS_PER_SOL) || 0).toLocaleString()} SOL</WalletAmount> :
-                                                    <ConnectButton>Connect Wallet</ConnectButton>}
+                                                    <ConnectButton onClick={(e: { preventDefault: () => void; }) => {
+                                                        if (
+                                                          wallet?.adapter.name === SolanaMobileWalletAdapterWalletName
+                                                        ) {
+                                                          props.connect();
+                                                          e.preventDefault();
+                                                        }
+                                                      }}>Connect Wallet</ConnectButton>}
                                             </Wallet>
                                         </WalletContainer>
                                         <MintContainer>
