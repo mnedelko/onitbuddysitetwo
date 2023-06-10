@@ -324,6 +324,7 @@ export const createAccountsForMint = async (
   payer: anchor.web3.PublicKey
 ): Promise<SetupState> => {
   const mint = anchor.web3.Keypair.generate();
+  console.log("1st mint",mint)
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
   )[0];
@@ -398,7 +399,9 @@ export const mintOneToken = async (
   afterTransactions: Transaction[] = [],
   setupState?: SetupState
 ): Promise<MintResult | null> => {
-  const mint = setupState?.mint ?? anchor.web3.Keypair.generate();
+  //const mint = setupState?.mint ?? anchor.web3.Keypair.generate();
+  const mint = anchor.web3.Keypair.generate();
+  console.log("2nd mint",mint)
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
   )[0];
@@ -410,7 +413,7 @@ export const mintOneToken = async (
   const candyMachineAddress = candyMachine.id;
   const remainingAccounts = [];
   const instructions = [];
-  const signers: anchor.web3.Keypair[] = [mint];
+  const signers: anchor.web3.Keypair[] = [];
   //console.log("SetupState: ", setupState);
   console.log("candyMachineAddress: ", candyMachine.id);
   //signers.push(mint);
