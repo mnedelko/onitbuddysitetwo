@@ -147,6 +147,7 @@ import {
       if (instructions.length === 0) {
         continue;
       }
+      console.log("Signers", signers);
       console.log("Instructions", instructions);
       const transaction = new Transaction();
       instructions.forEach((instruction) => transaction.add(instruction));
