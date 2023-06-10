@@ -721,7 +721,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 props.connection,
                 beforeTransactions,
                 afterTransactions,
-                setupState,
+                //setupState,
             );
     
             let status: any = { err: true };
