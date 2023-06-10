@@ -236,7 +236,7 @@ const getMasterEdition = async (
   mint: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddress(
+    await anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -252,7 +252,7 @@ const getMetadata = async (
   mint: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddress(
+    await anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),

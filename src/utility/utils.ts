@@ -59,7 +59,7 @@ export const getAtaForMint = async (
   mint: anchor.web3.PublicKey,
   buyer: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [buyer.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mint.toBuffer()],
     SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID
   );
@@ -68,7 +68,7 @@ export const getAtaForMint = async (
 export const getNetworkExpire = async (
   gatekeeperNetwork: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [gatekeeperNetwork.toBuffer(), Buffer.from("expire")],
     CIVIC
   );
@@ -78,7 +78,7 @@ export const getNetworkToken = async (
   wallet: anchor.web3.PublicKey,
   gatekeeperNetwork: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [
       wallet.toBuffer(),
       Buffer.from("gateway"),
