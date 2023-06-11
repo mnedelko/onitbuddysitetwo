@@ -166,6 +166,16 @@ import {
     //This is where we left
     console.log("unsignedTxns", unsignedTxns);
 
+    if (
+      unsignedTxns.length === 1 
+    ){
+      const test = unsignedTxns[0].signatures;
+      console.log("This is a test", test);
+    } else {
+      const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
+      console.log("This is a test", test);
+    }
+
     const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
     console.log("This is a test", test);
 
