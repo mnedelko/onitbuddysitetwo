@@ -414,7 +414,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 return;
             }
 
-            const connection = new Connection(props.rpcHost, commitment);
+    const connection = new Connection(props.rpcHost, commitment);
 
             if (props.candyMachineId){
                 try {
@@ -477,7 +477,7 @@ const SliderStyle2 = (props: SliderProps) => {
                             cndy.state.whitelistMintSettings.mint
                         );
                         console.log("mint", mint)
-                        const token = (await getAtaForMint(mint, anchorWallet.publicKey))[0];
+                        const token = (await getAtaForMint(mint, publicKey))[0];
                         console.log("token", token)
 
                         try{
@@ -512,7 +512,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         console.log("Entering state.tokenMint");
                         // retrieves teh SPL token
                         const mint = new anchor.web3.PublicKey(cndy.state.tokenMint);
-                        const token = (await getAtaForMint(mint, anchorWallet.publicKey))[0];
+                        const token = (await getAtaForMint(mint, publicKey))[0];
                         try {
                             const balance = await connection.getTokenAccountBalance(token);
 
@@ -531,10 +531,10 @@ const SliderStyle2 = (props: SliderProps) => {
                     } else {
                         console.log("No state.tokenMind");
                         const balance = new anchor.BN(
-                            await connection.getBalance(anchorWallet.publicKey)
+                            await connection.getBalance(publicKey)
                         );
                         setBalance(balance.toNumber());
-                        console.log("This is the publicKey", anchorWallet.publicKey);
+                        console.log("This is the publicKey", publicKey);
                         console.log("balance", balance); 
                         const valid = balance.gte(userPrice);
                         setIsValidBalance(valid);
@@ -643,7 +643,7 @@ const SliderStyle2 = (props: SliderProps) => {
       ) => {
         try {
           setIsUserMinting(true);
-          if (connected && candyMachine?.program && anchorWallet.publicKey) {
+          if (connected && candyMachine?.program && publicKey) {
             let setupMint: SetupState | undefined;
             if (needTxnSplit && setupTxn === undefined) {
               setAlertState({
@@ -651,7 +651,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign account setup transaction",
                 severity: "info",
               });
-              setupMint = await createAccountsForMint(candyMachine, anchorWallet.publicKey);
+              setupMint = await createAccountsForMint(candyMachine, publicKey);
               let status: any = { err: true };
               if (setupMint.transaction) {
                 status = await awaitTransactionSignatureConfirmation(
@@ -692,13 +692,13 @@ const SliderStyle2 = (props: SliderProps) => {
     
             const mintResult = await mintOneToken(
               candyMachine,
-              anchorWallet.publicKey,
+              publicKey,
               beforeTransactions,
               afterTransactions,
               setupMint ?? setupTxn
             );
 
-            console.log("mintResult", mintResult);
+            console.log("mintResult", mintResult)
     
             let status: any = { err: true };
             let metadataStatus = null;
@@ -947,7 +947,7 @@ const SliderStyle2 = (props: SliderProps) => {
                                 <SwiperSlide key={index} >
                                     <SliderItem2 
                                         wallet = {wallet}
-                                        publicKey = {anchorWallet.publicKey}
+                                        publicKey = {publicKey}
                                         goLiveDate= {candyMachine?.state.goLiveDate}
                                         isGatekeeper = {candyMachine?.state.gatekeeper}
                                         //consoleThis ={consoleThis}

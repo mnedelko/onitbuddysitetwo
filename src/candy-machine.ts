@@ -651,6 +651,7 @@ export const mintOneToken = async (
   const instructionsMatrix = [instructions];
   const signersMatrix = [signers];
   console.log("signersMatrix", signersMatrix);
+  console.log("instructionsMatrix", instructionsMatrix);
 
   try {
     const txns = (
