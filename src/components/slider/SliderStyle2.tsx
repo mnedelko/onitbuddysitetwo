@@ -414,7 +414,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 return;
             }
 
-    const connection = new Connection(props.rpcHost, commitment);
+            const connection = new Connection(props.rpcHost, commitment);
 
             if (props.candyMachineId){
                 try {
@@ -477,7 +477,7 @@ const SliderStyle2 = (props: SliderProps) => {
                             cndy.state.whitelistMintSettings.mint
                         );
                         console.log("mint", mint)
-                        const token = (await getAtaForMint(mint, publicKey))[0];
+                        const token = (await getAtaForMint(mint, anchorWallet.publicKey))[0];
                         console.log("token", token)
 
                         try{
@@ -512,7 +512,7 @@ const SliderStyle2 = (props: SliderProps) => {
                         console.log("Entering state.tokenMint");
                         // retrieves teh SPL token
                         const mint = new anchor.web3.PublicKey(cndy.state.tokenMint);
-                        const token = (await getAtaForMint(mint, publicKey))[0];
+                        const token = (await getAtaForMint(mint, anchorWallet.publicKey))[0];
                         try {
                             const balance = await connection.getTokenAccountBalance(token);
 
@@ -531,10 +531,10 @@ const SliderStyle2 = (props: SliderProps) => {
                     } else {
                         console.log("No state.tokenMind");
                         const balance = new anchor.BN(
-                            await connection.getBalance(publicKey)
+                            await connection.getBalance(anchorWallet.publicKey)
                         );
                         setBalance(balance.toNumber());
-                        console.log("This is the publicKey", publicKey);
+                        console.log("This is the publicKey", anchorWallet.publicKey);
                         console.log("balance", balance); 
                         const valid = balance.gte(userPrice);
                         setIsValidBalance(valid);
@@ -947,7 +947,7 @@ const SliderStyle2 = (props: SliderProps) => {
                                 <SwiperSlide key={index} >
                                     <SliderItem2 
                                         wallet = {wallet}
-                                        publicKey = {publicKey}
+                                        publicKey = {anchorWallet.publicKey}
                                         goLiveDate= {candyMachine?.state.goLiveDate}
                                         isGatekeeper = {candyMachine?.state.gatekeeper}
                                         //consoleThis ={consoleThis}
