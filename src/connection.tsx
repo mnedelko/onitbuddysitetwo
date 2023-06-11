@@ -153,7 +153,7 @@ import {
       instructions.forEach((instruction) => transaction.add(instruction));
       transaction.recentBlockhash = blockhash;
       transaction.feePayer = wallet.publicKey;
-      console.log("Instructions", instructions);
+      console.log("transaction", transaction);
   
       if (signers.length > 0) {
         transaction.partialSign(...signers);
@@ -163,32 +163,32 @@ import {
     }
     unsignedTxns.push(...afterTransactions);
   
-  //This is where we left
-  console.log("unsignedTxns", unsignedTxns);
+    //This is where we left
+    console.log("unsignedTxns", unsignedTxns);
 
-  const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
-  console.log("This is a test", test);
+    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
+    console.log("This is a test", test);
 
-  const partiallySignedTransactions = unsignedTxns.filter((t) =>
-      t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
-  console.log("partiallySignedTransactions", partiallySignedTransactions);
-  console.log("wallet.publicKey", wallet.publicKey);
-  const fullySignedTransactions = unsignedTxns.filter(
-      (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
-  console.log("fullySignedTransactions", fullySignedTransactions);
-  let signedTxns = await wallet.signAllTransactions(
-      partiallySignedTransactions
-  );
-  console.log("signedTxns1", signedTxns);
-  signedTxns = fullySignedTransactions.concat(signedTxns);
-  console.log("signedTxns2", signedTxns);
-  const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
-  console.log("pendingTxns", pendingTxns);
-    console.log(
-      "Signed txns length",
-      signedTxns.length,
-      "vs handed in length",
-      instructionSet.length
+    const partiallySignedTransactions = unsignedTxns.filter((t) =>
+        t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
+    console.log("partiallySignedTransactions", partiallySignedTransactions);
+    console.log("wallet.publicKey", wallet.publicKey);
+    const fullySignedTransactions = unsignedTxns.filter(
+        (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
+    console.log("fullySignedTransactions", fullySignedTransactions);
+    let signedTxns = await wallet.signAllTransactions(
+        partiallySignedTransactions
+    );
+    console.log("signedTxns1", signedTxns);
+    signedTxns = fullySignedTransactions.concat(signedTxns);
+    console.log("signedTxns2", signedTxns);
+    const pendingTxns: Promise<{ txid: string; slot: number }>[] = [];
+    console.log("pendingTxns", pendingTxns);
+      console.log(
+        "Signed txns length",
+        signedTxns.length,
+        "vs handed in length",
+        instructionSet.length
     );
 
     for (let i = 0; i < signedTxns.length; i++) {
