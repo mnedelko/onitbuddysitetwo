@@ -643,7 +643,7 @@ const SliderStyle2 = (props: SliderProps) => {
       ) => {
         try {
           setIsUserMinting(true);
-          if (connected && candyMachine?.program && publicKey) {
+          if (connected && candyMachine?.program && anchorWallet.publicKey) {
             let setupMint: SetupState | undefined;
             if (needTxnSplit && setupTxn === undefined) {
               setAlertState({
@@ -651,7 +651,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign account setup transaction",
                 severity: "info",
               });
-              setupMint = await createAccountsForMint(candyMachine, publicKey);
+              setupMint = await createAccountsForMint(candyMachine, anchorWallet.publicKey);
               let status: any = { err: true };
               if (setupMint.transaction) {
                 status = await awaitTransactionSignatureConfirmation(
