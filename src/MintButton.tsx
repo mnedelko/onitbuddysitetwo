@@ -122,6 +122,7 @@ export const MintButton = ({
             candyMachine.state.gatekeeper.gatekeeperNetwork.toBase58();
           console.log("network: ", network);
           if (network === CIVIC_GATEKEEPER_NETWORK) {
+            console.log("gatewayStatus: ", gatewayStatus);
             if (gatewayStatus === GatewayStatus.ACTIVE) {
               await onMint();
             } else {

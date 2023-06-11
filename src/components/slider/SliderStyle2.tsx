@@ -697,6 +697,8 @@ const SliderStyle2 = (props: SliderProps) => {
               afterTransactions,
               setupMint ?? setupTxn
             );
+
+            console.log("mintResult", mintResult);
     
             let status: any = { err: true };
             let metadataStatus = null;
