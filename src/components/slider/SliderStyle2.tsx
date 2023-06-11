@@ -416,225 +416,225 @@ const SliderStyle2 = (props: SliderProps) => {
 
     const connection = new Connection(props.rpcHost, commitment);
 
-            if (props.candyMachineId){
-                try {
-                    const cndy = await getCandyMachineState(
-                        anchorWallet as anchor.Wallet,
-                        props.candyMachineId,
-                        connection
-                    );
-                    console.log("Candy machine state: ", cndy);
-                    let active = cndy?.state.goLiveDate
-                        ? cndy?.state.goLiveDate.toNumber() < new Date().getTime() / 1000
-                        : false;
-                    let presale = false;
+    if (props.candyMachineId){
+        try {
+            const cndy = await getCandyMachineState(
+                anchorWallet as anchor.Wallet,
+                props.candyMachineId,
+                connection
+            );
+            console.log("Candy machine state: ", cndy);
+            let active = cndy?.state.goLiveDate
+                ? cndy?.state.goLiveDate.toNumber() < new Date().getTime() / 1000
+                : false;
+            let presale = false;
 
-                    // duplication of state to make sure we have the right values!
-                    let isWLUser = false;
-                    let userPrice = cndy.state.price;
-                    setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
+            // duplication of state to make sure we have the right values!
+            let isWLUser = false;
+            let userPrice = cndy.state.price;
+            setUserPrice(userPrice.toNumber() / LAMPORTS_PER_SOL);
 
-                    //This is where we are setting the candymachine attributes
-                    //setCandyMachine(cndy);
-                    console.log("this is the candymachine payload", cndy);
-                    setItemsAvailable(cndy.state.itemsAvailable);
-                    setItemsRemaining(cndy.state.itemsRemaining);
-                    setItemsRedeemed(cndy.state.itemsRedeemed);
+            //This is where we are setting the candymachine attributes
+            //setCandyMachine(cndy);
+            console.log("this is the candymachine payload", cndy);
+            setItemsAvailable(cndy.state.itemsAvailable);
+            setItemsRemaining(cndy.state.itemsRemaining);
+            setItemsRedeemed(cndy.state.itemsRedeemed);
 
-                    //this is where we are implementing the decimals
-                    // var divider = 1;
-                    // if (decimals) {
-                    //     divider = +('1' + new Array(decimals).join('0').slice() + '0');
-                    // }
+            //this is where we are implementing the decimals
+            // var divider = 1;
+            // if (decimals) {
+            //     divider = +('1' + new Array(decimals).join('0').slice() + '0');
+            // }
 
-                    //whitelist mint?
+            //whitelist mint?
 
-                    if (cndy?.state.whitelistMintSettings){
-                        setWhitelistEnabled(true);
-                        // is it a presale mint?
-                        if(
-                            cndy.state.whitelistMintSettings.presale &&
-                            (!cndy.state.goLiveDate ||
-                              cndy.state.goLiveDate.toNumber() > new Date().getTime() / 1000)
-                        ) {
-                            presale = true;
-                        }
-                        // is there a discount?
-                        if (cndy.state.whitelistMintSettings.discountPrice) {
-                            setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice.toNumber()/LAMPORTS_PER_SOL);
-                            //userPrice = cndy.state.whitelistMintSettings.discountPrice;
-                            setUserPrice(cndy.state.price.toNumber() / LAMPORTS_PER_SOL);
-                        } else {
-                            setDiscountPrice(undefined);
-                            // when presale=false and discountPrice=null, mint is restricted
-                            // to whitelist users only
-                            if (!cndy.state.whitelistMintSettings.presale) {
-                                cndy.state.isWhitelistOnly = true;
-                            }
-                        }
-                        // retrieves the whitelist token
-                        const mint = new anchor.web3.PublicKey(
-                            cndy.state.whitelistMintSettings.mint
-                        );
-                        console.log("mint", mint)
-                        const token = (await getAtaForMint(mint, publicKey))[0];
-                        console.log("token", token)
-
-                        try{
-                            const whitelistTokBalance = await connection.getTokenAccountBalance(token);
-                            setWhitelistTokenBalance(whitelistTokBalance.value.uiAmount);
-                            console.log("This is the whitelist token balance", whitelistTokBalance);
-                            isWLUser = whitelistTokBalance.value.uiAmount > 0;
-                            // only whitelist the user if the balance > 0
-                            console.log("isWLUser", isWLUser);
-                            setIsWhitelistUser(isWLUser);
-
-                            if(cndy.state.isWhitelistOnly) {
-                                active = isWLUser && (presale || active);
-                            }
-                        } catch (e) {
-                            setIsWhitelistUser(false);
-                            // no whitelist user, no mint
-                            if (cndy.state.isWhitelistOnly) {
-                                active = false;
-                            }
-                            console.log(
-                                "There was a problem fetching whitelist token balance"
-                            );
-                            console.log(e);
-                        }
+            if (cndy?.state.whitelistMintSettings){
+                setWhitelistEnabled(true);
+                // is it a presale mint?
+                if(
+                    cndy.state.whitelistMintSettings.presale &&
+                    (!cndy.state.goLiveDate ||
+                        cndy.state.goLiveDate.toNumber() > new Date().getTime() / 1000)
+                ) {
+                    presale = true;
+                }
+                // is there a discount?
+                if (cndy.state.whitelistMintSettings.discountPrice) {
+                    setDiscountPrice(cndy.state.whitelistMintSettings.discountPrice.toNumber()/LAMPORTS_PER_SOL);
+                    //userPrice = cndy.state.whitelistMintSettings.discountPrice;
+                    setUserPrice(cndy.state.price.toNumber() / LAMPORTS_PER_SOL);
+                } else {
+                    setDiscountPrice(undefined);
+                    // when presale=false and discountPrice=null, mint is restricted
+                    // to whitelist users only
+                    if (!cndy.state.whitelistMintSettings.presale) {
+                        cndy.state.isWhitelistOnly = true;
                     }
-                    userPrice = isWLUser ? userPrice : cndy.state.price;
-                    setUserPrice(cndy.state.price.toNumber()/ LAMPORTS_PER_SOL);
+                }
+                // retrieves the whitelist token
+                const mint = new anchor.web3.PublicKey(
+                    cndy.state.whitelistMintSettings.mint
+                );
+                console.log("mint", mint)
+                const token = (await getAtaForMint(mint, publicKey))[0];
+                console.log("token", token)
 
-                    // detect if using spl-token to mint
-                    if (cndy?.state.tokenMint) {
-                        console.log("Entering state.tokenMint");
-                        // retrieves teh SPL token
-                        const mint = new anchor.web3.PublicKey(cndy.state.tokenMint);
-                        const token = (await getAtaForMint(mint, publicKey))[0];
-                        try {
-                            const balance = await connection.getTokenAccountBalance(token);
+                try{
+                    const whitelistTokBalance = await connection.getTokenAccountBalance(token);
+                    setWhitelistTokenBalance(whitelistTokBalance.value.uiAmount);
+                    console.log("This is the whitelist token balance", whitelistTokBalance);
+                    isWLUser = whitelistTokBalance.value.uiAmount > 0;
+                    // only whitelist the user if the balance > 0
+                    console.log("isWLUser", isWLUser);
+                    setIsWhitelistUser(isWLUser);
 
-                            const valid = new anchor.BN(balance.value.amount).gte(userPrice);
-
-                            //only allow user to mint if token balance > the user if the balance > 0
-                            setIsValidBalance(valid);
-                            active = active && valid;
-                        } catch(e) {
-                            setIsValidBalance(false);
-                            active = false;
-                            //no whitelist user, no mint
-                            console.log("There was a problem fetching SPL token balance");
-                            console.log(e);
-                        }
-                    } else {
-                        console.log("No state.tokenMind");
-                        const balance = new anchor.BN(
-                            await connection.getBalance(publicKey)
-                        );
-                        setBalance(balance.toNumber());
-                        console.log("This is the publicKey", publicKey);
-                        console.log("balance", balance); 
-                        const valid = balance.gte(userPrice);
-                        setIsValidBalance(valid);
-                        active = active && valid;
-                    };
-
-                    // datetime to stop the mint?
-                    if (cndy?.state.endSettings?.endSettingType.date){
-                        setEndDate(toDate(cndy.state.endSettings.number));
-                        if(
-                            cndy.state.endSettings.number.toNumber() <
-                            new Date().getTime() / 1000
-                        ) {
-                            active = false;
-                        }
+                    if(cndy.state.isWhitelistOnly) {
+                        active = isWLUser && (presale || active);
                     }
-                    //amount to stop the mint?
-                    console.log("cndy?.state.endSettings?.endSettingType.amount",cndy?.state.endSettings?.endSettingType.amount)
-                    if (cndy?.state.endSettings?.endSettingType.amount){
-                        console.log("endSettings.number",cndy.state.endSettings.number.toNumber());
-                        console.log("itemsAvailable",cndy.state.itemsAvailable);
-                        const limit = Math.min(
-                            cndy.state.endSettings.number.toNumber(),
-                            cndy.state.itemsAvailable
-                        );
-                        if (cndy.state.itemsRedeemed < limit) {
-                            setItemsRemaining(limit - cndy.state.itemsRedeemed);
-                        } else {
-                            setItemsRemaining(0);
-                            cndy.state.isSoldOut = true;
-                        }
-                    } else {
-                        setItemsRemaining(cndy.state.itemsRemaining);
-                    }
-
-                    if (cndy.state.isSoldOut){
+                } catch (e) {
+                    setIsWhitelistUser(false);
+                    // no whitelist user, no mint
+                    if (cndy.state.isWhitelistOnly) {
                         active = false;
                     }
-
-                    const [collectionPDA] = await getCollectionPDA(props.candyMachineId);
-                    const collectionPDAAccount = await connection.getAccountInfo(
-                        collectionPDA
+                    console.log(
+                        "There was a problem fetching whitelist token balance"
                     );
+                    console.log(e);
+                }
+            }
+            userPrice = isWLUser ? userPrice : cndy.state.price;
+            setUserPrice(cndy.state.price.toNumber()/ LAMPORTS_PER_SOL);
 
-                    setIsActive((cndy.state.isActive = active));
-                    setIsPresale((cndy.state.isPresale = presale));
-                    setCandyMachine(cndy);
+            // detect if using spl-token to mint
+            if (cndy?.state.tokenMint) {
+                console.log("Entering state.tokenMint");
+                // retrieves teh SPL token
+                const mint = new anchor.web3.PublicKey(cndy.state.tokenMint);
+                const token = (await getAtaForMint(mint, publicKey))[0];
+                try {
+                    const balance = await connection.getTokenAccountBalance(token);
 
-                    const txnEstimate = 
-                        892 +
-                        (!!collectionPDAAccount && cndy.state.retainAuthority ? 182 : 0) +
-                        (cndy.state.tokenMint ? 66 : 0) +
-                        (cndy.state.whitelistMintSettings ? 34 : 0) +
-                        (cndy.state.whitelistMintSettings?.mode?.burnEveryTime ? 34 : 0) +
-                        (cndy.state.gatekeeper ? 33 : 0) +
-                        (cndy.state.gatekeeper?.expireOnUse ? 66 : 0);
+                    const valid = new anchor.BN(balance.value.amount).gte(userPrice);
 
-                    setNeedTxnSplit(txnEstimate > 1230);
-                    } catch(e){
-                        if (e instanceof Error) {
-                            if (
-                                e.message === `Account does not exist ${props.candyMachineId}`
-                            ) {
-                                setAlertState({
-                                    open: true,
-                                    message: `Couldn't fetch candy machine state from candy machine with address: ${props.candyMachineId}, using rpc: ${props.rpcHost}! You probably typed the REACT_APP_CANDY_MACHINE_ID value wrong in your .env file, or you are using the wrong RPC!`,
-                                    severity: "error",
-                                    hideDuration: null,
+                    //only allow user to mint if token balance > the user if the balance > 0
+                    setIsValidBalance(valid);
+                    active = active && valid;
+                } catch(e) {
+                    setIsValidBalance(false);
+                    active = false;
+                    //no whitelist user, no mint
+                    console.log("There was a problem fetching SPL token balance");
+                    console.log(e);
+                }
+            } else {
+                console.log("No state.tokenMind");
+                const balance = new anchor.BN(
+                    await connection.getBalance(publicKey)
+                );
+                setBalance(balance.toNumber());
+                console.log("This is the publicKey", publicKey);
+                console.log("balance", balance); 
+                const valid = balance.gte(userPrice);
+                setIsValidBalance(valid);
+                active = active && valid;
+            };
 
-                                });
-                            } else if (
-                                e.message.startsWith("failed to get info about account") 
-                            ){
-                                setAlertState({
-                                    open: true,
-                                    message: `Couldn't fetch candy machine state with rpc: ${props.rpcHost}! This probably means you have an issue with the REACT_APP_SOLANA_RPC_HOST value in your .env file, or you are not using a custom RPC!`,
-                                    severity: "error",
-                                    hideDuration: null,
-                                  });
-                            }
-                        } else {
-                            setAlertState({
-                                open: true,
-                                message: `${e}`,
-                                severity: "error",
-                                hideDuration: null,
-                              });
-                        }
-                        console.log(e);
-                    } 
+            // datetime to stop the mint?
+            if (cndy?.state.endSettings?.endSettingType.date){
+                setEndDate(toDate(cndy.state.endSettings.number));
+                if(
+                    cndy.state.endSettings.number.toNumber() <
+                    new Date().getTime() / 1000
+                ) {
+                    active = false;
+                }
+            }
+            //amount to stop the mint?
+            console.log("cndy?.state.endSettings?.endSettingType.amount",cndy?.state.endSettings?.endSettingType.amount)
+            if (cndy?.state.endSettings?.endSettingType.amount){
+                console.log("endSettings.number",cndy.state.endSettings.number.toNumber());
+                console.log("itemsAvailable",cndy.state.itemsAvailable);
+                const limit = Math.min(
+                    cndy.state.endSettings.number.toNumber(),
+                    cndy.state.itemsAvailable
+                );
+                if (cndy.state.itemsRedeemed < limit) {
+                    setItemsRemaining(limit - cndy.state.itemsRedeemed);
+                } else {
+                    setItemsRemaining(0);
+                    cndy.state.isSoldOut = true;
+                }
+            } else {
+                setItemsRemaining(cndy.state.itemsRemaining);
+            }
+
+            if (cndy.state.isSoldOut){
+                active = false;
+            }
+
+            const [collectionPDA] = await getCollectionPDA(props.candyMachineId);
+            const collectionPDAAccount = await connection.getAccountInfo(
+                collectionPDA
+            );
+
+            setIsActive((cndy.state.isActive = active));
+            setIsPresale((cndy.state.isPresale = presale));
+            setCandyMachine(cndy);
+
+            const txnEstimate = 
+                892 +
+                (!!collectionPDAAccount && cndy.state.retainAuthority ? 182 : 0) +
+                (cndy.state.tokenMint ? 66 : 0) +
+                (cndy.state.whitelistMintSettings ? 34 : 0) +
+                (cndy.state.whitelistMintSettings?.mode?.burnEveryTime ? 34 : 0) +
+                (cndy.state.gatekeeper ? 33 : 0) +
+                (cndy.state.gatekeeper?.expireOnUse ? 66 : 0);
+
+            setNeedTxnSplit(txnEstimate > 1230);
+            } catch(e){
+                if (e instanceof Error) {
+                    if (
+                        e.message === `Account does not exist ${props.candyMachineId}`
+                    ) {
+                        setAlertState({
+                            open: true,
+                            message: `Couldn't fetch candy machine state from candy machine with address: ${props.candyMachineId}, using rpc: ${props.rpcHost}! You probably typed the REACT_APP_CANDY_MACHINE_ID value wrong in your .env file, or you are using the wrong RPC!`,
+                            severity: "error",
+                            hideDuration: null,
+
+                        });
+                    } else if (
+                        e.message.startsWith("failed to get info about account") 
+                    ){
+                        setAlertState({
+                            open: true,
+                            message: `Couldn't fetch candy machine state with rpc: ${props.rpcHost}! This probably means you have an issue with the REACT_APP_SOLANA_RPC_HOST value in your .env file, or you are not using a custom RPC!`,
+                            severity: "error",
+                            hideDuration: null,
+                            });
+                    }
                 } else {
                     setAlertState({
                         open: true,
-                        message: `Your REACT_APP_CANDY_MACHINE_ID value in the .env file doesn't look right! Make sure you enter it in as plain base-58 address!`,
+                        message: `${e}`,
                         severity: "error",
                         hideDuration: null,
-                      });
-                    }
-            },
-            [anchorWallet, props.candyMachineId, props.rpcHost, props.connection]
+                        });
+                }
+                console.log(e);
+            } 
+        } else {
+            setAlertState({
+                open: true,
+                message: `Your REACT_APP_CANDY_MACHINE_ID value in the .env file doesn't look right! Make sure you enter it in as plain base-58 address!`,
+                severity: "error",
+                hideDuration: null,
+                });
+            }
+    },
+    [anchorWallet, props.candyMachineId, props.rpcHost, props.connection]
     );
 
     const onMint = async (
@@ -1198,26 +1198,30 @@ const SliderItem2 = (props: any) => {
                                                                     >
                                                                         <MintButton
                                                                             candyMachine={candyMachine}
-                                                                            isMinting={isUserMinting}
-                                                                            setIsMinting={(val) => setIsUserMinting(val)}
-                                                                            onMint={props.onMint}
+                                                                            isMinting={isUserMinting}                        
+                                                                            //setIsMinting={(val) => setIsUserMinting(val)}
                                                                             isActive={
                                                                                 isActive ||
                                                                                 (isPresale && isWhitelistUser && isValidBalance)
                                                                             }
+                                                                            isEnded={props.isEnded}
+                                                                            isSoldOut={props.isSoldOut}
+                                                                            onMint={props.onMint}
                                                                             //anchorWallet={anchorWallet}
                                                                         />
                                                                     </GatewayProvider>
                                                                 ) : (
                                                                     <MintButton
                                                                         candyMachine={candyMachine}
-                                                                        isMinting={isUserMinting}
-                                                                        setIsMinting={(val) => setIsUserMinting(val)}
-                                                                        onMint={props.onMint}
+                                                                        isMinting={isUserMinting}                        
+                                                                        //setIsMinting={(val) => setIsUserMinting(val)}
                                                                         isActive={
                                                                             isActive ||
                                                                             (isPresale && isWhitelistUser && isValidBalance)
                                                                         }
+                                                                        isEnded={props.isEnded}
+                                                                        isSoldOut={props.isSoldOut}
+                                                                        onMint={props.onMint}
                                                                     />
                                                                 ) :
                                                                 <h2>Whitelisted Members Mint Only.</h2>
