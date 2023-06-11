@@ -12,7 +12,9 @@ import {
     Blockhash,
   } from "@solana/web3.js";
 
-  
+  import * as anchor from '@project-serum/anchor';
+
+
   import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
   
   export const DEFAULT_TIMEOUT = 60000;
@@ -233,7 +235,7 @@ import {
   
   export const sendTransaction = async (
     connection: Connection,
-    wallet: any,
+    wallet: anchor.Wallet,
     instructions: TransactionInstruction[] | Transaction,
     signers: Keypair[],
     awaitConfirmation = true,
