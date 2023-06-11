@@ -1204,8 +1204,8 @@ const SliderItem2 = (props: any) => {
                                                                                 isActive ||
                                                                                 (isPresale && isWhitelistUser && isValidBalance)
                                                                             }
-                                                                            isEnded={props.isEnded}
-                                                                            isSoldOut={props.isSoldOut}
+                                                                            isEnded={false}
+                                                                            isSoldOut={false}
                                                                             onMint={props.onMint}
                                                                             //anchorWallet={anchorWallet}
                                                                         />
@@ -1219,8 +1219,8 @@ const SliderItem2 = (props: any) => {
                                                                             isActive ||
                                                                             (isPresale && isWhitelistUser && isValidBalance)
                                                                         }
-                                                                        isEnded={props.isEnded}
-                                                                        isSoldOut={props.isSoldOut}
+                                                                        isEnded={false}
+                                                                        isSoldOut={false}
                                                                         onMint={props.onMint}
                                                                     />
                                                                 ) :
