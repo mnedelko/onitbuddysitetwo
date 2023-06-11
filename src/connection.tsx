@@ -167,12 +167,11 @@ import {
   //This is where we left
   console.log("unsignedTxns", unsignedTxns);
 
-  const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
+  const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey);
   console.log("This is a test", test);
 
   const partiallySignedTransactions = unsignedTxns.filter((t) =>
-      t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey))
-  );
+      t.signatures.find((sig) => sig.publicKey === wallet.publicKey));
   console.log("partiallySignedTransactions", partiallySignedTransactions);
   console.log("wallet.publicKey", wallet.publicKey);
   const fullySignedTransactions = unsignedTxns.filter(
