@@ -692,7 +692,7 @@ const SliderStyle2 = (props: SliderProps) => {
     
             const mintResult = await mintOneToken(
               candyMachine,
-              publicKey,
+              anchorWallet.publicKey,
               beforeTransactions,
               afterTransactions,
               setupMint ?? setupTxn
