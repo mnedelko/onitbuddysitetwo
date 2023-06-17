@@ -635,7 +635,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 });
             }
     },
-    [anchorWallet, props.candyMachineId, props.rpcHost]
+    [anchorWallet, props.candyMachineId, props.error, props.rpcHost]
     );
 
     const onMint = async (
