@@ -70,6 +70,7 @@ export const MintButton = ({
                 connection.connection,
                 webSocketSubscriptionId
             );
+            console.log("second onMint that gets executed")
             await onMint();
 
             setClicked(false);
@@ -124,6 +125,7 @@ export const MintButton = ({
           if (network === CIVIC_GATEKEEPER_NETWORK) {
             console.log("gatewayStatus", gatewayStatus);
             if (gatewayStatus === GatewayStatus.ACTIVE) {
+              //It goes into inMint and doesn't progress beyond that!
               await onMint();
             } else {
               // setIsMinting(true);
@@ -175,6 +177,7 @@ export const MintButton = ({
           await onMint();
           setClicked(false);
         }
+        console.log("actually it all worked out")
       }}
       variant="contained"
     >
