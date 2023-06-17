@@ -202,7 +202,7 @@ import {
       const signedTxnPromise = sendSignedTransaction({
         connection,
         signedTransaction: signedTxns[i],
-        timeout: 60000
+
       });
 
       console.log("signedTxnPromise", signedTxnPromise);
@@ -278,7 +278,7 @@ import {
       commitment,
     };
   
-  const txid = await connection.sendRawTransaction(rawTransaction, options);
+  const txid = await connection.Transaction(rawTransaction, options);
   let slot = 0;
 
   if (awaitConfirmation) {
@@ -366,7 +366,7 @@ import {
 
     const startTime = getUnixTs();
     let slot = 0;
-    const txid: TransactionSignature = await connection.sendRawTransaction(
+    const txid: TransactionSignature = await connection.Transaction(
       rawTransaction,
       {
         skipPreflight: true,
@@ -378,7 +378,7 @@ import {
     let done = false;
     (async () => {
       while (!done && getUnixTs() - startTime < timeout) {
-        connection.sendRawTransaction(rawTransaction, {
+        connection.Transaction(rawTransaction, {
           skipPreflight: true,
         });
         await sleep(500);
