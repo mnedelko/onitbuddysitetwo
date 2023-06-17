@@ -602,7 +602,7 @@ export const mintOneToken = async (
         remainingAccounts.length > 0 ? remainingAccounts : undefined,
     })
   );
-
+  console.log("Instructions in mint One Token", instructions);
   const [collectionPDA] = await getCollectionPDA(candyMachineAddress);
   const collectionPDAAccount =
     await candyMachine.program.provider.connection.getAccountInfo(
