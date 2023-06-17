@@ -198,6 +198,9 @@ import {
         instructionSet.length
     );
 
+    console.log("connection", connection);
+    console.log("signedTxns", signedTxns);
+
     for (let i = 0; i < signedTxns.length; i++) {
       const signedTxnPromise = sendSignedTransaction({
         connection,
