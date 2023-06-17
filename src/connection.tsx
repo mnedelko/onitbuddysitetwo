@@ -282,6 +282,7 @@ import {
     };
   
   const txid = await connection.sendRawTransaction(rawTransaction, options);
+  console.log("TXID", txid);
   let slot = 0;
 
   if (awaitConfirmation) {
