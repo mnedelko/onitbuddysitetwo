@@ -153,7 +153,7 @@ import {
       instructions.forEach((instruction) => transaction.add(instruction));
       transaction.recentBlockhash = blockhash;
       transaction.feePayer = wallet.publicKey;
-      console.log("transaction", transaction);
+      console.log("Transaction Output", transaction);
   
       if (signers.length > 0) {
         transaction.partialSign(...signers);
@@ -173,7 +173,7 @@ import {
       console.log("This is a test", test);
     } else {
       const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
-      console.log("This is a test", test);
+      console.log("This is a testly", test);
     }
 
     const partiallySignedTransactions = unsignedTxns.filter((t) =>
