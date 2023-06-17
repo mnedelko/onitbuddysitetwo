@@ -122,7 +122,7 @@ export const MintButton = ({
             candyMachine.state.gatekeeper.gatekeeperNetwork.toBase58();
           console.log("network: ", network);
           if (network === CIVIC_GATEKEEPER_NETWORK) {
-            console.log("gatewayStatus")
+            console.log("gatewayStatus", gatewayStatus);
             if (gatewayStatus === GatewayStatus.ACTIVE) {
               await onMint();
             } else {
@@ -136,6 +136,7 @@ export const MintButton = ({
             network === "tibePmPaoTgrs929rWpu755EXaxC7M3SthVCf6GzjZt"
           ) {
             setClicked(true);
+            console.log("clicked", clicked);
             const gatewayToken = await findGatewayToken(
               connection.connection,
               wallet.publicKey!,
