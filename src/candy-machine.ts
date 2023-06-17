@@ -96,6 +96,7 @@ export const awaitTransactionSignatureConfirmation = async (
             txid,
           ]);
           status = signatureStatuses && signatureStatuses.value[0];
+          console.log("signatureStatuses", signatureStatuses, "txid", txid, "status", status, "done", done, "queryStatus", queryStatus);
           if (!done) {
             if (!status) {
               console.log("REST null result for", txid, status);
