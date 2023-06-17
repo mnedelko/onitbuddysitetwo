@@ -651,6 +651,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 message: "Please sign account setup transaction",
                 severity: "info",
               });
+              console.log("publicKey in On Mint", publicKey)
               setupMint = await createAccountsForMint(candyMachine, publicKey);
               console.log("setupMint",setupMint);
               let status: any = { err: true };
@@ -664,7 +665,7 @@ const SliderStyle2 = (props: SliderProps) => {
                   true
                 );
               }
-              console.log("status",status);
+              console.log("status in on Mint",status);
               if (status && !status.err) {
                 setSetupTxn(setupMint);
                 console.log("setupTxn", setupTxn);
@@ -693,7 +694,9 @@ const SliderStyle2 = (props: SliderProps) => {
               });
               console.log("Please sign minting transaction")
             }
-    
+            
+            //we are progressing to here
+            console.log("setupTxn in OnMint", setupTxn);
             const mintResult = await mintOneToken(
               candyMachine,
               publicKey,
