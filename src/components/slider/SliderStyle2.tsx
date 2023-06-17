@@ -652,6 +652,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 severity: "info",
               });
               setupMint = await createAccountsForMint(candyMachine, publicKey);
+              console.log("setupMint",setupMint);
               let status: any = { err: true };
               if (setupMint.transaction) {
                 status = await awaitTransactionSignatureConfirmation(
@@ -661,6 +662,7 @@ const SliderStyle2 = (props: SliderProps) => {
                   true
                 );
               }
+              console.log("status",status);
               if (status && !status.err) {
                 setSetupTxn(setupMint);
                 console.log("setupTxn", setupTxn);
