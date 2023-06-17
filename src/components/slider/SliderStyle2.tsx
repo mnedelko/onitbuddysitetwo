@@ -335,6 +335,7 @@ const SliderStyle2 = (props: SliderProps) => {
     const rpcUrl = props.rpcHost;
     const anchorWallet = useAnchorWallet();
     const { connect, connected, publicKey, wallet } = useWallet();
+    console.log("lets check if the wallet gets called", wallet);
     const cluster = props.network;
 
     const [balance, setBalance] = useState<number>();
