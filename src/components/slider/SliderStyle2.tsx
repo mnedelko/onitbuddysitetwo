@@ -1198,30 +1198,26 @@ const SliderItem2 = (props: any) => {
                                                                     >
                                                                         <MintButton
                                                                             candyMachine={candyMachine}
-                                                                            isMinting={isUserMinting}                        
-                                                                            //setIsMinting={(val) => setIsUserMinting(val)}
+                                                                            isMinting={isUserMinting}
+                                                                            setIsMinting={(val) => setIsUserMinting(val)}
+                                                                            onMint={props.onMint}
                                                                             isActive={
                                                                                 isActive ||
                                                                                 (isPresale && isWhitelistUser && isValidBalance)
                                                                             }
-                                                                            isEnded={false}
-                                                                            isSoldOut={false}
-                                                                            onMint={props.onMint}
                                                                             //anchorWallet={anchorWallet}
                                                                         />
                                                                     </GatewayProvider>
                                                                 ) : (
                                                                     <MintButton
                                                                         candyMachine={candyMachine}
-                                                                        isMinting={isUserMinting}                        
-                                                                        //setIsMinting={(val) => setIsUserMinting(val)}
+                                                                        isMinting={isUserMinting}
+                                                                        setIsMinting={(val) => setIsUserMinting(val)}
+                                                                        onMint={props.onMint}
                                                                         isActive={
                                                                             isActive ||
                                                                             (isPresale && isWhitelistUser && isValidBalance)
                                                                         }
-                                                                        isEnded={false}
-                                                                        isSoldOut={false}
-                                                                        onMint={props.onMint}
                                                                     />
                                                                 ) :
                                                                 <h2>Whitelisted Members Mint Only.</h2>

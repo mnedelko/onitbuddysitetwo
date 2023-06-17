@@ -176,9 +176,6 @@ import {
       console.log("This is a test", test);
     }
 
-    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
-    console.log("This is a test", test);
-
     const partiallySignedTransactions = unsignedTxns.filter((t) =>
         t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
     console.log("partiallySignedTransactions", partiallySignedTransactions);
@@ -205,6 +202,7 @@ import {
       const signedTxnPromise = sendSignedTransaction({
         connection,
         signedTransaction: signedTxns[i],
+        timeout: 60000
       });
 
       console.log("signedTxnPromise", signedTxnPromise);
@@ -364,6 +362,7 @@ import {
     timeout?: number;
   }): Promise<{ txid: string; slot: number }> {
     const rawTransaction = signedTransaction.serialize();
+    console.group("rawTransaction", rawTransaction);
 
     const startTime = getUnixTs();
     let slot = 0;
