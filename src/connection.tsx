@@ -278,7 +278,7 @@ import {
       commitment,
     };
   
-  const txid = await connection.Transaction(rawTransaction, options);
+  const txid = await connection.sendRawTransaction(rawTransaction, options);
   let slot = 0;
 
   if (awaitConfirmation) {
@@ -366,7 +366,7 @@ import {
 
     const startTime = getUnixTs();
     let slot = 0;
-    const txid: TransactionSignature = await connection.Transaction(
+    const txid: TransactionSignature = await connection.sendRawTransaction(
       rawTransaction,
       {
         skipPreflight: true,
@@ -378,7 +378,7 @@ import {
     let done = false;
     (async () => {
       while (!done && getUnixTs() - startTime < timeout) {
-        connection.Transaction(rawTransaction, {
+        connection.sendRawTransaction(rawTransaction, {
           skipPreflight: true,
         });
         await sleep(500);
