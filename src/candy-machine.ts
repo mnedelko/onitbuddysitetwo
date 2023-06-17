@@ -323,6 +323,7 @@ export const createAccountsForMint = async (
   candyMachine: CandyMachineAccount,
   payer: anchor.web3.PublicKey
 ): Promise<SetupState> => {
+  console.log("payer in createAcccountsForMint", payer);
   const mint = anchor.web3.Keypair.generate();
   const userTokenAccountAddress = (
     await getAtaForMint(mint.publicKey, payer)
