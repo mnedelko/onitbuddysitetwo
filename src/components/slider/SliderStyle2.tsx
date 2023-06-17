@@ -647,6 +647,7 @@ const SliderStyle2 = (props: SliderProps) => {
           if (connected && candyMachine?.program && publicKey) {
             let setupMint: SetupState | undefined;
             if (needTxnSplit && setupTxn === undefined) {
+              console.log("needTxnSplit", needTxnSplit, "setupTxn", setupTxn);
               setAlertState({
                 open: true,
                 message: "Please sign account setup transaction",
