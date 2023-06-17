@@ -654,6 +654,8 @@ const SliderStyle2 = (props: SliderProps) => {
               setupMint = await createAccountsForMint(candyMachine, publicKey);
               console.log("setupMint",setupMint);
               let status: any = { err: true };
+              console.log("status", status);
+              console.log("props.connection in onMint", props.connection);
               if (setupMint.transaction) {
                 status = await awaitTransactionSignatureConfirmation(
                   setupMint.transaction,
