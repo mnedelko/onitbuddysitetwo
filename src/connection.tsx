@@ -214,6 +214,7 @@ import { CandyMachineAccount } from "./candy-machine";
     console.log("signedTxns[0]", signedTxns[0]);
 
     for (let i = 0; i < signedTxns.length; i++) {
+      console.log("SignedTxns increments", signedTxns[i]);
       const signedTxnPromise = sendSignedTransaction({
         signedTransaction: signedTxns[i],
         connection,
@@ -354,8 +355,8 @@ import { CandyMachineAccount } from "./candy-machine";
     }
   
     const { txid, slot } = await sendSignedTransaction({
-      connection,
       signedTransaction: transaction,
+      connection,
     });
   
     return { txid, slot };
