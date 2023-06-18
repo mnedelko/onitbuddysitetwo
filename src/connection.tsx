@@ -209,7 +209,7 @@ import {
       
       });
 
-      console.log("signedTxnPromise", signedTxnPromise);
+      console.log("signedTxnPromise", await signedTxnPromise);
   
       if (sequenceType !== SequenceType.Parallel) {
         try {
