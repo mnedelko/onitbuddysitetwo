@@ -15,6 +15,7 @@ import {
   import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { Provider, Wallet, web3 } from "@project-serum/anchor";
+import { CandyMachineAccount } from "./candy-machine";
   
   export const DEFAULT_TIMEOUT = 60000;
   
@@ -123,7 +124,7 @@ import { Provider, Wallet, web3 } from "@project-serum/anchor";
   
   export const sendTransactions = async (
     connection: Connection,
-    wallet: any,
+    candymachine: CandyMachineAccount,
     instructionSet: TransactionInstruction[][],
     signersSet: Keypair[][],
     sequenceType: SequenceType = SequenceType.Parallel,
@@ -134,7 +135,7 @@ import { Provider, Wallet, web3 } from "@project-serum/anchor";
     beforeTransactions: Transaction[] = [],
     afterTransactions: Transaction[] = []
   ): Promise<{ number: number; txs: { txid: string; slot: number }[] }> => {
-    if (!wallet.publicKey) throw new WalletNotConnectedError();
+    if (!candymachine.program.provider.wallet.publicKey) throw new WalletNotConnectedError();
     console.log("signersSet",signersSet);
     const unsignedTxns: Transaction[] = beforeTransactions;
   
@@ -154,7 +155,7 @@ import { Provider, Wallet, web3 } from "@project-serum/anchor";
       const transaction = new Transaction();
       instructions.forEach((instruction) => transaction.add(instruction));
       transaction.recentBlockhash = blockhash;
-      transaction.feePayer = wallet.publicKey;
+      transaction.feePayer = candymachine.program.provider.wallet.publicKey;
       console.log("Transaction Output", transaction);
   
       if (signers.length > 0) {
@@ -178,22 +179,22 @@ import { Provider, Wallet, web3 } from "@project-serum/anchor";
     //   console.log("This is a testly", test);
     // }
 
-    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
+    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
     console.log("This is a testly", test);
 
-    console.log("wallet.publiKey", wallet.publicKey);
+    console.log("wallet.publiKey", candymachine.program.provider.wallet.publicKey);
 
-    const partiallySignedTransactions: Transaction[] = unsignedTxns.filter((t) =>
-        t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
+    const partiallySignedTransactions = unsignedTxns.filter((t) =>
+        t.signatures.find((sig) => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey)));
     //const partiallySignedTransactions = unsignedTxns[0].signatures.find((sig) => sig.publicKey.equals(wallet.publicKey));
     console.log("partiallySignedTransactions", partiallySignedTransactions);
-    console.log("wallet.publicKey", wallet.publicKey);
+    console.log("wallet.publicKey", candymachine.program.provider.wallet.publicKey);
     //need to revisit this also
-    const fullySignedTransactions: Transaction[] = unsignedTxns.filter(
-        (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
+    const fullySignedTransactions= unsignedTxns.filter(
+        (t) => !t.signatures.find((sig) => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey)));
     console.log("fullySignedTransactions", fullySignedTransactions);
     //HERE is where we left off
-    let signedTxns = await wallet.signTransaction(
+    let signedTxns = await candymachine.program.provider.wallet.signAllTransactions(
         partiallySignedTransactions
     );
     console.log("signedTxns1", signedTxns);
@@ -231,7 +232,7 @@ import { Provider, Wallet, web3 } from "@project-serum/anchor";
           console.log("Failed at txn index:", i);
           console.log("Caught failure:", e);
 
-          failCallback(signedTxns[i], i);
+          failCallback(signedTxns[i].serialize.toString(), i);
           if (sequenceType === SequenceType.StopOnFailure) {
             return {
               number: i,

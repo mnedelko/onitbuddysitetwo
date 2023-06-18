@@ -376,7 +376,7 @@ export const createAccountsForMint = async (
     transaction: (
       await sendTransactions(
         candyMachine.program.provider.connection,
-        candyMachine.program.provider.wallet,
+        candyMachine,
         [instructions],
         [signers],
         SequenceType.StopOnFailure,
