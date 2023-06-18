@@ -365,8 +365,8 @@ import {
     successMessage?: string;
     timeout?: number;
   }): Promise<{ txid: string; slot: number }> {
-    const rawTransaction = signedTransaction.serialize();
-    console.group("rawTransaction", rawTransaction);
+    const rawTransaction = signedTransaction.serialize;
+    console.log("rawTransaction", rawTransaction);
 
     const startTime = getUnixTs();
     let slot = 0;
