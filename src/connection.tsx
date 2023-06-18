@@ -166,18 +166,21 @@ import {
     //This is where we left
     console.log("unsignedTxns", unsignedTxns);
 
-    if (
-      unsignedTxns.length === 1 
-    ){
-      const test = unsignedTxns[0].signatures[0].publicKey;
-      console.log("This is a test", test);
-    } else {
-      const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
-      console.log("This is a testly", test);
-    }
+    // if (
+    //   unsignedTxns.length === 1 
+    // ){
+    //   const test = unsignedTxns[0].signatures[0].publicKey;
+    //   console.log("This is a test", test);
+    // } else {
+    //   const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
+    //   console.log("This is a testly", test);
+    // }
+
+    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
+    console.log("This is a testly", test);
 
     const partiallySignedTransactions = unsignedTxns.filter((t) =>
-        t.signatures.find((sig) => sig[0].publicKey.equals(wallet.publicKey)));
+        t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
     console.log("partiallySignedTransactions", partiallySignedTransactions);
     console.log("wallet.publicKey", wallet.publicKey);
     const fullySignedTransactions = unsignedTxns.filter(
