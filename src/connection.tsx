@@ -166,7 +166,7 @@ import { Provider, Wallet } from "@project-serum/anchor";
     unsignedTxns.push(...afterTransactions);
   
     //This is where we left
-    console.log("unsignedTxns", JSON.stringify(unsignedTxns));
+    console.log("unsignedTxns", JSON.si(unsignedTxns));
 
     // if (
     //   unsignedTxns.length === 1 
@@ -183,13 +183,13 @@ import { Provider, Wallet } from "@project-serum/anchor";
 
     console.log("wallet.publiKey", wallet.publicKey);
 
-    const partiallySignedTransactions = unsignedTxns.filter((t) =>
+    const partiallySignedTransactions: Transaction[] = unsignedTxns.filter((t) =>
         t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
     //const partiallySignedTransactions = unsignedTxns[0].signatures.find((sig) => sig.publicKey.equals(wallet.publicKey));
     console.log("partiallySignedTransactions", partiallySignedTransactions);
     console.log("wallet.publicKey", wallet.publicKey);
     //need to revisit this also
-    const fullySignedTransactions = unsignedTxns.filter(
+    const fullySignedTransactions: Transaction[] = unsignedTxns.filter(
         (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
     console.log("fullySignedTransactions", fullySignedTransactions);
     //HERE is where we left off

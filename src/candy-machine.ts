@@ -368,6 +368,8 @@ export const createAccountsForMint = async (
   ];
   console.log("instrictions in createAccountsForMint", instructions);
 
+  //candyMachine.program.provider.wallet.signAllTransactions
+
   return {
     mint: mint,
     userTokenAccount: userTokenAccountAddress,
