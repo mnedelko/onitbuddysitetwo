@@ -366,6 +366,7 @@ export const createAccountsForMint = async (
       1
     ),
   ];
+  console.log("instrictions in createAccountsForMint", instructions)
 
   return {
     mint: mint,
