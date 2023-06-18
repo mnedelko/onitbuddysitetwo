@@ -332,7 +332,7 @@ export const createAccountsForMint = async (
   console.log ("userTokenAccountAddress", userTokenAccountAddress);
   console.log("1st Mint", mint);
   const signers: anchor.web3.Keypair[] = [mint];
-  console.log("signers in getCollectionAuthorityRecordPDA", signers);
+  console.log("signers in creasteAccountsForMint", signers);
   const instructions = [
     anchor.web3.SystemProgram.createAccount({
       fromPubkey: payer,
@@ -408,7 +408,7 @@ export const mintOneToken = async (
     await getAtaForMint(mint.publicKey, payer)
   )[0];
   
-  console.log("Is it a token mint?", candyMachine);
+  console.log("candymachine", candyMachine);
   
   const userPayingAccountAddress = candyMachine.state.tokenMint
     ? (await getAtaForMint(candyMachine.state.tokenMint, payer))[0]
@@ -461,6 +461,7 @@ export const mintOneToken = async (
       ]
     );
   }
+  console.log("1st set of instructions", instructions);
 
   if (candyMachine.state.gatekeeper) {
     console.log("candyMachine.state.gatekeeper", candyMachine.state.gatekeeper);
@@ -657,6 +658,14 @@ export const mintOneToken = async (
   console.log("instructionsMatrix", instructionsMatrix);
 
   try {
+    console.log("A. candyMachine.program.provider.connection", candyMachine.program.provider.connection);
+    console.log("B. candyMachine.program.provider.wallet", candyMachine.program.provider.wallet);
+    console.log("C. instructionsMatrix",instructionsMatrix);
+    console.log("D. signersMatrix", signersMatrix);
+    console.log("E. SequenceType.StopOnFailure", SequenceType.StopOnFailure);
+    console.log("F. singleGossip", "singleGossip");
+    console.log("G. beforeTransactions", beforeTransactions);
+    console.log("H. afterTransactions", afterTransactions);
     const txns = (
       await sendTransactions(
         candyMachine.program.provider.connection,
@@ -677,6 +686,7 @@ export const mintOneToken = async (
       mintTxId: mintTxn,
       metadataKey: metadataAddress,
     };
+    console.log("txns", txns);
   } catch (e) {
     console.log(e);
   }

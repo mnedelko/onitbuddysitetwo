@@ -644,6 +644,7 @@ const SliderStyle2 = (props: SliderProps) => {
       ) => {
         try {
           setIsUserMinting(true);
+          console.log("Connected", connected, "candymachine?.program", candyMachine?.program, "publicKey", publicKey);
           if (connected && candyMachine?.program && publicKey) {
             let setupMint: SetupState | undefined;
             if (needTxnSplit && setupTxn === undefined) {
