@@ -188,9 +188,12 @@ import { Provider, Wallet } from "@project-serum/anchor";
     const partiallySignedTransactions = unsignedTxns[0].signatures.find((sig) => sig.publicKey.equals(wallet.publicKey));
     console.log("partiallySignedTransactions", partiallySignedTransactions);
     console.log("wallet.publicKey", wallet.publicKey);
-    const fullySignedTransactions = unsignedTxns.filter(
-        (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
+    //need to revisit this also
+    // const fullySignedTransactions = unsignedTxns.filter(
+    //     (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
+    const fullySignedTransactions = unsignedTxns.shift();
     console.log("fullySignedTransactions", fullySignedTransactions);
+    //HERE is where we left off
     let signedTxns = await wallet.signTransaction(
         partiallySignedTransactions
     );
