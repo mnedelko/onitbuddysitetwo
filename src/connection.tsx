@@ -13,6 +13,8 @@ import {
   } from "@solana/web3.js";
   
   import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
+import { useAnchorWallet } from "@solana/wallet-adapter-react";
+import { Provider, Wallet } from "@project-serum/anchor";
   
   export const DEFAULT_TIMEOUT = 60000;
   
@@ -189,7 +191,7 @@ import {
     const fullySignedTransactions = unsignedTxns.filter(
         (t) => !t.signatures.find((sig) => sig.publicKey.equals(wallet.publicKey)));
     console.log("fullySignedTransactions", fullySignedTransactions);
-    let signedTxns = await wallet.signAllTransactions(
+    let signedTxns = await wallet.signTransaction(
         partiallySignedTransactions
     );
     console.log("signedTxns1", signedTxns);
