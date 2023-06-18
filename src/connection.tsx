@@ -203,9 +203,9 @@ import {
 
     for (let i = 0; i < signedTxns.length; i++) {
       const signedTxnPromise = sendSignedTransaction({
-        connection,
         signedTransaction: signedTxns[i],
-        
+        connection,
+      
       });
 
       console.log("signedTxnPromise", signedTxnPromise);
