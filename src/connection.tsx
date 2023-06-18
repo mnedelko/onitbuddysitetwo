@@ -200,6 +200,7 @@ import {
 
     console.log("connection", connection);
     console.log("signedTxns", signedTxns);
+    console.log("signedTxns[0]", signedTxns[0]);
 
     for (let i = 0; i < signedTxns.length; i++) {
       const signedTxnPromise = sendSignedTransaction({
@@ -365,7 +366,7 @@ import {
     successMessage?: string;
     timeout?: number;
   }): Promise<{ txid: string; slot: number }> {
-    const rawTransaction = signedTransaction.serialize;
+    const rawTransaction = signedTransaction.serialize();
     console.log("rawTransaction", rawTransaction);
 
     const startTime = getUnixTs();
