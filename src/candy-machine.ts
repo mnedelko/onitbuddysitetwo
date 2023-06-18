@@ -672,7 +672,7 @@ export const mintOneToken = async (
     const txns = (
       await sendTransactions(
         candyMachine.program.provider.connection,
-        candyMachine.program.provider.wallet,
+        candyMachine,
         instructionsMatrix,
         signersMatrix,
         SequenceType.StopOnFailure,
