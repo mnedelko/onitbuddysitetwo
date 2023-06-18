@@ -13,8 +13,8 @@ import {
   } from "@solana/web3.js";
   
   import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { useAnchorWallet } from "@solana/wallet-adapter-react";
-import { Provider, Wallet } from "@project-serum/anchor";
+import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
+import { Provider, Wallet, web3 } from "@project-serum/anchor";
   
   export const DEFAULT_TIMEOUT = 60000;
   
@@ -166,7 +166,7 @@ import { Provider, Wallet } from "@project-serum/anchor";
     unsignedTxns.push(...afterTransactions);
   
     //This is where we left
-    console.log("unsignedTxns", JSON.si(unsignedTxns));
+    console.log("unsignedTxns", JSON.stringify(unsignedTxns));
 
     // if (
     //   unsignedTxns.length === 1 
