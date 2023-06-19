@@ -24,15 +24,22 @@ import {
 
 require('@solana/wallet-adapter-react-ui/styles.css');
 
-const candyMachineId = new anchor.web3.PublicKey(
-    process.env.REACT_APP_CANDY_MACHINE_ID!
-  );
-  
-  const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
-  
-  const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
+const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
+    try {
+      return new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID!);
+    } catch (e) {
+      console.log("Failed to construct CandyMachineId", e);
+      return undefined;
+    }
+  };
+
+const candyMachineId = getCandyMachineId();
+  const network = (process.env.REACT_APP_SOLANA_NETWORK ??
+    "mainnet-beta") as WalletAdapterNetwork;
+  const rpcHost =
+    process.env.REACT_APP_SOLANA_RPC_HOST ?? anchor.web3.clusterApiUrl("mainnet-beta");
   const connection = new anchor.web3.Connection(rpcHost);
-  
+
   const txTimeout = 30000; // milliseconds (confirm this works for your project)
   
   const theme = createTheme({
@@ -77,7 +84,7 @@ const candyMachineId = new anchor.web3.PublicKey(
           new SolletExtensionWalletAdapter({ network }),
         ],
         []
-    );
+      );
 
 
     return (
