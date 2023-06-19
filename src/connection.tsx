@@ -168,6 +168,10 @@ import { CandyMachineAccount } from "./candy-machine";
   
     //This is where we left
     console.log("unsignedTxns", unsignedTxns);
+    console.log("JSONStringyfy unsignedTxns", JSON.stringify(unsignedTxns[0]));
+    console.log("JSONStringyfy unsignedTxns[0]", JSON.stringify(unsignedTxns[0]));
+    console.log("unsignedTxns[0]", unsignedTxns[0]);
+    console.log("unsignedTxns[0].signatures", unsignedTxns[0].signatures);
 
     // if (
     //   unsignedTxns.length <= 1 
@@ -179,8 +183,10 @@ import { CandyMachineAccount } from "./candy-machine";
     //   console.log("This is a testly", test);
     // }
 
-    //const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
-    //console.log("This is a testly", test);
+    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
+    console.log("This is a testly", test);
+
+
 
     console.log("wallet.publiKey", candymachine.program.provider.wallet.publicKey);
 
