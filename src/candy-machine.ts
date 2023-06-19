@@ -167,7 +167,7 @@ const createAssociatedTokenAccountInstruction = (
 export const getCandyMachineState = async (
   anchorWallet: anchor.Wallet,
   candyMachineId: anchor.web3.PublicKey,
-  connection: anchor.web3.Connection
+  connection: anchor.web3.Connection,
 ): Promise<CandyMachineAccount> => {
   const provider = new anchor.Provider(connection, anchorWallet, {
     preflightCommitment: "processed",
@@ -234,10 +234,10 @@ export const getFreezePdaState = async (
 };
 
 const getMasterEdition = async (
-  mint: anchor.web3.PublicKey
+  mint: anchor.web3.PublicKey,
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddress(
+    await anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -253,7 +253,7 @@ const getMetadata = async (
   mint: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddress(
+    await anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
@@ -267,7 +267,7 @@ const getMetadata = async (
 export const getCandyMachineCreator = async (
   candyMachine: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("candy_machine"), candyMachine.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -276,7 +276,7 @@ export const getCandyMachineCreator = async (
 export const getFreezePda = async (
   candyMachine: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("freeze"), candyMachine.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -285,7 +285,7 @@ export const getFreezePda = async (
 export const getCollectionPDA = async (
   candyMachineAddress: anchor.web3.PublicKey
 ): Promise<[anchor.web3.PublicKey, number]> => {
-  return await anchor.web3.PublicKey.findProgramAddress(
+  return await anchor.web3.PublicKey.findProgramAddressSync(
     [Buffer.from("collection"), candyMachineAddress.toBuffer()],
     CANDY_MACHINE_PROGRAM
   );
@@ -301,7 +301,7 @@ export const getCollectionAuthorityRecordPDA = async (
   newAuthority: anchor.web3.PublicKey
 ): Promise<anchor.web3.PublicKey> => {
   return (
-    await anchor.web3.PublicKey.findProgramAddress(
+    await anchor.web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("metadata"),
         TOKEN_METADATA_PROGRAM_ID.toBuffer(),
