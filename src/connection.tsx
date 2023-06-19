@@ -406,7 +406,7 @@ import { CandyMachineAccount } from "./candy-machine";
         connection.sendRawTransaction(rawTransaction, {
           skipPreflight: true,
         });
-        await sleep(1000);
+        await sleep(500);
       }
     })();
     try {
