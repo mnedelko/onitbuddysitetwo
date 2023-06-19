@@ -179,7 +179,7 @@ import { CandyMachineAccount } from "./candy-machine";
     //   console.log("This is a testly", test);
     // }
 
-    const test = beforeTransactions ;
+    const test = beforeTransactions;
     for (let i = 0; i < unsignedTxns.length; i++) {
       if (unsignedTxns[i].signatures.find((sig) => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey))){
         test.push(unsignedTxns[i]);
