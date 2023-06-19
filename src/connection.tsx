@@ -170,7 +170,7 @@ import { array } from "prop-types";
     //This is where we left
     console.log("unsignedTxns", (unsignedTxns.toString()));
     console.log("unsignedTxns normal", unsignedTxns);
-    console.log("unsignedTxns normal", unsignedTxns[0].signatures);
+    console.log("unsignedTxns normal", unsignedTxns[0].signatures[0]);
 
     // if (
     //   unsignedTxns.length === 1 
