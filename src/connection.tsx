@@ -167,7 +167,7 @@ import { CandyMachineAccount } from "./candy-machine";
     unsignedTxns.push(...afterTransactions);
   
     //This is where we left
-    console.log("unsignedTxns", JSON.stringify(unsignedTxns));
+    console.log("unsignedTxns", unsignedTxns);
 
     // if (
     //   unsignedTxns.length === 1 
