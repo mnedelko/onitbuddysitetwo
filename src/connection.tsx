@@ -387,6 +387,7 @@ import { CandyMachineAccount } from "./candy-machine";
   }): Promise<{ txid: string; slot: number }> {
     const rawTransaction = signedTransaction.serialize();
     console.log("rawTransaction", rawTransaction);
+    console.log("timeout", timeout);
 
     const startTime = getUnixTs();
     let slot = 0;
