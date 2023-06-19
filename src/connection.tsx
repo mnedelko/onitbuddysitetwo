@@ -401,14 +401,14 @@ import { CandyMachineAccount } from "./candy-machine";
     console.log("Started awaiting confirmation for", txid);
   
     let done = false;
-    (async () => {
-      while (!done && getUnixTs() - startTime < timeout) {
-        connection.sendRawTransaction(rawTransaction, {
-          skipPreflight: true,
-        });
-        await sleep(500);
-      }
-    })();
+    // (async () => {
+    //   while (!done && getUnixTs() - startTime < timeout) {
+    //     connection.sendRawTransaction(rawTransaction, {
+    //       skipPreflight: true,
+    //     });
+    //     await sleep(500);
+    //   }
+    // })();
     try {
       const confirmation = await awaitTransactionSignatureConfirmation(
         txid,

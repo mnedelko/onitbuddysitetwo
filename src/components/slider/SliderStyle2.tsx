@@ -713,7 +713,7 @@ const SliderStyle2 = (props: SliderProps) => {
             let status: any = { err: true };
             let metadataStatus = null;
             if (mintResult) {
-              status = await awaitTransactionSignatureConfirmation(
+              status = await (
                 mintResult.mintTxId,
                 props.txTimeout,
                 props.connection,
