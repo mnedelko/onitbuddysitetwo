@@ -198,7 +198,7 @@ import { CandyMachineAccount } from "./candy-machine";
     console.log("fullySignedTransactions", fullySignedTransactions);
     //HERE is where we left off
     let signedTxns = await candymachine.program.provider.wallet.signAllTransactions(
-        partiallySignedTransactions
+        partiallySignedTransactions,
     );
     console.log("signedTxns1", signedTxns);
     signedTxns = fullySignedTransactions.concat(signedTxns);
@@ -219,9 +219,8 @@ import { CandyMachineAccount } from "./candy-machine";
     for (let i = 0; i < signedTxns.length; i++) {
       console.log("SignedTxns increments", signedTxns[i]);
       const signedTxnPromise = sendSignedTransaction({
-        signedTransaction: signedTxns[i],
         connection,
-      
+        signedTransaction: signedTxns[i],
       });
 
       console.log("signedTxnPromise", await signedTxnPromise);
