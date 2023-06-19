@@ -390,6 +390,7 @@ import { CandyMachineAccount } from "./candy-machine";
 
     const startTime = getUnixTs();
     let slot = 0;
+    console.log("slot", slot);
     const txid: TransactionSignature = await connection.sendRawTransaction(
       rawTransaction,
       {
