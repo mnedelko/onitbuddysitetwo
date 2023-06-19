@@ -168,6 +168,8 @@ import { CandyMachineAccount } from "./candy-machine";
   
     //This is where we left
     console.log("unsignedTxns", JSON.stringify(unsignedTxns));
+    console.log("unsignedTxns normal", unsignedTxns);
+    console.log("unsignedTxns normal", unsignedTxns[0].signatures);
 
     // if (
     //   unsignedTxns.length === 1 
