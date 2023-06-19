@@ -179,15 +179,8 @@ import { CandyMachineAccount } from "./candy-machine";
     //   console.log("This is a testly", test);
     // }
 
-    // const test = beforeTransactions;
-    // for (let i = 0; i < unsignedTxns.length; i++) {
-    //   if (unsignedTxns[i].signatures.find((sig) => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey))){
-    //     test.push(unsignedTxns[i]);
-    //   }
-    // }
-
     //const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
-    console.log("This is a testly", test);
+    //console.log("This is a testly", test);
 
     console.log("wallet.publiKey", candymachine.program.provider.wallet.publicKey);
 
