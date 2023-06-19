@@ -169,15 +169,15 @@ import { CandyMachineAccount } from "./candy-machine";
     //This is where we left
     console.log("unsignedTxns", unsignedTxns);
 
-    if (
-      unsignedTxns.length <= 1 
-    ){
-      const test = unsignedTxns[0].signatures[0].publicKey;
-      console.log("This is a test", test);
-    } else {
-      const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
-      console.log("This is a testly", test);
-    }
+    // if (
+    //   unsignedTxns.length <= 1 
+    // ){
+    //   const test = unsignedTxns[0].signatures[0].publicKey;
+    //   console.log("This is a test", test);
+    // } else {
+    //   const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
+    //   console.log("This is a testly", test);
+    // }
 
     //const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
     //console.log("This is a testly", test);
