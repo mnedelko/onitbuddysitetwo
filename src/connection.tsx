@@ -16,7 +16,6 @@ import {
 import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { Provider, Wallet, web3 } from "@project-serum/anchor";
 import { CandyMachineAccount } from "./candy-machine";
-import { array } from "prop-types";
   
   export const DEFAULT_TIMEOUT = 60000;
   
@@ -168,19 +167,17 @@ import { array } from "prop-types";
     unsignedTxns.push(...afterTransactions);
   
     //This is where we left
-    console.log("unsignedTxns", (unsignedTxns.toString()));
-    console.log("unsignedTxns normal", unsignedTxns);
-    console.log("unsignedTxns normal", unsignedTxns[0].signatures[0]);
+    console.log("unsignedTxns", unsignedTxns);
 
-    // if (
-    //   unsignedTxns.length === 1 
-    // ){
-    //   const test = unsignedTxns[0].signatures[0].publicKey;
-    //   console.log("This is a test", test);
-    // } else {
-    //   const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(wallet.publicKey));
-    //   console.log("This is a testly", test);
-    // }
+    if (
+      unsignedTxns.length <= 1 
+    ){
+      const test = unsignedTxns[0].signatures[0].publicKey;
+      console.log("This is a test", test);
+    } else {
+      const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
+      console.log("This is a testly", test);
+    }
 
     //const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
     //console.log("This is a testly", test);
