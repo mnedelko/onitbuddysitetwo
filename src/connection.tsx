@@ -183,8 +183,8 @@ import { CandyMachineAccount } from "./candy-machine";
     //   console.log("This is a testly", test);
     // }
 
-    const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
-    console.log("This is a testly", test);
+    // const test = unsignedTxns[0].signatures.find((sig)=> sig.publicKey.equals(candymachine.program.provider.wallet.publicKey));
+    // console.log("This is a testly", test);
 
     console.log("wallet.publiKey", candymachine.program.provider.wallet.publicKey);
 
