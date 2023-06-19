@@ -16,6 +16,7 @@ import {
 import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
 import { Provider, Wallet, web3 } from "@project-serum/anchor";
 import { CandyMachineAccount } from "./candy-machine";
+import { array } from "prop-types";
   
   export const DEFAULT_TIMEOUT = 60000;
   
@@ -167,7 +168,7 @@ import { CandyMachineAccount } from "./candy-machine";
     unsignedTxns.push(...afterTransactions);
   
     //This is where we left
-    console.log("unsignedTxns", JSON.stringify(unsignedTxns));
+    console.log("unsignedTxns", (unsignedTxns.toString()));
     console.log("unsignedTxns normal", unsignedTxns);
     console.log("unsignedTxns normal", unsignedTxns[0].signatures);
 
