@@ -697,8 +697,8 @@ const SliderStyle2 = (props: SliderProps) => {
               });
               console.log("Please sign minting transaction")
             }
-            console.log("before transaction and mintOneToken", beforeTransactions);
-            console.log("afterTransasctions", afterTransactions); 
+            console.log("before transaction and mintOneToken", JSON.stringify(beforeTransactions));
+            console.log("afterTransasctions", JSON.stringify(afterTransactions)); 
             //we are progressing to here
             console.log("setupTxn in OnMint", setupTxn);
             const mintResult = await mintOneToken(
