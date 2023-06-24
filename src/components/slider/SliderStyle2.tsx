@@ -656,7 +656,7 @@ const SliderStyle2 = (props: SliderProps) => {
               });
               console.log("publicKey in On Mint", publicKey)
               setupMint = await createAccountsForMint(candyMachine, publicKey);
-              console.log("setupMint",setupMint);
+              //console.log("setupMint",setupMint);
               let status: any = { err: true };
               console.log("status", status);
               console.log("props.connection in onMint", props.connection);
@@ -697,7 +697,8 @@ const SliderStyle2 = (props: SliderProps) => {
               });
               console.log("Please sign minting transaction")
             }
-            
+            console.log("before transaction and mintOneToken", beforeTransactions);
+            console.log("afterTransasctions", afterTransactions); 
             //we are progressing to here
             console.log("setupTxn in OnMint", setupTxn);
             const mintResult = await mintOneToken(
@@ -849,14 +850,14 @@ const SliderStyle2 = (props: SliderProps) => {
         refreshCandyMachineState,
       ]);
       
-    //   useEffect(() => {
-    //     (function loop() {
-    //       setTimeout(() => {
-    //         refreshCandyMachineState();
-    //         loop();
-    //       }, 20000);
-    //     })();
-    //   }, [refreshCandyMachineState]);
+      useEffect(() => {
+        (function loop() {
+          setTimeout(() => {
+            refreshCandyMachineState();
+            loop();
+          }, 20000);
+        })();
+      }, [refreshCandyMachineState]);
 
     const renderGoLiveDateCounter = ({days, hours, minutes, seconds}: any) => {
         return (
@@ -1171,7 +1172,7 @@ const SliderItem2 = (props: any) => {
                                                         {console.log("!props.isActive", !props.isActive )}
                                                         {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
                                                         {console.log("publicKey", props.publicKey)}
-                                                        {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || isWhitelistUser) ? (
+                                                        {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || whitelistTokenBalance > 0) ? (
                                                             <Countdown
                                                                 date={toDate(props.goLiveDate)}
                                                                 onMount={({ completed }) => completed && props.setIsActive(!props.isEnded)}
@@ -1183,7 +1184,7 @@ const SliderItem2 = (props: any) => {
                                                             !anchorWallet ? ( 
                                                                 <ConnectButton>Connect Wallet</ConnectButton>
                                                             ) : 
-                                                            (!props.isWLOnly || isWhitelistUser) ? 
+                                                            (!props.isWLOnly || whitelistTokenBalance > 0) ? 
                                                                 props.candyMachine?.state.isActive &&
                                                                 props.candyMachine?.state.gatekeeper &&
                                                                     publicKey &&
@@ -1191,7 +1192,8 @@ const SliderItem2 = (props: any) => {
                                                                     <GatewayProvider
                                                                         wallet={{
                                                                             publicKey:
-                                                                                publicKey || new PublicKey(CANDY_MACHINE_PROGRAM),
+                                                                                publicKey || 
+                                                                                new PublicKey(CANDY_MACHINE_PROGRAM),
                                                                             //@ts-ignore
                                                                             signTransaction: anchorWallet.signTransaction,
                                                                         }}
