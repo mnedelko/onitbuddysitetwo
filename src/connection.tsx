@@ -169,9 +169,9 @@ import { CandyMachineAccount } from "./candy-machine";
   
       unsignedTxns.push(transaction);
     }
-    console.log("afterTransaction before", JSON.stringify(afterTransactions));
+    console.log("afterTransaction before", afterTransactions);
     unsignedTxns.push(...afterTransactions);
-    console.log("afterTransaction after", JSON.stringify(afterTransactions));
+    console.log("afterTransaction after", afterTransactions);
   
     //This is where we left
     console.dir("unsignedTxns", unsignedTxns);
