@@ -566,7 +566,7 @@ export const mintOneToken = async (
   console.log("Freeze state: ", freezePdaState);
 
   if (freezePdaState != null) {
-    console.log("Freeze PDA state gets executed")
+    console.log("Freeze PDA state");
     remainingAccounts.push({
       pubkey: freezePda,
       isWritable: true,
@@ -684,7 +684,7 @@ export const mintOneToken = async (
       await sendTransactions(
         candyMachine.program.provider.connection,
         candyMachine,
-        instructionsMatrix[0],
+        instructionsMatrix,
         signersMatrix,
         SequenceType.StopOnFailure,
         "singleGossip",
