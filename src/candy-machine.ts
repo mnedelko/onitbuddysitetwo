@@ -421,6 +421,7 @@ export const mintOneToken = async (
   const candyMachineAddress = candyMachine.id;
   const remainingAccounts = [];
   const instructions = [];
+  console.log("0st instructions", instructions);
   const signers: anchor.web3.Keypair[] = [];
   console.log("SetupState: ", setupState);
   console.log("candyMachineAddress: ", candyMachine.id);
