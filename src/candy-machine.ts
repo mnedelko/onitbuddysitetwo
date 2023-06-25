@@ -366,7 +366,7 @@ export const createAccountsForMint = async (
       1
     ),
   ];
-  console.log("instrictions in createAccountsForMint", instructions);
+  console.log("Instructions in createAccountsForMint", instructions);
 
   //candyMachine.program.provider.wallet.signAllTransactions
 
