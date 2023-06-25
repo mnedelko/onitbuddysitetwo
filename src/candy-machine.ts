@@ -466,7 +466,7 @@ export const mintOneToken = async (
       ]
     );
   }
-  console.log("1st set of instructions", JSON.stringify(instructions));
+  console.log("1st set of instructions", instructions);
 
   if (candyMachine.state.gatekeeper) {
     console.log("candyMachine.state.gatekeeper", candyMachine.state.gatekeeper);
