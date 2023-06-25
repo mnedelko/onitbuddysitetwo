@@ -621,6 +621,9 @@ export const mintOneToken = async (
       collectionPDA
     );
 
+  console.log("collectionPDAAccount ", collectionPDAAccount );
+  console.log("candyMachine.state.retainAuthority ", candyMachine.state.retainAuthority);
+
   if (collectionPDAAccount && candyMachine.state.retainAuthority) {
     try {
       const collectionData =
