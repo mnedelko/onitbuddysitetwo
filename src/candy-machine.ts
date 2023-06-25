@@ -429,7 +429,7 @@ export const mintOneToken = async (
   //signers.push(mint);
   if (!setupState) {
     signers.push(mint);
-    console.log("Did we pass this?")
+    console.log("Did we pass this?");
     instructions.push(
       ...[
         anchor.web3.SystemProgram.createAccount({
