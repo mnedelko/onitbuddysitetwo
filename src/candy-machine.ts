@@ -529,6 +529,8 @@ export const mintOneToken = async (
     }
   }
 
+  console.log("2nd set of instructions", instructions);
+
   if (candyMachine.state.tokenMint) {
     console.log("candyMachine.state.tokenMint", candyMachine.state.tokenMint);
     remainingAccounts.push({
@@ -553,6 +555,7 @@ export const mintOneToken = async (
   const freezePda = (await getFreezePda(candyMachineAddress))[0];
   console.log("FreezePda", freezePda.toString());
   console.log("candyMachine.program", candyMachine.program);
+  console.log("3rd set of instructions", instructions);
 
   const freezePdaState = await getFreezePdaState(
     candyMachine.program,
@@ -585,6 +588,7 @@ export const mintOneToken = async (
   }
   console.log("Remaining Accounts", remainingAccounts);
   console.log("RemainingAccounts", remainingAccounts.map((rm) => rm.pubkey.toBase58()));
+  console.log("4th set of instructions", instructions);
   instructions.push(
     await candyMachine.program.instruction.mintNft(creatorBump, {
       accounts: {
