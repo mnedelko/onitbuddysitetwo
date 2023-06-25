@@ -565,28 +565,28 @@ export const mintOneToken = async (
 
   console.log("Freeze state: ", freezePdaState);
 
-  if (freezePdaState != null) {
-    remainingAccounts.push({
-      pubkey: freezePda,
-      isWritable: true,
-      isSigner: false,
-    });
-    remainingAccounts.push({
-      pubkey: userTokenAccountAddress,
-      isWritable: false,
-      isSigner: false,
-    });
-    if (candyMachine.state.tokenMint != null) {
-      const freezeAta = (
-        await getAtaForMint(candyMachine.state.tokenMint, freezePda)
-      )[0];
-      remainingAccounts.push({
-        pubkey: freezeAta,
-        isWritable: true,
-        isSigner: false,
-      });
-    }
-  }
+  // if (freezePdaState != null) {
+  //   remainingAccounts.push({
+  //     pubkey: freezePda,
+  //     isWritable: true,
+  //     isSigner: false,
+  //   });
+  //   remainingAccounts.push({
+  //     pubkey: userTokenAccountAddress,
+  //     isWritable: false,
+  //     isSigner: false,
+  //   });
+  //   if (candyMachine.state.tokenMint != null) {
+  //     const freezeAta = (
+  //       await getAtaForMint(candyMachine.state.tokenMint, freezePda)
+  //     )[0];
+  //     remainingAccounts.push({
+  //       pubkey: freezeAta,
+  //       isWritable: true,
+  //       isSigner: false,
+  //     });
+  //   }
+  // }
   console.log("Remaining Accounts", remainingAccounts);
   console.log("RemainingAccounts", remainingAccounts.map((rm) => rm.pubkey.toBase58()));
   console.log("4th set of instructions", instructions);
