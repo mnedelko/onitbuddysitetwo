@@ -850,14 +850,14 @@ const SliderStyle2 = (props: SliderProps) => {
         refreshCandyMachineState,
       ]);
       
-    //   useEffect(() => {
-    //     (function loop() {
-    //       setTimeout(() => {
-    //         refreshCandyMachineState();
-    //         loop();
-    //       }, 20000);
-    //     })();
-    //   }, [refreshCandyMachineState]);
+      useEffect(() => {
+        (function loop() {
+          setTimeout(() => {
+            refreshCandyMachineState();
+            loop();
+          }, 20000);
+        })();
+      }, [refreshCandyMachineState]);
 
     const renderGoLiveDateCounter = ({days, hours, minutes, seconds}: any) => {
         return (
