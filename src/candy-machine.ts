@@ -424,6 +424,8 @@ export const mintOneToken = async (
   const signers: anchor.web3.Keypair[] = [];
   console.log("SetupState: ", setupState);
   console.log("candyMachineAddress: ", candyMachine.id);
+  console.log("mintOneTrasnaction: beforeTransactions", beforeTransactions);
+  console.log("mintOneTrasnaction: afterTransactions", afterTransactions);
   //signers.push(mint);
   if (!setupState) {
     signers.push(mint);
