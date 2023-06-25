@@ -137,7 +137,8 @@ import { CandyMachineAccount } from "./candy-machine";
   ): Promise<{ number: number; txs: { txid: string; slot: number }[] }> => {
     if (!candymachine.program.provider.wallet.publicKey) throw new WalletNotConnectedError();
     console.log("signersSet",signersSet);
-    const unsignedTxns: Transaction[] = beforeTransactions;
+    const unsignedTxns: Transaction[] = [];
+    //beforeTransactions;
   
     if (!blockhash) {
       blockhash = (await connection.getLatestBlockhash(commitment)).blockhash;
