@@ -173,8 +173,8 @@ import { CandyMachineAccount } from "./candy-machine";
     console.log("afterTransaction after", afterTransactions);
   
     //This is where we left
-    console.dir("unsignedTxns", unsignedTxns);
-    console.log("JSONStringyfy unsignedTxns", JSON.stringify(unsignedTxns[0], ["signatures"]));
+    console.log("unsignedTxns", JSON.stringify(unsignedTxns));
+    console.log("JSONStringyfy unsignedTxns.signatures", JSON.stringify(unsignedTxns[0], ["signatures"]));
     console.log("JSONStringyfy unsignedTxns[0]", JSON.stringify(unsignedTxns[0]));
     console.log("unsignedTxns[0]", unsignedTxns[0]);
 
@@ -194,7 +194,7 @@ import { CandyMachineAccount } from "./candy-machine";
     console.log("wallet.publiKey", candymachine.program.provider.wallet.publicKey);
 
     const partiallySignedTransactions = unsignedTxns.filter(t =>
-      t.signatures.find(sig => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey)));
+      t.signatures.find(sig => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey) || sig === undefined));
     
       //const partiallySignedTransactions = unsignedTxns[0].signatures.find((sig) => sig.publicKey.equals(wallet.publicKey));
     
