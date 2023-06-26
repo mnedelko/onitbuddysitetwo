@@ -142,6 +142,7 @@ import { CandyMachineAccount } from "./candy-machine";
     }
   
     for (let i = 0; i < instructionSet.length; i++) {
+      console.log("instructionSet[i]",instructionSet[i]);
       const instructions = instructionSet[i];
       const signers = signersSet[i];
   
@@ -154,11 +155,11 @@ import { CandyMachineAccount } from "./candy-machine";
       instructions.forEach((instruction) => transaction.add(instruction));
       transaction.recentBlockhash = blockhash;
       transaction.feePayer = candymachine.program.provider.wallet.publicKey;
-      // transaction.setSigners(
-      //   // fee payed by the wallet owner
-      //   candymachine.program.provider.wallet.publicKey,
-      //   ...signers.map(s => s.publicKey),
-      // );
+      transaction.setSigners(
+        // fee payed by the wallet owner
+        candymachine.program.provider.wallet.publicKey,
+        ...signers.map(s => s.publicKey),
+      );
       console.log("Transaction Output", transaction);
   
       if (signers.length > 0) {
