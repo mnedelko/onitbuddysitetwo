@@ -88,6 +88,7 @@ export const MintButton = ({
     ]);
     
     const previousGatewayStatus = usePrevious(gatewayStatus); 
+
     useEffect(() => {
         const fromStates = [
             GatewayStatus.NOT_REQUESTED,
@@ -104,9 +105,11 @@ export const MintButton = ({
     }, [waitForActiveToken, previousGatewayStatus, gatewayStatus]);
 
     useEffect(() => {
+      console.log("waitForActiveToken", waitForActiveToken, "gatewayStatus", gatewayStatus);
         if (waitForActiveToken && gatewayStatus === GatewayStatus.ACTIVE) {
             console.log("Minting after token active");
             setWaitForActiveToken(false);
+            console.log("waitForActiveToken", waitForActiveToken);
             onMint();
         }
     }, [waitForActiveToken, gatewayStatus, onMint]);
@@ -125,10 +128,12 @@ export const MintButton = ({
           if (network === CIVIC_GATEKEEPER_NETWORK) {
             console.log("gatewayStatus", gatewayStatus);
             if (gatewayStatus === GatewayStatus.ACTIVE) {
+              console.log("this doesn't get executed - onMint");
               //It goes into inMint and doesn't progress beyond that!
               await onMint();
             } else {
               // setIsMinting(true);
+              console.log("this does get executed");
               setWaitForActiveToken(true);
               await requestGatewayToken();
               console.log("after: ", gatewayStatus);
@@ -146,6 +151,7 @@ export const MintButton = ({
             );
             console.log("gatewayToken: ", gatewayToken);
             if (gatewayToken?.isValid()) {
+              console.log("This onMint gets executed:")
               await onMint();
             } else {
               window.open(

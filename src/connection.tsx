@@ -12,9 +12,7 @@ import {
     Blockhash,
   } from "@solana/web3.js";
   
-  import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { AnchorWallet, useAnchorWallet } from "@solana/wallet-adapter-react";
-import { Provider, Wallet, web3 } from "@project-serum/anchor";
+import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { CandyMachineAccount } from "./candy-machine";
   
   export const DEFAULT_TIMEOUT = 60000;
