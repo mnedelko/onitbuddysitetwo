@@ -424,7 +424,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 props.candyMachineId,
                 connection
             );
-            console.log("Candy machine state: ", cndy);
+            //console.log("Candy machine state: ", cndy);
             let active = cndy?.state.goLiveDate
                 ? cndy?.state.goLiveDate.toNumber() < new Date().getTime() / 1000
                 : false;
@@ -437,7 +437,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
             //This is where we are setting the candymachine attributes
             //setCandyMachine(cndy);
-            console.log("this is the candymachine payload", cndy);
+            //console.log("this is the candymachine payload", cndy);
             setItemsAvailable(cndy.state.itemsAvailable);
             setItemsRemaining(cndy.state.itemsRemaining);
             setItemsRedeemed(cndy.state.itemsRedeemed);
@@ -477,17 +477,17 @@ const SliderStyle2 = (props: SliderProps) => {
                 const mint = new anchor.web3.PublicKey(
                     cndy.state.whitelistMintSettings.mint
                 );
-                console.log("mint", mint)
+                //console.log("mint", mint)
                 const token = (await getAtaForMint(mint, publicKey))[0];
-                console.log("token", token)
+                //console.log("token", token)
 
                 try{
                     const whitelistTokBalance = await connection.getTokenAccountBalance(token);
                     setWhitelistTokenBalance(whitelistTokBalance.value.uiAmount);
-                    console.log("This is the whitelist token balance", whitelistTokBalance);
+                    //console.log("This is the whitelist token balance", whitelistTokBalance);
                     isWLUser = whitelistTokBalance.value.uiAmount > 0;
                     // only whitelist the user if the balance > 0
-                    console.log("isWLUser", isWLUser);
+                    //console.log("isWLUser", isWLUser);
                     setIsWhitelistUser(isWLUser);
 
                     if(cndy.state.isWhitelistOnly) {
@@ -510,7 +510,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
             // detect if using spl-token to mint
             if (cndy?.state.tokenMint) {
-                console.log("Entering state.tokenMint");
+                //console.log("Entering state.tokenMint");
                 // retrieves teh SPL token
                 const mint = new anchor.web3.PublicKey(cndy.state.tokenMint);
                 const token = (await getAtaForMint(mint, publicKey))[0];
@@ -526,17 +526,17 @@ const SliderStyle2 = (props: SliderProps) => {
                     setIsValidBalance(false);
                     active = false;
                     //no whitelist user, no mint
-                    console.log("There was a problem fetching SPL token balance");
+                    //console.log("There was a problem fetching SPL token balance");
                     console.log(e);
                 }
             } else {
-                console.log("No state.tokenMind");
+                //console.log("No state.tokenMind");
                 const balance = new anchor.BN(
                     await connection.getBalance(publicKey)
                 );
                 setBalance(balance.toNumber());
-                console.log("This is the publicKey", publicKey);
-                console.log("balance", balance); 
+                //console.log("This is the publicKey", publicKey);
+                //console.log("balance", balance); 
                 const valid = balance.gte(userPrice);
                 setIsValidBalance(valid);
                 active = active && valid;
