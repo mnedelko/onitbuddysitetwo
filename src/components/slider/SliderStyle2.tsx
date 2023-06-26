@@ -335,7 +335,7 @@ const SliderStyle2 = (props: SliderProps) => {
     const rpcUrl = props.rpcHost;
     const anchorWallet = useAnchorWallet();
     const { connect, connected, publicKey, wallet } = useWallet();
-    console.log("lets check if the wallet gets called", wallet);
+    //console.log("lets check if the wallet gets called", wallet);
     const cluster = props.network;
 
     const [balance, setBalance] = useState<number>();
@@ -1171,12 +1171,12 @@ const SliderItem2 = (props: any) => {
                                                         value={100 - (props.itemsRemaining * 100 / props.itemsAvailable)} />}
                                                     <br />
                                                     <MintButtonContainer>
-                                                        {console.log("statis of !isWLOnly", !props.isWLOnly)}
+                                                        {/* {console.log("statis of !isWLOnly", !props.isWLOnly)}
                                                         {console.log("isWhitelistUser", isWhitelistUser)}
                                                         {console.log("candyMachine?.state.isActive ", candyMachine?.state.isActive )}
                                                         {console.log("!props.isActive", !props.isActive )}
                                                         {console.log("candyMachine?.state.gatekeeper", candyMachine?.state.gatekeeper)}
-                                                        {console.log("publicKey", props.publicKey)}
+                                                        {console.log("publicKey", props.publicKey)} */}
                                                         {!props.isActive && !props.isEnded && props.goLiveDate && (!props.isWLOnly || whitelistTokenBalance > 0) ? (
                                                             <Countdown
                                                                 date={toDate(props.goLiveDate)}
