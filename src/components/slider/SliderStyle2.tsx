@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as anchor from "@project-serum/anchor";
 //import { Link } from 'react-router-dom'
 
@@ -61,10 +61,10 @@ import Card from '../elements/Card'
 
 //@ts-ignore
 import lightpaperpdfslider from '../../assets/docs/OnitBuddy-LightPaper.pdf';
-import { set } from '@project-serum/anchor/dist/cjs/utils/features';
+//import { set } from '@project-serum/anchor/dist/cjs/utils/features';
 
-const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
-const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString() : "TOKEN";
+//const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS ? +process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS!.toString() : 9;
+//const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString() : "TOKEN";
 
 const WalletContainer = styled.div`
   display: flex;
@@ -540,7 +540,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 const valid = balance.gte(userPrice);
                 setIsValidBalance(valid);
                 active = active && valid;
-            };
+            }
 
             // datetime to stop the mint?
             if (cndy?.state.endSettings?.endSettingType.date){
@@ -701,13 +701,17 @@ const SliderStyle2 = (props: SliderProps) => {
             // console.log("afterTransasctions", JSON.stringify(afterTransactions)); 
             //we are progressing to here
             console.log("setupTxn in OnMint", setupTxn);
+
+            const setupState = setupMint ?? setupTxn;
+            const mint = setupState?.mint ?? anchor.web3.Keypair.generate();
             
             const mintResult = await mintOneToken(
               candyMachine,
               publicKey,
+              mint,
               beforeTransactions,
               afterTransactions,
-              setupMint ?? setupTxn
+              setupState,
             );
 
             console.log("mintResult", mintResult)
@@ -744,6 +748,7 @@ const SliderStyle2 = (props: SliderProps) => {
                 severity: "success",
                 hideDuration: 7000,
               });
+              displaySuccess(publicKey);
               refreshCandyMachineState("processed");
             } else if (status && !status.err) {
               setAlertState({
@@ -885,7 +890,7 @@ const SliderStyle2 = (props: SliderProps) => {
 
     //Displays success if the mint succeeded
     function displaySuccess(mintPublicKey: any, qty: number = 1): void {
-        let remaining = itemsRemaining - qty;
+        const remaining = itemsRemaining - qty;
         setItemsRemaining(remaining);
         setIsSoldOut(remaining === 0);
         // if (isBurnToken && whitelistTokenBalance && whitelistTokenBalance > 0) {
@@ -894,14 +899,14 @@ const SliderStyle2 = (props: SliderProps) => {
         //     setIsActive(isPresale && !isEnded && balance > 0);
         // }
         if ( whitelistTokenBalance && whitelistTokenBalance > 0) {
-            let whitelistTokBalance = whitelistTokenBalance - qty;
+            const whitelistTokBalance = whitelistTokenBalance - qty;
             setWhitelistTokenBalance(whitelistTokBalance);
             setIsActive(isPresale && !isEnded && balance > 0);
         }
         setSetupTxn(undefined);
         setItemsRedeemed(itemsRedeemed + qty);
         if (!payWithSplToken && balance && balance > 0) {
-            setBalance(balance - ((whitelistEnabled ? whitelistPrice : price) * qty) - solFeesEstimation);
+            setBalance(balance - ((whitelistEnabled ? whitelistPrice : price) * qty) - solFeesEstimation)
         } //The below link is the link we can view the successful mint on via solscan
         setSolanaExplorerLink(cluster === "devnet" || cluster === "testnet"
             ? ("https://solscan.io/token/" + mintPublicKey + "?cluster=" + cluster)
@@ -1086,7 +1091,6 @@ const SliderItem2 = (props: any) => {
     const balance = props.balance;
     const userPrice = props.userPrice;
     const discountPrice = props.discountPrice;
-    const solBalance = props.solBalance;
     const whitelistTokenBalance = props.whitelistTokenBalance; 
     
     // console.log("1. Wallet", wallet);
