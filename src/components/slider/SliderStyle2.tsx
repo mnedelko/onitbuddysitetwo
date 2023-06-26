@@ -701,6 +701,7 @@ const SliderStyle2 = (props: SliderProps) => {
             // console.log("afterTransasctions", JSON.stringify(afterTransactions)); 
             //we are progressing to here
             console.log("setupTxn in OnMint", setupTxn);
+            
             const mintResult = await mintOneToken(
               candyMachine,
               publicKey,
@@ -1088,24 +1089,24 @@ const SliderItem2 = (props: any) => {
     const solBalance = props.solBalance;
     const whitelistTokenBalance = props.whitelistTokenBalance; 
     
-    console.log("1. Wallet", wallet);
-    console.log("2. publicKey", publicKey);
-    console.log("3. anchorWallet", anchorWallet);
-    console.log("4. candyMachine", candyMachine);
-    console.log("5. rpcUrl", rpcUrl);
-    console.log("6. cluster", cluster);
-    console.log("7. isUserMinting", isUserMinting);
-    console.log("8. setIsUserMinting", setIsUserMinting);
-    console.log("9. isActive", isActive);
-    console.log("10. isPresale", isPresale);
-    console.log("11. isWhitelistUser", isWhitelistUser);
-    console.log("12. isValidBalance", isValidBalance);
-    console.log("13. whitelistEnabled", whitelistEnabled);
-    console.log("14. balance", balance);
-    console.log("15. userPrice", userPrice);
-    console.log("16. discountPrice", discountPrice);
-    console.log("17. solBalance", solBalance);
-    console.log("18. whitelistTokenBalance", whitelistTokenBalance); 
+    // console.log("1. Wallet", wallet);
+    // console.log("2. publicKey", publicKey);
+    // console.log("3. anchorWallet", anchorWallet);
+    // console.log("4. candyMachine", candyMachine);
+    // console.log("5. rpcUrl", rpcUrl);
+    // console.log("6. cluster", cluster);
+    // console.log("7. isUserMinting", isUserMinting);
+    // console.log("8. setIsUserMinting", setIsUserMinting);
+    // console.log("9. isActive", isActive);
+    // console.log("10. isPresale", isPresale);
+    // console.log("11. isWhitelistUser", isWhitelistUser);
+    // console.log("12. isValidBalance", isValidBalance);
+    // console.log("13. whitelistEnabled", whitelistEnabled);
+    // console.log("14. balance", balance);
+    // console.log("15. userPrice", userPrice);
+    // console.log("16. discountPrice", discountPrice);
+    // console.log("17. solBalance", solBalance);
+    // console.log("18. whitelistTokenBalance", whitelistTokenBalance); 
     
     return (
         <div className="swiper-wrapper">

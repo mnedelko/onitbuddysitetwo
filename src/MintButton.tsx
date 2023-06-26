@@ -76,6 +76,7 @@ export const MintButton = ({
             setClicked(false);
             setVerified(false);
         };
+        console.log("verified", verified, "clicked", clicked);
         if (verified && clicked) {
             mint();
         }
@@ -179,7 +180,7 @@ export const MintButton = ({
             throw new Error(`Unknown Gatekeeper Network: ${network}`);
           }
         } else {
-          console.log("This is the onMint that gets executed");
+          console.log("This is the onMint that doesn't get executed");
           await onMint();
           setClicked(false);
         }

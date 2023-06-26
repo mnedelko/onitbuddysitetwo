@@ -337,11 +337,12 @@ export const createAccountsForMint = async (
     anchor.web3.SystemProgram.createAccount({
       fromPubkey: payer,
       newAccountPubkey: mint.publicKey,
+      space: MintLayout.span,
       lamports:
         await candyMachine.program.provider.connection.getMinimumBalanceForRentExemption(
           MintLayout.span
         ),
-      space: MintLayout.span,
+      
       programId: TOKEN_PROGRAM_ID,
     }),
     Token.createInitMintInstruction(
