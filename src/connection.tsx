@@ -194,7 +194,7 @@ import { CandyMachineAccount } from "./candy-machine";
     console.log("wallet.publiKey", candymachine.program.provider.wallet.publicKey);
 
     const partiallySignedTransactions = unsignedTxns.filter(t =>
-      t.signatures.find(sig => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey)) || t.signatures === undefined);
+      t.signatures.find(sig => sig.publicKey.equals(candymachine.program.provider.wallet.publicKey)));
     
       //const partiallySignedTransactions = unsignedTxns[0].signatures.find((sig) => sig.publicKey.equals(wallet.publicKey));
     
